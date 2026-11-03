@@ -17,7 +17,7 @@ public sealed record UsageSpan(DateTime Start, DateTime End, UsageDevice Device,
     public TimeSpan Duration => End - Start;
 
     /// <summary>"in use" for a confirmed live span, "connected" for an uncertain one.</summary>
-    public string LiveWord => Uncertain ? "connected" : "in use";
+    public string LiveWord => Uncertain ? PrivacyToggle.Properties.Resources.ActivityDyn_LiveWord_connected : PrivacyToggle.Properties.Resources.ActivityDyn_LiveWord_inuse;
 }
 
 /// <summary>Everything the Activity page shows for one app within the selected window.</summary>
@@ -52,10 +52,10 @@ public static class ActivityModel
 
     public static string Label(ActivityRange range) => range switch
     {
-        ActivityRange.Hour1 => "hour",
-        ActivityRange.Hours6 => "6 hours",
-        ActivityRange.Hours24 => "24 hours",
-        _ => "7 days",
+        ActivityRange.Hour1 => PrivacyToggle.Properties.Resources.ActivityDyn_RangeLabel_hour,
+        ActivityRange.Hours6 => PrivacyToggle.Properties.Resources.ActivityDyn_RangeLabel_6hours,
+        ActivityRange.Hours24 => PrivacyToggle.Properties.Resources.ActivityDyn_RangeLabel_24hours,
+        _ => PrivacyToggle.Properties.Resources.ActivityDyn_RangeLabel_7days,
     };
 
     /// <summary>The smallest of 1h / 6h / 24h that contains all of today's activity.</summary>
@@ -265,15 +265,16 @@ public static class ActivityModel
 
     /// <summary>Compact duration for chips: "&lt;1m", "3m", "1h 20m".</summary>
     public static string Short(TimeSpan d) =>
-        d.TotalMinutes < 1 ? "<1m"
-        : d.TotalHours < 1 ? $"{(int)d.TotalMinutes}m"
-        : d.Minutes == 0 ? $"{(int)d.TotalHours}h" : $"{(int)d.TotalHours}h {d.Minutes}m";
+        d.TotalMinutes < 1 ? PrivacyToggle.Properties.Resources.ActivityDyn_Short_under1m
+        : d.TotalHours < 1 ? LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Short_minutes, (int)d.TotalMinutes)
+        : d.Minutes == 0 ? LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Short_hours, (int)d.TotalHours)
+        : LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Short_hoursMinutes, (int)d.TotalHours, d.Minutes);
 
-    /// <summary>Readable duration: "under 1 min", "35 min", "1 h 20 min".</summary>
     public static string Long(TimeSpan d) =>
-        d.TotalMinutes < 1 ? "under 1 min"
-        : d.TotalHours < 1 ? $"{(int)d.TotalMinutes} min"
-        : d.Minutes == 0 ? $"{(int)d.TotalHours} h" : $"{(int)d.TotalHours} h {d.Minutes} min";
+        d.TotalMinutes < 1 ? PrivacyToggle.Properties.Resources.ActivityDyn_Duration_under1min
+        : d.TotalHours < 1 ? LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Duration_minutes, (int)d.TotalMinutes)
+        : d.Minutes == 0 ? LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Duration_hours, (int)d.TotalHours)
+        : LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Duration_hoursMinutes, (int)d.TotalHours, d.Minutes);
 
     /// <summary>Running clock for live use: "4:05", "1:02:33".</summary>
     public static string Clock(TimeSpan d) =>
@@ -282,12 +283,12 @@ public static class ActivityModel
     public static string Ago(DateTime when, DateTime now)
     {
         var d = now - when;
-        if (d.TotalMinutes < 1) return "just now";
-        if (d.TotalHours < 1) return $"{(int)d.TotalMinutes} min ago";
-        if (d.TotalDays < 1) return $"{(int)d.TotalHours} h ago";
-        if (when.Date == now.Date.AddDays(-1)) return "yesterday";
-        return $"{(int)Math.Ceiling(d.TotalDays)} days ago";
+        if (d.TotalMinutes < 1) return PrivacyToggle.Properties.Resources.ActivityDyn_Ago_justnow;
+        if (d.TotalHours < 1) return LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Ago_minutes, (int)d.TotalMinutes);
+        if (d.TotalDays < 1) return LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Ago_hours, (int)d.TotalHours);
+        if (when.Date == now.Date.AddDays(-1)) return PrivacyToggle.Properties.Resources.ActivityDyn_Ago_yesterday;
+        return LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Ago_days, (int)Math.Ceiling(d.TotalDays));
     }
 
-    public static string Name(UsageDevice d) => d == UsageDevice.Camera ? "Camera" : "Microphone";
+    public static string Name(UsageDevice d) => d == UsageDevice.Camera ? PrivacyToggle.Properties.Resources.ActivityDyn_DeviceName_Camera : PrivacyToggle.Properties.Resources.ActivityDyn_DeviceName_Microphone;
 }

@@ -36,9 +36,9 @@ public partial class ActivityView
 
     private void BuildCards()
     {
-        _micCard = new ResourceCard("Microphone", Glyphs.Device(UsageDevice.Microphone, 18), "MicUsage", "MicOnText");
-        _camCard = new ResourceCard("Camera", Glyphs.Device(UsageDevice.Camera, 18), "CamUsage", "CamOnText");
-        _netCard = new ResourceCard("Network", Glyphs.Transfer(18), "NetUsage", "NetOnText");
+        _micCard = new ResourceCard(PrivacyToggle.Properties.Resources.Activity_Lane_Microphone, Glyphs.Device(UsageDevice.Microphone, 18), "MicUsage", "MicOnText");
+        _camCard = new ResourceCard(PrivacyToggle.Properties.Resources.Activity_Lane_Camera, Glyphs.Device(UsageDevice.Camera, 18), "CamUsage", "CamOnText");
+        _netCard = new ResourceCard(PrivacyToggle.Properties.Resources.Activity_Lane_Network, Glyphs.Transfer(18), "NetUsage", "NetOnText");
         _micCard.ActionClicked += () => _app?.UserToggle();
         _camCard.ActionClicked += () => _app?.UserToggleCamera();
         _netCard.ActionClicked += () => _app?.UserToggleNetwork();
@@ -117,7 +117,7 @@ public partial class ActivityView
         var usage = _app!.Usage;
         int n = live.Count;
         _micCard.SetLive(n > 0);
-        _micCard.SetPill(n > 0 ? $"LIVE · {n} APP{(n == 1 ? "" : "S")}" : "OFF", n > 0);
+        _micCard.SetPill(n > 0 ? LivePill(n) : PrivacyToggle.Properties.Resources.ActivityDyn_Pill_Off, n > 0);
 
         string keys = string.Join("|", live.Select(l => l.AppKey));
         if (keys != _micKeys)
@@ -133,8 +133,9 @@ public partial class ActivityView
         var (total, apps) = ActivityModel.DeviceToday(usage.Sessions, usage.Blocked, now, UsageDevice.Microphone);
         var state = _app.Mic.State;
         // The microphone is either live or muted.
-        string action = state == MicState.NoDevice ? "No microphone" : state == MicState.Muted ? "Unmute" : "Mute";
-        _micCard.SetFooter(Duration(total), $"· {apps} app{(apps == 1 ? "" : "s")}", action, state != MicState.NoDevice);
+        string action = state == MicState.NoDevice ? PrivacyToggle.Properties.Resources.ActivityDyn_MicAction_NoMic
+            : state == MicState.Muted ? PrivacyToggle.Properties.Resources.ActivityDyn_MicAction_Unmute : PrivacyToggle.Properties.Resources.ActivityDyn_MicAction_Mute;
+        _micCard.SetFooter(Duration(total), AppsSuffix(apps), action, state != MicState.NoDevice);
     }
 
     // ---------------- camera ----------------
@@ -144,7 +145,7 @@ public partial class ActivityView
         var usage = _app!.Usage;
         int n = live.Count;
         _camCard.SetLive(n > 0);
-        _camCard.SetPill(n > 0 ? $"LIVE · {n} APP{(n == 1 ? "" : "S")}" : "OFF", n > 0);
+        _camCard.SetPill(n > 0 ? LivePill(n) : PrivacyToggle.Properties.Resources.ActivityDyn_Pill_Off, n > 0);
 
         string keys = string.Join("|", live.Select(l => l.AppKey + (l.Uncertain ? "?" : "")));
         if (keys != _camKeys)
@@ -155,7 +156,7 @@ public partial class ActivityView
             var enabled = _app.Camera.Devices.Where(d => d.Enabled).ToList();
             string? device = enabled.Count == 1 ? enabled[0].Name : null;
             foreach (var (appKey, start, uncertain) in live)
-                _camRows.Add(DeviceRow(appKey, start, uncertain ? "Connected · may not be using it" : device, meter: false));
+                _camRows.Add(DeviceRow(appKey, start, uncertain ? PrivacyToggle.Properties.Resources.ActivityDyn_CamConnectedUncertain : device, meter: false));
             _camCard.SetRows(_camRows.Select(r => r.Element).ToList());
         }
         UpdateTimers(_camRows, now);
@@ -166,12 +167,12 @@ public partial class ActivityView
         bool usable = state is CameraState.On or CameraState.Off && !_app.Camera.Busy;
         string action = state switch
         {
-            CameraState.Unavailable => "Not installed",
-            CameraState.NoDevice => "No camera",
-            CameraState.Off => "Turn on",
-            _ => "Turn off",
+            CameraState.Unavailable => PrivacyToggle.Properties.Resources.ActivityDyn_CamAction_NotInstalled,
+            CameraState.NoDevice => PrivacyToggle.Properties.Resources.ActivityDyn_CamAction_NoCamera,
+            CameraState.Off => PrivacyToggle.Properties.Resources.ActivityDyn_CamAction_TurnOn,
+            _ => PrivacyToggle.Properties.Resources.ActivityDyn_CamAction_TurnOff,
         };
-        _camCard.SetFooter(Duration(total), $"· {apps} app{(apps == 1 ? "" : "s")}", action, usable);
+        _camCard.SetFooter(Duration(total), AppsSuffix(apps), action, usable);
     }
 
     /// <summary>"Off · last used by Visual Studio Code, 1 min ago".</summary>
@@ -180,8 +181,9 @@ public partial class ActivityView
         var usage = _app!.Usage;
         var last = ActivityModel.LastUse(usage.Sessions, usage.Blocked, now, device);
         return last is { } l
-            ? $"Off · last used by {AppIdentity.For(l.AppKey).Name}, {ActivityModel.Ago(l.End, now)}"
-            : $"Off · no app has used the {(device == UsageDevice.Camera ? "camera" : "microphone")} in the last 7 days";
+            ? LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_OffLastUsed, AppIdentity.For(l.AppKey).Name, ActivityModel.Ago(l.End, now))
+            : LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_OffNoUse7Days,
+                device == UsageDevice.Camera ? PrivacyToggle.Properties.Resources.ActivityDyn_Device_camera : PrivacyToggle.Properties.Resources.ActivityDyn_Device_microphone);
     }
 
     /// <summary>A microphone or camera row: icon, name (+ NEW), a subtitle or level meter, and a running timer.</summary>
@@ -198,7 +200,7 @@ public partial class ActivityView
         var text = new StackPanel { Margin = new Thickness(10, 0, 10, 0), VerticalAlignment = VerticalAlignment.Center };
         var nameRow = new StackPanel { Orientation = Orientation.Horizontal };
         nameRow.Children.Add(new TextBlock { Text = app.Name, FontWeight = FontWeights.SemiBold, FontSize = 13, TextTrimming = TextTrimming.CharacterEllipsis, ToolTip = app.Detail });
-        var badge = SmallBadge("NEW", "AccentSoft", "AccentText");
+        var badge = SmallBadge(PrivacyToggle.Properties.Resources.Activity_Badge_New, "AccentSoft", "AccentText");
         badge.Margin = new Thickness(6, 0, 0, 0);
         nameRow.Children.Add(badge);
         text.Children.Add(nameRow);
@@ -244,7 +246,8 @@ public partial class ActivityView
         int n = live.Count;
         bool off = _app.Network.State == NetworkState.Off;
         _netCard.SetLive(n > 0);
-        _netCard.SetPill(off ? "OFF" : !usage.Available ? "UNAVAILABLE" : n > 0 ? $"{n} APP{(n == 1 ? "" : "S")}" : "QUIET", n > 0);
+        _netCard.SetPill(off ? PrivacyToggle.Properties.Resources.ActivityDyn_Pill_Off : !usage.Available ? PrivacyToggle.Properties.Resources.ActivityDyn_Pill_Unavailable
+            : n > 0 ? NetAppsPill(n) : PrivacyToggle.Properties.Resources.ActivityDyn_Pill_Quiet, n > 0);
 
         if (n > 0)
         {
@@ -279,7 +282,7 @@ public partial class ActivityView
         }
 
         _netCard.SetIdle(n > 0 ? null
-            : off ? "The network is off. Turn it back on from the Network page or with its shortcut."
+            : off ? PrivacyToggle.Properties.Resources.ActivityDyn_NetIdle_Off
             : !usage.Available ? usage.Problem
             : NetworkIdleText());
         var today = usage.Totals(1);
@@ -288,12 +291,12 @@ public partial class ActivityView
         var state = _app.Network.State;
         string action = state switch
         {
-            NetworkState.Off => "Connect",
-            NetworkState.On => "Disconnect",
-            NetworkState.NoDevice => "No adapter",
-            _ => "Not installed",
+            NetworkState.Off => PrivacyToggle.Properties.Resources.ActivityDyn_NetAction_Connect,
+            NetworkState.On => PrivacyToggle.Properties.Resources.ActivityDyn_NetAction_Disconnect,
+            NetworkState.NoDevice => PrivacyToggle.Properties.Resources.ActivityDyn_NetAction_NoAdapter,
+            _ => PrivacyToggle.Properties.Resources.ActivityDyn_NetAction_NotInstalled,
         };
-        _netCard.SetFooter(Bytes(bytes), $"· {today.Count} app{(today.Count == 1 ? "" : "s")}", action,
+        _netCard.SetFooter(Bytes(bytes), AppsSuffix(today.Count), action,
             state is NetworkState.On or NetworkState.Off && !_app.Network.Busy);
     }
 
@@ -305,9 +308,10 @@ public partial class ActivityView
         var now = DateTime.Now;
         // Finding the last session scans the week's history; once every 30 seconds is plenty.
         if (now - _lastNet.At > TimeSpan.FromSeconds(30)) _lastNet = (now, _app!.NetworkUsage.LastSession());
-        const string quiet = "No app is sending or receiving data right now.";
+        var quiet = PrivacyToggle.Properties.Resources.ActivityDyn_NetIdle_Quiet;
         return _lastNet.Session is { } s
-            ? $"{quiet} Last: {AppIdentity.For(s.AppKey).Name}, {ActivityModel.Ago(s.End, now)} (↓ {Bytes(s.Received)})"
+            ? LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_NetIdle_Last, quiet, AppIdentity.For(s.AppKey).Name,
+                ActivityModel.Ago(s.End, now), Bytes(s.Received))
             : quiet;
     }
 
@@ -349,13 +353,17 @@ public partial class ActivityView
     private void RefreshSummary(int mic, int cam, int net)
     {
         var parts = new List<string>();
-        if (mic > 0) parts.Add($"{mic} on mic");
-        if (cam > 0) parts.Add($"{cam} on camera");
+        if (mic > 0) parts.Add(LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Summary_OnMic, mic));
+        if (cam > 0) parts.Add(LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Summary_OnCamera, cam));
         if (mic == 0 && cam == 0)
-            NowSummary.Text = "Mic and camera are off · " + (net > 0 ? $"{net} app{(net == 1 ? "" : "s")} using the network" : "network quiet");
+            NowSummary.Text = net > 1
+                ? LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Summary_MicCamOff_NetApps, net)
+                : net == 1
+                    ? LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Summary_MicCamOff_NetApp, net)
+                    : PrivacyToggle.Properties.Resources.ActivityDyn_Summary_MicCamOff_Quiet;
         else
         {
-            if (net > 0) parts.Add($"{net} on network");
+            if (net > 0) parts.Add(LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Summary_OnNetwork, net));
             NowSummary.Text = string.Join(" · ", parts);
         }
         NowDot.SetResourceReference(System.Windows.Shapes.Shape.FillProperty, cam > 0 ? "CamUsage" : mic > 0 ? "MicUsage" : "StatusOn");
@@ -374,7 +382,8 @@ public partial class ActivityView
                 LiveAnnouncer.Text = string.Join(". ", started.Select(k =>
                 {
                     var parts = k.Split('|', 2);
-                    return $"{AppIdentity.For(parts[1]).Name} started using the {parts[0]}";
+                    string device = parts[0] == "camera" ? PrivacyToggle.Properties.Resources.ActivityDyn_Announce_camera : PrivacyToggle.Properties.Resources.ActivityDyn_Announce_microphone;
+                    return LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Announce, AppIdentity.For(parts[1]).Name, device);
                 }));
                 AutomationProperties.SetLiveSetting(LiveAnnouncer, AutomationLiveSetting.Polite);
                 (UIElementAutomationPeer.FromElement(LiveAnnouncer) ?? UIElementAutomationPeer.CreatePeerForElement(LiveAnnouncer))
@@ -385,6 +394,18 @@ public partial class ActivityView
     }
 
     // ---------------- building blocks ----------------
+
+    private static string LivePill(int n) => n == 1
+        ? LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Pill_LiveApps, n)
+        : LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Pill_LiveApps_Plural, n);
+
+    private static string NetAppsPill(int n) => n == 1
+        ? LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Pill_Apps, n)
+        : LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Pill_Apps_Plural, n);
+
+    private static string AppsSuffix(int apps) => apps == 1
+        ? LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Card_Apps, apps)
+        : LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Card_Apps_Plural, apps);
 
     /// <summary>A small rounded label such as NEW or LIVE.</summary>
     private static Border SmallBadge(string text, string background, string foreground)

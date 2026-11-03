@@ -26,8 +26,8 @@ public partial class SettingsWindow : Window
 
         var version = Assembly.GetExecutingAssembly().GetName().Version;
         string v = version == null ? "" : $"{version.Major}.{version.Minor}.{version.Build}";
-        VersionText.Text = $"Version {v}";
-        SidebarVersion.Text = $"PrivacyToggle {v}";
+        VersionText.Text = LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_Version, v);
+        SidebarVersion.Text = LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_SidebarVersion, v);
         AboutIcon.Source = BrandIcon.Source = Image("app.ico");
 
         LoadValues();
@@ -83,7 +83,7 @@ public partial class SettingsWindow : Window
         MaxGlyph.Data = System.Windows.Media.Geometry.Parse(max
             ? "M3,0.5 H11.5 V9 M0.5,3 H9 V11.5 H0.5 Z"   // restore: two overlapping boxes
             : "M0.5,0.5 H11.5 V11.5 H0.5 Z");
-        MaxButton.ToolTip = max ? "Restore" : "Maximize";
+        MaxButton.ToolTip = max ? PrivacyToggle.Properties.Resources.Settings_Caption_Restore : PrivacyToggle.Properties.Resources.Settings_Caption_Maximize;
     }
 
     /// <summary>The largest frame of an .ico (an Image given the .ico directly would upscale the 16px one).</summary>
@@ -166,6 +166,9 @@ public partial class SettingsWindow : Window
         ThemeSystem.IsChecked = S.Theme == ThemeMode.System;
         ThemeLight.IsChecked = S.Theme == ThemeMode.Light;
         ThemeDark.IsChecked = S.Theme == ThemeMode.Dark;
+        LangSystem.IsChecked = S.Language == UiLanguage.System;
+        LangEnglish.IsChecked = S.Language == UiLanguage.English;
+        LangRussian.IsChecked = S.Language == UiLanguage.Russian;
         MicTrayBox.IsChecked = S.ShowMicTrayIcon;
         CamTrayBox.IsChecked = S.ShowCameraTrayIcon;
         DoubleClickBox.IsChecked = S.DoubleClickOpensSettings;
@@ -191,15 +194,15 @@ public partial class SettingsWindow : Window
         NetListPanel.IsEnabled = NetDevSelected.IsChecked == true;
         NetSelectNoneWarning.Visibility = S.NetworkDeviceMode == DeviceMode.Selected && S.SelectedNetworkIds.Count == 0
             ? Visibility.Visible : Visibility.Collapsed;
-        NetHotkeyHint.Text = $"Press {S.NetworkHotkey} to disconnect, and again to reconnect.";
+        NetHotkeyHint.Text = LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_NetHotkeyHint, S.NetworkHotkey);
         SelectNoneWarning.Visibility = S.DeviceMode == DeviceMode.Selected && S.SelectedDeviceIds.Count == 0
             ? Visibility.Visible : Visibility.Collapsed;
         CamSelectNoneWarning.Visibility = S.CameraDeviceMode == DeviceMode.Selected && S.SelectedCameraIds.Count == 0
             ? Visibility.Visible : Visibility.Collapsed;
         ModeHint.Text = S.HotkeyMode == HotkeyMode.Toggle
-            ? $"Press {S.Hotkey} once to mute and again to unmute."
-            : $"Microphones stay muted and are live only while you hold {S.Hotkey}. The key press is not passed on to other apps.";
-        CamHotkeyHint.Text = $"Press {S.CameraHotkey} to turn the camera off, and again to turn it back on.";
+            ? LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_MicHotkeyHint_Toggle, S.Hotkey)
+            : LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_MicHotkeyHint_Ptt, S.Hotkey);
+        CamHotkeyHint.Text = LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_CamHotkeyHint, S.CameraHotkey);
         MicNoTrayWarning.Visibility = CamNoTrayWarning.Visibility =
             !S.ShowMicTrayIcon && !S.ShowCameraTrayIcon && !S.ShowNetworkTrayIcon ? Visibility.Visible : Visibility.Collapsed;
     }
@@ -220,23 +223,23 @@ public partial class SettingsWindow : Window
 
         switch (_app.Mic.State)
         {
-            case MicState.Muted: Set(MicDot, MicChip, "Mic off", "StatusOff"); break;
-            case MicState.NoDevice: Set(MicDot, MicChip, "No microphone", "NoneColor"); break;
-            default: Set(MicDot, MicChip, "Mic on", "StatusOn"); break;
+            case MicState.Muted: Set(MicDot, MicChip, PrivacyToggle.Properties.Resources.SettingsDyn_Status_MicOff, "StatusOff"); break;
+            case MicState.NoDevice: Set(MicDot, MicChip, PrivacyToggle.Properties.Resources.SettingsDyn_Status_NoMicrophone, "NoneColor"); break;
+            default: Set(MicDot, MicChip, PrivacyToggle.Properties.Resources.SettingsDyn_Status_MicOn, "StatusOn"); break;
         }
         switch (_app.Camera.State)
         {
-            case CameraState.Off: Set(CamDot, CamChip, "Camera off", "StatusOff"); break;
-            case CameraState.On: Set(CamDot, CamChip, "Camera on", "StatusOn"); break;
-            case CameraState.NoDevice: Set(CamDot, CamChip, "No camera", "NoneColor"); break;
-            default: Set(CamDot, CamChip, "Camera control not installed", "NoneColor"); break;
+            case CameraState.Off: Set(CamDot, CamChip, PrivacyToggle.Properties.Resources.SettingsDyn_Status_CameraOff, "StatusOff"); break;
+            case CameraState.On: Set(CamDot, CamChip, PrivacyToggle.Properties.Resources.SettingsDyn_Status_CameraOn, "StatusOn"); break;
+            case CameraState.NoDevice: Set(CamDot, CamChip, PrivacyToggle.Properties.Resources.SettingsDyn_Status_NoCamera, "NoneColor"); break;
+            default: Set(CamDot, CamChip, PrivacyToggle.Properties.Resources.SettingsDyn_Status_CamNotInstalled, "NoneColor"); break;
         }
         switch (_app.Network.State)
         {
-            case NetworkState.Off: Set(NetDot, NetChip, "Network off", "StatusOff"); break;
-            case NetworkState.On: Set(NetDot, NetChip, "Network on", "StatusOn"); break;
-            case NetworkState.NoDevice: Set(NetDot, NetChip, "No network adapter", "NoneColor"); break;
-            default: Set(NetDot, NetChip, "Network control unavailable", "NoneColor"); break;
+            case NetworkState.Off: Set(NetDot, NetChip, PrivacyToggle.Properties.Resources.SettingsDyn_Status_NetworkOff, "StatusOff"); break;
+            case NetworkState.On: Set(NetDot, NetChip, PrivacyToggle.Properties.Resources.SettingsDyn_Status_NetworkOn, "StatusOn"); break;
+            case NetworkState.NoDevice: Set(NetDot, NetChip, PrivacyToggle.Properties.Resources.SettingsDyn_Status_NoNetworkAdapter, "NoneColor"); break;
+            default: Set(NetDot, NetChip, PrivacyToggle.Properties.Resources.SettingsDyn_Status_NetworkUnavailable, "NoneColor"); break;
         }
     }
 
@@ -249,13 +252,15 @@ public partial class SettingsWindow : Window
         string micColor = mic switch { MicState.Muted => "MutedColor", MicState.Live => "LiveColor", _ => "NoneColor" };
         MicStateBadge.SetResourceReference(Border.BackgroundProperty, micColor.Replace("Color", "Fill"));
         MicCardIcon.Source = Image(mic switch { MicState.Muted => "mic-off.ico", MicState.Live => "mic-on.ico", _ => "mic-none.ico" });
-        MicCardState.Text = mic switch { MicState.Muted => "Muted", MicState.Live => "Live", _ => "Not found" };
+        MicCardState.Text = mic switch { MicState.Muted => PrivacyToggle.Properties.Resources.SettingsDyn_MicCard_Muted, MicState.Live => PrivacyToggle.Properties.Resources.SettingsDyn_MicCard_Live, _ => PrivacyToggle.Properties.Resources.SettingsDyn_MicCard_NotFound };
         MicCardHint.Text = mic == MicState.NoDevice
-            ? "Plug in a microphone."
-            : S.HotkeyMode == HotkeyMode.PushToTalk ? $"Hold {S.Hotkey} to talk" : $"{S.Hotkey} to switch";
+            ? PrivacyToggle.Properties.Resources.SettingsDyn_MicCard_PlugIn
+            : S.HotkeyMode == HotkeyMode.PushToTalk
+                ? LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_MicCard_HoldToTalk, S.Hotkey)
+                : LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_MicCard_Switch, S.Hotkey);
         int micCount = _app.Mic.Devices.Count;
-        MicCardDevices.Text = micCount == 1 ? "1 microphone" : $"{micCount} microphones";
-        MicCardButton.Content = mic == MicState.Muted ? "Unmute" : "Mute";
+        MicCardDevices.Text = micCount == 1 ? PrivacyToggle.Properties.Resources.SettingsDyn_MicCard_OneMic : LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_MicCard_NMics, micCount);
+        MicCardButton.Content = mic == MicState.Muted ? PrivacyToggle.Properties.Resources.SettingsDyn_MicCard_Unmute : PrivacyToggle.Properties.Resources.SettingsDyn_MicCard_Mute;
         MicCardButton.IsEnabled = mic != MicState.NoDevice;
 
         // camera
@@ -264,30 +269,31 @@ public partial class SettingsWindow : Window
         string camColor = cam switch { CameraState.Off => "MutedColor", CameraState.On => "LiveColor", _ => "NoneColor" };
         CamStateBadge.SetResourceReference(Border.BackgroundProperty, camColor.Replace("Color", "Fill"));
         CamCardIcon.Source = Image(cam switch { CameraState.Off => "cam-off.ico", CameraState.On => "cam-on.ico", _ => "cam-none.ico" });
-        CamCardState.Text = camService.Busy ? (camService.DesiredOff ? "Turning off…" : "Turning on…") : cam switch
+        CamCardState.Text = camService.Busy ? (camService.DesiredOff ? PrivacyToggle.Properties.Resources.SettingsDyn_CamCard_TurningOff : PrivacyToggle.Properties.Resources.SettingsDyn_CamCard_TurningOn) : cam switch
         {
-            CameraState.Off => "Off",
-            CameraState.On => "On",
-            CameraState.NoDevice => "Not found",
-            _ => "Unavailable",
+            CameraState.Off => PrivacyToggle.Properties.Resources.SettingsDyn_CamCard_Off,
+            CameraState.On => PrivacyToggle.Properties.Resources.SettingsDyn_CamCard_On,
+            CameraState.NoDevice => PrivacyToggle.Properties.Resources.SettingsDyn_MicCard_NotFound,
+            _ => PrivacyToggle.Properties.Resources.SettingsDyn_CamCard_Unavailable,
         };
         CamCardHint.Text = cam switch
         {
-            CameraState.Unavailable => "Needs the helper service — see the Camera page.",
-            CameraState.NoDevice => "Plug in a camera.",
-            _ when camService.LastError != null => "Last switch failed: " + camService.LastError,
-            _ when camService.NeedsRestart => "Windows needs a restart to finish the switch.",
-            _ => $"{S.CameraHotkey} to switch",
+            CameraState.Unavailable => PrivacyToggle.Properties.Resources.SettingsDyn_CamCard_NeedsHelper,
+            CameraState.NoDevice => PrivacyToggle.Properties.Resources.SettingsDyn_CamCard_PlugIn,
+            _ when camService.LastError != null => LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_CamCard_LastError, camService.LastError),
+            _ when camService.NeedsRestart => PrivacyToggle.Properties.Resources.SettingsDyn_CamCard_NeedsRestart,
+            _ => LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_MicCard_Switch, S.CameraHotkey),
         };
         int camCount = camService.Devices.Count;
-        CamCardDevices.Text = cam == CameraState.Unavailable ? "Helper not installed" : camCount == 1 ? "1 camera" : $"{camCount} cameras";
-        CamCardButton.Content = cam == CameraState.Off ? "Turn on" : "Turn off";
+        CamCardDevices.Text = cam == CameraState.Unavailable ? PrivacyToggle.Properties.Resources.SettingsDyn_CamCard_HelperNotInstalled
+            : camCount == 1 ? PrivacyToggle.Properties.Resources.SettingsDyn_CamCard_OneCamera : LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_CamCard_NCameras, camCount);
+        CamCardButton.Content = cam == CameraState.Off ? PrivacyToggle.Properties.Resources.SettingsDyn_CamCard_TurnOn : PrivacyToggle.Properties.Resources.SettingsDyn_CamCard_TurnOff;
         CamCardButton.IsEnabled = !camService.Busy && cam is CameraState.On or CameraState.Off;
         CamHelperBanner.Visibility = cam == CameraState.Unavailable ? Visibility.Visible : Visibility.Collapsed;
         HelperStatusText.Text = cam == CameraState.Unavailable
-            ? "Helper service: not installed"
-            : _app.Network.HelperOutdated ? "Helper service: running (an older version, without network control)"
-            : "Helper service: running";
+            ? PrivacyToggle.Properties.Resources.SettingsDyn_Helper_NotInstalled
+            : _app.Network.HelperOutdated ? PrivacyToggle.Properties.Resources.SettingsDyn_Helper_OldVersion
+            : PrivacyToggle.Properties.Resources.SettingsDyn_Helper_Running;
 
         // network
         var netService = _app.Network;
@@ -295,35 +301,36 @@ public partial class SettingsWindow : Window
         string netColor = net switch { NetworkState.Off => "MutedColor", NetworkState.On => "LiveColor", _ => "NoneColor" };
         NetStateBadge.SetResourceReference(Border.BackgroundProperty, netColor.Replace("Color", "Fill"));
         NetCardIcon.Source = Image(net switch { NetworkState.Off => "net-off.ico", NetworkState.On => "net-on.ico", _ => "net-none.ico" });
-        NetCardState.Text = netService.Busy ? (netService.DesiredOff ? "Disconnecting…" : "Reconnecting…") : net switch
+        NetCardState.Text = netService.Busy ? (netService.DesiredOff ? PrivacyToggle.Properties.Resources.SettingsDyn_NetCard_Disconnecting : PrivacyToggle.Properties.Resources.SettingsDyn_NetCard_Reconnecting) : net switch
         {
-            NetworkState.Off => "Off",
-            NetworkState.On => "On",
-            NetworkState.NoDevice => "Not found",
-            _ => "Unavailable",
+            NetworkState.Off => PrivacyToggle.Properties.Resources.SettingsDyn_CamCard_Off,
+            NetworkState.On => PrivacyToggle.Properties.Resources.SettingsDyn_CamCard_On,
+            NetworkState.NoDevice => PrivacyToggle.Properties.Resources.SettingsDyn_MicCard_NotFound,
+            _ => PrivacyToggle.Properties.Resources.SettingsDyn_CamCard_Unavailable,
         };
         NetCardHint.Text = net switch
         {
             NetworkState.Unavailable => netService.HelperOutdated
-                ? "Needs the latest installer — see the Network page."
-                : "Needs the helper service — see the Network page.",
-            NetworkState.NoDevice => "No Wi-Fi or wired adapter found.",
-            _ when netService.LastError != null => "Last switch failed: " + netService.LastError,
-            _ when netService.NeedsRestart => "Windows needs a restart to finish the switch.",
-            _ => $"{S.NetworkHotkey} to switch",
+                ? PrivacyToggle.Properties.Resources.SettingsDyn_NetCard_NeedsInstaller
+                : PrivacyToggle.Properties.Resources.SettingsDyn_NetCard_NeedsHelper,
+            NetworkState.NoDevice => PrivacyToggle.Properties.Resources.SettingsDyn_NetCard_NoAdapter,
+            _ when netService.LastError != null => LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_CamCard_LastError, netService.LastError),
+            _ when netService.NeedsRestart => PrivacyToggle.Properties.Resources.SettingsDyn_CamCard_NeedsRestart,
+            _ => LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_MicCard_Switch, S.NetworkHotkey),
         };
         var targets = netService.Targets;
         int connected = targets.Count(a => a.Connected);
-        NetCardDevices.Text = net == NetworkState.Unavailable ? "Helper needs updating"
-            : targets.Count == 1 ? (connected == 1 ? "1 adapter · connected" : "1 adapter")
-            : $"{targets.Count} adapters" + (connected > 0 ? $" · {connected} connected" : "");
-        NetCardButton.Content = net == NetworkState.Off ? "Reconnect" : "Disconnect";
+        NetCardDevices.Text = net == NetworkState.Unavailable ? PrivacyToggle.Properties.Resources.SettingsDyn_NetCard_HelperNeedsUpdate
+            : targets.Count == 1 ? (connected == 1 ? PrivacyToggle.Properties.Resources.SettingsDyn_NetCard_OneAdapterConnected : PrivacyToggle.Properties.Resources.SettingsDyn_NetCard_OneAdapter)
+            : LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_NetCard_NAdapters, targets.Count)
+              + (connected > 0 ? LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_NetCard_NConnected, connected) : "");
+        NetCardButton.Content = net == NetworkState.Off ? PrivacyToggle.Properties.Resources.SettingsDyn_NetCard_Reconnect : PrivacyToggle.Properties.Resources.SettingsDyn_NetCard_Disconnect;
         NetCardButton.IsEnabled = !netService.Busy && net is NetworkState.On or NetworkState.Off;
         NetHelperBanner.Visibility = net == NetworkState.Unavailable ? Visibility.Visible : Visibility.Collapsed;
-        NetHelperBannerTitle.Text = netService.HelperOutdated ? "The helper service needs updating" : "Network control isn't installed";
+        NetHelperBannerTitle.Text = netService.HelperOutdated ? PrivacyToggle.Properties.Resources.SettingsDyn_NetBanner_UpdateTitle : PrivacyToggle.Properties.Resources.SettingsDyn_NetBanner_NotInstalledTitle;
         NetHelperBannerText.Text = netService.HelperOutdated
-            ? "The PrivacyToggle helper service on this PC is from an older version that can't switch the network. Run the latest PrivacyToggle-Setup to update it."
-            : "Turning the network off needs the PrivacyToggle helper service, which the installer sets up (it asks for admin rights once). Run PrivacyToggle-Setup to enable it.";
+            ? PrivacyToggle.Properties.Resources.SettingsDyn_NetBanner_UpdateBody
+            : PrivacyToggle.Properties.Resources.SettingsDyn_NetBanner_NotInstalledBody;
 
         // shortcuts
         HotkeyWarning.Text = _app.HotkeyError ?? "";
@@ -362,10 +369,16 @@ public partial class SettingsWindow : Window
     /// <summary>"Wi-Fi · Intel(R) Wi-Fi 6E AX211 — connected".</summary>
     private static string AdapterLabel(Helper.NetworkAdapter a)
     {
-        string kind = a.Kind switch { Helper.NetworkKind.WiFi => "Wi-Fi", Helper.NetworkKind.Mobile => "Mobile", _ => "Wired" };
-        string state = !a.Enabled ? "off" : a.Connected ? "connected" : "not connected";
+        string kind = a.Kind switch
+        {
+            Helper.NetworkKind.WiFi => PrivacyToggle.Properties.Resources.SettingsDyn_Adapter_WiFi,
+            Helper.NetworkKind.Mobile => PrivacyToggle.Properties.Resources.SettingsDyn_Adapter_Mobile,
+            _ => PrivacyToggle.Properties.Resources.SettingsDyn_Adapter_Wired,
+        };
+        string state = !a.Enabled ? PrivacyToggle.Properties.Resources.SettingsDyn_Adapter_Off
+            : a.Connected ? PrivacyToggle.Properties.Resources.SettingsDyn_Adapter_Connected : PrivacyToggle.Properties.Resources.SettingsDyn_Adapter_NotConnected;
         string name = a.Alias.Equals(a.Name, StringComparison.OrdinalIgnoreCase) ? a.Name : $"{a.Alias} · {a.Name}";
-        return $"{kind}: {name} — {state}";
+        return LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_AdapterLine, kind, name, state);
     }
 
     private void FillChecklist(ItemsControl list, IEnumerable<(string Id, string Name)> devices, List<string> selectedIds,
@@ -584,7 +597,7 @@ public partial class SettingsWindow : Window
         }
         else
         {
-            warning.Text = $"{error} Keeping {recorder.Hotkey}.";
+            warning.Text = LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_HotkeyWarning_Keep, error, recorder.Hotkey);
             warning.Visibility = Visibility.Visible;
         }
         UpdateDependentControls();
@@ -686,6 +699,18 @@ public partial class SettingsWindow : Window
         _app.SetTheme(ThemeLight.IsChecked == true ? ThemeMode.Light : ThemeDark.IsChecked == true ? ThemeMode.Dark : ThemeMode.System);
     }
 
+    private void Language_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        var language = LangEnglish.IsChecked == true ? UiLanguage.English
+            : LangRussian.IsChecked == true ? UiLanguage.Russian
+            : UiLanguage.System;
+        _app.SetLanguage(language);
+        if (MessageBox.Show(PrivacyToggle.Properties.Resources.Language_RestartMessage, PrivacyToggle.Properties.Resources.Language_RestartTitle,
+                MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
+            LocalizationService.RestartApp();
+    }
+
     private void MicTray_Changed(object sender, RoutedEventArgs e)
     {
         if (_loading) return;
@@ -717,7 +742,7 @@ public partial class SettingsWindow : Window
     {
         if (_updateBusy) return;
         _updateBusy = true;
-        UpdateStatus.Text = "Checking for updates…";
+        UpdateStatus.Text = PrivacyToggle.Properties.Resources.SettingsDyn_Update_Checking;
         UpdateDetail.Text = "";
         CheckUpdatesButton.IsEnabled = false;
         UpdateButton.Visibility = Visibility.Collapsed;
@@ -727,9 +752,9 @@ public partial class SettingsWindow : Window
         }
         catch (Exception ex)
         {
-            UpdateStatus.Text = "Couldn't check for updates";
+            UpdateStatus.Text = PrivacyToggle.Properties.Resources.SettingsDyn_Update_CheckFailed;
             UpdateDetail.Text = ex is HttpRequestException or TaskCanceledException
-                ? "Check your internet connection and try again."
+                ? PrivacyToggle.Properties.Resources.SettingsDyn_Update_CheckFailedHint
                 : ex.Message;
             ReleaseLinkText.Visibility = Visibility.Collapsed;
         }
@@ -747,22 +772,21 @@ public partial class SettingsWindow : Window
         ReleaseLinkText.Visibility = Visibility.Visible;
         if (info.IsNewer)
         {
-            UpdateStatus.Text = $"Version {info.Latest} is available";
+            UpdateStatus.Text = LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_Update_Available, info.Latest);
             UpdateDetail.Text = info.InstallerUrl != null
-                ? $"You have {current}. Update downloads the installer from GitHub ({info.InstallerSize / 1048576.0:0} MB), checks it, and installs it; PrivacyToggle restarts afterwards."
-                : $"You have {current}. This release has no installer attached; download it from the link below.";
-            // Without an installer there's nothing to install here; the "What's new" link below opens the release.
-            UpdateButton.Content = $"Update to {info.Latest}";
+                ? LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_Update_AvailableDetail, current, info.InstallerSize / 1048576.0)
+                : LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_Update_NoInstallerDetail, current);
+            UpdateButton.Content = LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_Update_Button, info.Latest);
             UpdateButton.Visibility = info.InstallerUrl != null ? Visibility.Visible : Visibility.Collapsed;
-            ReleaseLinkRun.Text = $"What's new in {info.Tag}";
+            ReleaseLinkRun.Text = LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_Update_WhatsNewIn, info.Tag);
             AboutUpdateBadge.Visibility = Visibility.Visible;
         }
         else
         {
-            UpdateStatus.Text = "You're up to date";
-            UpdateDetail.Text = $"PrivacyToggle {current} is the latest version (checked {UpdateService.LastChecked:t}).";
+            UpdateStatus.Text = PrivacyToggle.Properties.Resources.SettingsDyn_Update_UpToDate;
+            UpdateDetail.Text = LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_Update_UpToDateDetail, current, UpdateService.LastChecked);
             UpdateButton.Visibility = Visibility.Collapsed;
-            ReleaseLinkRun.Text = $"Release notes for {info.Tag}";
+            ReleaseLinkRun.Text = LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_Update_ReleaseNotes, info.Tag);
             AboutUpdateBadge.Visibility = Visibility.Collapsed;
         }
     }
@@ -777,32 +801,32 @@ public partial class SettingsWindow : Window
         UpdateButton.IsEnabled = CheckUpdatesButton.IsEnabled = false;
         UpdateProgress.Value = 0;
         UpdateProgress.Visibility = Visibility.Visible;
-        UpdateStatus.Text = $"Downloading {info.Latest}…";
+        UpdateStatus.Text = LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_Update_Downloading, info.Latest);
         UpdateDetail.Text = "";
         try
         {
             var progress = new Progress<double>(p =>
             {
                 UpdateProgress.Value = p;
-                UpdateDetail.Text = $"{p * 100:0}% of {info.InstallerSize / 1048576.0:0} MB";
+                UpdateDetail.Text = LocalizationService.Format(PrivacyToggle.Properties.Resources.SettingsDyn_Update_DownloadProgress, p * 100, info.InstallerSize / 1048576.0);
             });
             string installer = await UpdateService.DownloadAsync(info, progress);
 
-            UpdateStatus.Text = "Starting the installer…";
-            UpdateDetail.Text = "Windows will ask for permission. PrivacyToggle closes now and restarts when the update is done.";
+            UpdateStatus.Text = PrivacyToggle.Properties.Resources.SettingsDyn_Update_StartingInstaller;
+            UpdateDetail.Text = PrivacyToggle.Properties.Resources.SettingsDyn_Update_InstallerHint;
             if (UpdateService.StartInstaller(installer))
             {
                 await Task.Delay(800); // let the installer window appear first
                 Application.Current.Shutdown();
                 return;
             }
-            UpdateStatus.Text = "Update cancelled";
-            UpdateDetail.Text = "The installer needs permission to run. Click Update to try again.";
+            UpdateStatus.Text = PrivacyToggle.Properties.Resources.SettingsDyn_Update_Cancelled;
+            UpdateDetail.Text = PrivacyToggle.Properties.Resources.SettingsDyn_Update_CancelledHint;
         }
         catch (Exception ex)
         {
-            UpdateStatus.Text = "Update failed";
-            UpdateDetail.Text = ex is HttpRequestException ? "The download failed. Check your internet connection and try again." : ex.Message;
+            UpdateStatus.Text = PrivacyToggle.Properties.Resources.SettingsDyn_Update_Failed;
+            UpdateDetail.Text = ex is HttpRequestException ? PrivacyToggle.Properties.Resources.SettingsDyn_Update_DownloadFailed : ex.Message;
         }
         finally
         {

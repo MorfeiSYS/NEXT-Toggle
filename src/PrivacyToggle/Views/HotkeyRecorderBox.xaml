@@ -1,6 +1,7 @@
 <UserControl x:Class="PrivacyToggle.Views.HotkeyRecorderBox"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:loc="clr-namespace:PrivacyToggle.Properties"
              Focusable="True" FocusVisualStyle="{x:Null}" Cursor="Hand"
              MinWidth="220" Height="40" Margin="0,0,3,3">
     <Grid>
@@ -15,7 +16,7 @@
                 <TextBlock x:Name="Display" VerticalAlignment="Center" FontSize="14" FontWeight="Bold"
                            Foreground="{DynamicResource TextPrimary}" />
                 <TextBlock x:Name="Badge" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="11" FontWeight="SemiBold"
-                           Foreground="{DynamicResource TextSecondary}" Text="Click to change" />
+                           Foreground="{DynamicResource TextSecondary}" Text="{x:Static loc:Resources.HotkeyRecorder_ClickToChange}" />
             </Grid>
         </Border>
     </Grid>

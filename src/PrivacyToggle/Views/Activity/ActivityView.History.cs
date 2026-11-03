@@ -134,14 +134,15 @@ public partial class ActivityView
             MoreRowsButton.Visibility = Visibility.Collapsed;
             string what = _filter switch
             {
-                ActivityFilter.Microphone => "microphone ",
-                ActivityFilter.Camera => "camera ",
-                ActivityFilter.Network => "network ",
+                ActivityFilter.Microphone => PrivacyToggle.Properties.Resources.ActivityDyn_FilterMic,
+                ActivityFilter.Camera => PrivacyToggle.Properties.Resources.ActivityDyn_FilterCam,
+                ActivityFilter.Network => PrivacyToggle.Properties.Resources.ActivityDyn_FilterNet,
                 _ => "",
             };
-            EmptyText.Text = $"No {what}activity in the last {ActivityModel.Label(_range)}.";
+            EmptyText.Text = LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_Empty, what, ActivityModel.Label(_range));
             EmptyButton.Visibility = _range == ActivityRange.Days7 ? Visibility.Collapsed : Visibility.Visible;
-            EmptyButton.Content = $"Show the last {ActivityModel.Label(_range == ActivityRange.Days7 ? _range : _range + 1)}";
+            EmptyButton.Content = LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_ShowLastRange,
+                ActivityModel.Label(_range == ActivityRange.Days7 ? _range : _range + 1));
             _timelineRows.Clear();
             _listTimers.Clear();
             return;
@@ -169,10 +170,10 @@ public partial class ActivityView
         RangeTotals.Children.Clear();
         string range = _range switch
         {
-            ActivityRange.Hour1 => "Last hour",
-            ActivityRange.Hours6 => "Last 6 hours",
-            ActivityRange.Hours24 => "Last 24 hours",
-            _ => "Last 7 days",
+            ActivityRange.Hour1 => PrivacyToggle.Properties.Resources.ActivityDyn_Range_LastHour,
+            ActivityRange.Hours6 => PrivacyToggle.Properties.Resources.ActivityDyn_Range_Last6Hours,
+            ActivityRange.Hours24 => PrivacyToggle.Properties.Resources.ActivityDyn_Range_Last24Hours,
+            _ => PrivacyToggle.Properties.Resources.ActivityDyn_Range_Last7Days,
         };
         var label = new TextBlock { Text = range + ":", FontSize = 13, FontWeight = FontWeights.Bold, Margin = new Thickness(0, 0, 10, 0), VerticalAlignment = VerticalAlignment.Center };
         label.SetResourceReference(TextBlock.ForegroundProperty, "TextSecondary");
@@ -193,10 +194,11 @@ public partial class ActivityView
             }
             RangeTotals.Children.Add(item);
         }
-        if (_filter is ActivityFilter.All or ActivityFilter.Microphone) Total(Lane.Microphone, "Microphone", Duration(mic), null);
-        if (_filter is ActivityFilter.All or ActivityFilter.Camera) Total(Lane.Camera, "Camera", Duration(cam), null);
+        if (_filter is ActivityFilter.All or ActivityFilter.Microphone) Total(Lane.Microphone, PrivacyToggle.Properties.Resources.Activity_Lane_Microphone, Duration(mic), null);
+        if (_filter is ActivityFilter.All or ActivityFilter.Camera) Total(Lane.Camera, PrivacyToggle.Properties.Resources.Activity_Lane_Camera, Duration(cam), null);
         if (_filter is ActivityFilter.All or ActivityFilter.Network)
-            Total(Lane.Network, "Network", Bytes(received + sent), $"(↓ {Bytes(received)} · ↑ {Bytes(sent)})");
+            Total(Lane.Network, PrivacyToggle.Properties.Resources.Activity_Lane_Network, Bytes(received + sent),
+                LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_NetworkTotalExtra, Bytes(received), Bytes(sent)));
     }
 
     private void TickHistory(DateTime now)
@@ -232,9 +234,9 @@ public partial class ActivityView
             Legend.Children.Add(swatch);
             Legend.Children.Add(label);
         }
-        Add("MicUsage", "Mic", 14, 5);
-        Add("CamUsage", "Camera", 14, 5);
-        Add("NetUsage", "Data", 5, 11);
+        Add("MicUsage", PrivacyToggle.Properties.Resources.Activity_Legend_Mic, 14, 5);
+        Add("CamUsage", PrivacyToggle.Properties.Resources.Activity_Legend_Camera, 14, 5);
+        Add("NetUsage", PrivacyToggle.Properties.Resources.Activity_Legend_Data, 5, 11);
     }
 
     private void RefreshTimeline(List<HistoryApp> apps, DateTime from, DateTime now)
@@ -254,13 +256,15 @@ public partial class ActivityView
         {
             if (grouped && !a.Live && !dividerDone)
             {
-                Rows.Items.Add(GroupDivider(_range == ActivityRange.Days7 ? "EARLIER" : "EARLIER TODAY"));
+                Rows.Items.Add(GroupDivider(_range == ActivityRange.Days7 ? PrivacyToggle.Properties.Resources.Activity_Divider_Earlier : PrivacyToggle.Properties.Resources.Activity_Divider_EarlierToday));
                 dividerDone = true;
             }
             Rows.Items.Add(TimelineRowFor(a, from, now));
         }
         int more = apps.Count - shown.Count;
-        MoreRowsButton.Content = $"Show {more} more app{(more == 1 ? "" : "s")}";
+        MoreRowsButton.Content = more == 1
+            ? LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_MoreApps, more)
+            : LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_MoreApps_Plural, more);
         MoreRowsButton.Visibility = more > 0 ? Visibility.Visible : Visibility.Collapsed;
     }
 
@@ -336,7 +340,7 @@ public partial class ActivityView
         var name = new DockPanel();
         if (a.Live)
         {
-            var live = SmallBadge("LIVE", "Accent", "AccentText");
+            var live = SmallBadge(PrivacyToggle.Properties.Resources.Activity_Badge_Live, "Accent", "AccentText");
             live.Margin = new Thickness(6, 0, 0, 0);
             DockPanel.SetDock(live, Dock.Right);
             name.Children.Add(live);
@@ -354,17 +358,18 @@ public partial class ActivityView
         if (a.Lanes.Contains(Lane.Microphone))
         {
             if (a.MicLive is { } m) LiveChip(Lane.Microphone, m);
-            else chips.Children.Add(Tip(ResourceChip(Lane.Microphone, ActivityModel.Short(a.Mic)).Chip, "Microphone time in this range"));
+            else chips.Children.Add(Tip(ResourceChip(Lane.Microphone, ActivityModel.Short(a.Mic)).Chip, PrivacyToggle.Properties.Resources.Activity_Tooltip_MicTime));
         }
         if (a.Lanes.Contains(Lane.Camera))
         {
             if (a.CamLive is { } c) LiveChip(Lane.Camera, c);
-            else chips.Children.Add(Tip(ResourceChip(Lane.Camera, ActivityModel.Short(a.Camera)).Chip, "Camera time in this range"));
+            else chips.Children.Add(Tip(ResourceChip(Lane.Camera, ActivityModel.Short(a.Camera)).Chip, PrivacyToggle.Properties.Resources.Activity_Tooltip_CamTime));
         }
         if (a.Lanes.Contains(Lane.Network))
         {
             if (a.NetLive is { } n) LiveChip(Lane.Network, n);
-            else chips.Children.Add(Tip(ResourceChip(Lane.Network, Bytes(a.Bytes)).Chip, $"Data in this range: ↓ {Bytes(a.Received)} · ↑ {Bytes(a.Sent)}"));
+            else chips.Children.Add(Tip(ResourceChip(Lane.Network, Bytes(a.Bytes)).Chip,
+                LocalizationService.Format(PrivacyToggle.Properties.Resources.Activity_Tooltip_DataRange, Bytes(a.Received), Bytes(a.Sent))));
         }
         text.Children.Add(chips);
         Grid.SetColumn(text, 1);
@@ -493,9 +498,14 @@ public partial class ActivityView
         foreach (var s in sessions.Take(maxShown))
         {
             var line = new DockPanel { Margin = new Thickness(0, 3, 0, 3) };
-            var (chip, _) = ResourceChip(s.Lane, s.Lane switch { Lane.Camera => "Camera", Lane.Microphone => "Mic", _ => "Network" });
+            var (chip, _) = ResourceChip(s.Lane, s.Lane switch
+            {
+                Lane.Camera => PrivacyToggle.Properties.Resources.Activity_Lane_Camera,
+                Lane.Microphone => PrivacyToggle.Properties.Resources.Activity_Lane_MicShort,
+                _ => PrivacyToggle.Properties.Resources.Activity_Lane_Network,
+            });
             line.Children.Add(chip);
-            var length = new TextBlock { Text = s.Live ? "ongoing" : ActivityModel.Long(s.End - s.Start), Margin = new Thickness(12, 0, 0, 0) };
+            var length = new TextBlock { Text = s.Live ? PrivacyToggle.Properties.Resources.Activity_Ongoing : ActivityModel.Long(s.End - s.Start), Margin = new Thickness(12, 0, 0, 0) };
             length.SetResourceReference(TextBlock.ForegroundProperty, "TextSecondary");
             DockPanel.SetDock(length, Dock.Right);
             line.Children.Add(length);
@@ -505,7 +515,7 @@ public partial class ActivityView
         }
         if (sessions.Count > maxShown)
         {
-            var more = new TextBlock { Text = "Switch to List for every session.", Margin = new Thickness(0, 4, 0, 0) };
+            var more = new TextBlock { Text = PrivacyToggle.Properties.Resources.Activity_SwitchToList, Margin = new Thickness(0, 4, 0, 0) };
             more.SetResourceReference(TextBlock.ForegroundProperty, "TextSecondary");
             panel.Children.Add(more);
         }
@@ -513,7 +523,7 @@ public partial class ActivityView
         if (a.Key.StartsWith("np:"))
         {
             string path = a.Key[3..];
-            var open = new Button { Style = (Style)FindResource("LinkButton"), Content = "Open file location", HorizontalAlignment = HorizontalAlignment.Left, Margin = new Thickness(-4, 8, 0, 0), ToolTip = path };
+            var open = new Button { Style = (Style)FindResource("LinkButton"), Content = PrivacyToggle.Properties.Resources.Activity_OpenFileLocation, HorizontalAlignment = HorizontalAlignment.Left, Margin = new Thickness(-4, 8, 0, 0), ToolTip = path };
             open.Click += (_, e) =>
             {
                 e.Handled = true;
@@ -573,7 +583,11 @@ public partial class ActivityView
         if (ListHeader.Children.Count == 0)
         {
             var header = ListGrid();
-            string[] titles = { "Started", "App", "Used", "Duration", "Data during session" };
+            string[] titles =
+            {
+                PrivacyToggle.Properties.Resources.Activity_ListHeader_Started, PrivacyToggle.Properties.Resources.Activity_ListHeader_App, PrivacyToggle.Properties.Resources.Activity_ListHeader_Used,
+                PrivacyToggle.Properties.Resources.Activity_ListHeader_Duration, PrivacyToggle.Properties.Resources.Activity_ListHeader_Data,
+            };
             for (int i = 0; i < titles.Length; i++)
             {
                 var t = new TextBlock { Text = titles[i], FontSize = 11, FontWeight = FontWeights.Bold, Margin = new Thickness(i == 1 ? 34 : 0, 0, 0, 0) };
@@ -588,7 +602,9 @@ public partial class ActivityView
         ListRows.Items.Clear();
         foreach (var s in sessions.Take(_listCap)) ListRows.Items.Add(ListRow(s, now));
         int more = sessions.Count - Math.Min(_listCap, sessions.Count);
-        MoreRowsButton.Content = $"Show {more} more session{(more == 1 ? "" : "s")}";
+        MoreRowsButton.Content = more == 1
+            ? LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_MoreSessions, more)
+            : LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_MoreSessions_Plural, more);
         MoreRowsButton.Visibility = more > 0 ? Visibility.Visible : Visibility.Collapsed;
     }
 
@@ -606,7 +622,12 @@ public partial class ActivityView
         app.Children.Add(new TextBlock { Text = s.App.App.Name, FontWeight = FontWeights.SemiBold, Margin = new Thickness(10, 0, 8, 0), VerticalAlignment = VerticalAlignment.Center, TextTrimming = TextTrimming.CharacterEllipsis, ToolTip = s.App.App.Detail });
         AddCell(grid, app, 1);
 
-        AddCell(grid, ResourceChip(s.Lane, s.Lane switch { Lane.Camera => "Camera", Lane.Microphone => "Microphone", _ => "Network" }).Chip, 2);
+        AddCell(grid, ResourceChip(s.Lane, s.Lane switch
+        {
+            Lane.Camera => PrivacyToggle.Properties.Resources.Activity_Lane_Camera,
+            Lane.Microphone => PrivacyToggle.Properties.Resources.Activity_Lane_Microphone,
+            _ => PrivacyToggle.Properties.Resources.Activity_Lane_Network,
+        }).Chip, 2);
 
         var duration = ResourceCard.Tabular(new TextBlock());
         if (s.Live && s.Lane != Lane.Network)
@@ -615,7 +636,7 @@ public partial class ActivityView
             duration.FontWeight = FontWeights.Bold;
             _listTimers.Add((duration, s.Start));
         }
-        else duration.Text = s.Live ? "ongoing" : ActivityModel.Short(s.End - s.Start);
+        else duration.Text = s.Live ? PrivacyToggle.Properties.Resources.Activity_Ongoing : ActivityModel.Short(s.End - s.Start);
         AddCell(grid, duration, 3);
 
         AddCell(grid, DataCell(s), 4);
@@ -629,7 +650,7 @@ public partial class ActivityView
         var text = new TextBlock { TextWrapping = TextWrapping.Wrap };
         if (s.Sent + s.Received == 0)
         {
-            text.Text = "—";
+            text.Text = PrivacyToggle.Properties.Resources.Activity_EmptyDash;
             text.SetResourceReference(TextBlock.ForegroundProperty, "TextSecondary");
             return text;
         }
@@ -643,11 +664,11 @@ public partial class ActivityView
         if (down) Part("↓ " + Bytes(s.Received), "DownloadText");
         if (down && up) Part(" · ", "TextSecondary");
         if (up) Part("↑ " + Bytes(s.Sent), "UploadText");
-        if (!down && !up) Part("< 1 KB", "TextSecondary");
-        if (s.Live) Part(" so far", "TextSecondary");
+        if (!down && !up) Part(PrivacyToggle.Properties.Resources.Activity_LessThan1KB, "TextSecondary");
+        if (s.Live) Part(PrivacyToggle.Properties.Resources.Activity_SoFar, "TextSecondary");
         if (s.Sent >= LargeUpload)
         {
-            var flag = new System.Windows.Documents.Run(" — large upload") { FontWeight = FontWeights.Bold };
+            var flag = new System.Windows.Documents.Run(PrivacyToggle.Properties.Resources.Activity_LargeUpload) { FontWeight = FontWeights.Bold };
             flag.SetResourceReference(System.Windows.Documents.TextElement.ForegroundProperty, "UploadText");
             text.Inlines.Add(flag);
         }
@@ -680,9 +701,9 @@ public partial class ActivityView
 
         var dialog = new Microsoft.Win32.SaveFileDialog
         {
-            Title = "Export activity",
-            FileName = $"PrivacyToggle activity {now:yyyy-MM-dd HHmm}.csv",
-            Filter = "CSV file (*.csv)|*.csv",
+            Title = PrivacyToggle.Properties.Resources.Activity_ExportDialogTitle,
+            FileName = LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_ExportFileName, $"{now:yyyy-MM-dd HHmm}"),
+            Filter = PrivacyToggle.Properties.Resources.Activity_ExportFilter,
             DefaultExt = ".csv",
         };
         if (dialog.ShowDialog(Window.GetWindow(this)) != true) return;
@@ -703,7 +724,8 @@ public partial class ActivityView
         }
         catch (Exception ex)
         {
-            MessageBox.Show(Window.GetWindow(this), "Couldn't save the file: " + ex.Message, "PrivacyToggle", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show(Window.GetWindow(this), LocalizationService.Format(PrivacyToggle.Properties.Resources.Activity_ExportSaveFailed, ex.Message),
+                PrivacyToggle.Properties.Resources.MessageBox_Title_App, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
 

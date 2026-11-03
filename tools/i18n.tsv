@@ -1,0 +1,473 @@
+MessageBox_Title_App	PrivacyToggle	PrivacyToggle
+MessageBox_Title_Network	PrivacyToggle — network	PrivacyToggle — сеть
+Button_Cancel	Cancel	Отмена
+Button_Reset	Reset	Сброс
+Button_CloseItAndTurnOff	Close it and turn off	Закрыть и выключить
+Button_CheckAgain	Check again	Проверить снова
+Button_UpdateNow	Update now	Обновить
+Common_BrandName	PrivacyToggle	PrivacyToggle
+Common_Beta	BETA	BETA
+Common_New	NEW	NEW
+Language_Section	Language	Язык
+Language_MatchWindows	Match Windows	Как в Windows
+Language_English	English	English
+Language_Russian	Russian	Русский
+Language_RestartHint	Changes apply after you restart PrivacyToggle.	Изменения вступят в силу после перезапуска PrivacyToggle.
+Language_RestartTitle	Restart PrivacyToggle?	Перезапустить PrivacyToggle?
+Language_RestartMessage	The new language will be used after restart. Restart now?	Новый язык будет использован после перезапуска. Перезапустить сейчас?
+Language_RestartNow	Restart now	Перезапустить
+Language_RestartLater	Later	Позже
+Key_Ctrl	Ctrl	Ctrl
+Key_Alt	Alt	Alt
+Key_Shift	Shift	Shift
+Key_Win	Win	Win
+Key_Unknown	?	?
+Key_Enter	Enter	Enter
+Key_Backspace	Backspace	Backspace
+Key_CapsLock	CapsLock	CapsLock
+Key_PageDown	PageDown	PageDown
+Key_PageUp	PageUp	PageUp
+Key_PrintScreen	PrintScreen	PrintScreen
+Key_OemTilde	`	`
+Key_OemMinus	-	-
+Key_OemPlus	=	=
+Key_OemOpenBrackets	[	[
+Key_OemCloseBrackets	]	]
+Key_OemPipe	\	\
+Key_OemSemicolon	;	;
+Key_OemQuotes	'	'
+Key_OemComma	,	,
+Key_OemPeriod	.	.
+Key_OemQuestion	/	/
+Settings_Title	PrivacyToggle Settings	Настройки PrivacyToggle
+Settings_Caption_Minimize	Minimize	Свернуть
+Settings_Caption_Maximize	Maximize	Развернуть
+Settings_Caption_Restore	Restore	Восстановить
+Settings_Caption_Close	Close	Закрыть
+Settings_Nav_Overview	Overview	Обзор
+Settings_Nav_Activity	Activity	Активность
+Settings_Nav_Microphone	Microphone	Микрофон
+Settings_Nav_Camera	Camera	Камера
+Settings_Nav_Network	Network	Сеть
+Settings_Nav_General	General	Общие
+Settings_Nav_About	About	О программе
+Settings_Section_Shortcut	Shortcut	Сочетание клавиш
+Settings_Section_OnStart	When PrivacyToggle starts	При запуске PrivacyToggle
+Settings_Section_TrayIcon	Tray icon	Значок в трее
+Settings_Section_Alerts	Alerts	Уведомления
+Settings_Section_Startup	Startup	Автозапуск
+Settings_Section_Appearance	Appearance	Оформление
+Settings_Section_Sound	Sound	Звук
+Settings_Section_Updates	Updates	Обновления
+Settings_Section_TaskbarSpeed	Taskbar speed	Скорость на панели задач
+Settings_Option_KeepLastState	Keep last state	Как в прошлый раз
+Settings_Option_OnlySelected	Only selected	Только выбранные
+Settings_Option_WindowsNotification	Windows notification	Уведомление Windows
+Settings_Option_CornerBadge	Corner badge	Значок в углу
+Settings_Option_NotificationStyle	Notification style	Стиль уведомления
+Settings_Option_BadgePosition	Badge position	Положение значка
+Settings_Option_TopLeft	Top left	Сверху слева
+Settings_Option_TopRight	Top right	Сверху справа
+Settings_Option_BottomLeft	Bottom left	Снизу слева
+Settings_Option_BottomRight	Bottom right	Снизу справа
+Settings_Option_MatchWindows	Match Windows	Как в Windows
+Settings_Option_Light	Light	Светлая
+Settings_Option_Dark	Dark	Тёмная
+Settings_Option_Toggle	Toggle	Переключатель
+Settings_Option_PushToTalk	Push-to-talk	Режим рации
+Settings_Option_AllMicrophones	All microphones	Все микрофоны
+Settings_HotkeyRecorder_Hint	Click the box and press a combination with at least one of Ctrl, Alt, Shift or Win. Works even when another app is focused.	Щёлкните поле и нажмите сочетание хотя бы с Ctrl, Alt, Shift или Win. Работает, даже когда активно другое приложение.
+Settings_Overview_Hint	Click a tray icon or press its shortcut to switch. Right-click a tray icon for more options.	Щёлкните значок в трее или нажмите его сочетание клавиш. Щёлкните правой кнопкой для дополнительных действий и настроек.
+Settings_Overview_OpenMicPage	Open the Microphone page	Открыть страницу «Микрофон»
+Settings_Overview_OpenCamPage	Open the Camera page	Открыть страницу «Камера»
+Settings_Overview_OpenNetPage	Open the Network page	Открыть страницу «Сеть»
+Settings_Mic_OnStart_Unmuted	Always unmuted	Всегда включён
+Settings_Mic_OnStart_Muted	Always muted	Всегда выключен
+Settings_Mic_Devices_Title	Which microphones to mute	Какие микрофоны отключать
+Settings_Mic_NoDevices	No active microphones found.	Активные микрофоны не найдены.
+Settings_Mic_NoSelectionWarning	No microphone selected: muting will have no effect.	Микрофон не выбран: отключение не сработает.
+Settings_Mic_EnforceMute_Title	Enforce mute	Удерживать отключение
+Settings_Mic_EnforceMute_Hint	If another app or a headset button unmutes a microphone while PrivacyToggle has it muted, mute it again right away. When off, PrivacyToggle follows the change.	Если другое приложение или кнопка на гарнитуре снова включит микрофон, пока PrivacyToggle держит его выключенным, он сразу отключится снова. Если выключено, PrivacyToggle следует изменениям.
+Settings_Mic_Tray_Show	Show the microphone icon in the tray	Показывать значок микрофона в трее
+Settings_Mic_Tray_Hint	Click it to mute or unmute. Right-click for both controls and Settings.	Щёлкните, чтобы включить или выключить. Правый щелчок — управление и настройки.
+Settings_Mic_NoTrayWarning	With both tray icons hidden, use the shortcuts, or start PrivacyToggle again to open this window.	Если оба значка в трее скрыты, используйте сочетания клавиш или запустите PrivacyToggle снова, чтобы открыть это окно.
+Settings_Mic_DoubleClick_Title	Double-click the icon to open Settings	Двойной щелчок по значку открывает настройки
+Settings_Mic_DoubleClick_Hint	Single clicks stay instant; a double-click undoes that click.	Один щелчок срабатывает сразу; двойной отменяет его.
+Settings_Mic_Notify_Title	Notify me when the microphone mutes or unmutes	Уведомлять при включении или выключении микрофона
+Settings_Mic_Notify_Hint	Each time you switch it, as a Windows notification or a badge that disappears after 2 seconds. Not shown for push-to-talk presses.	При каждом переключении — уведомление Windows или значок на 2 секунды. Не показывается при нажатиях в режиме рации.
+Settings_Mic_Overlay_Title	Show a MIC OFF badge while muted	Показывать значок MIC OFF, пока выключен
+Settings_Mic_Overlay_Hint	A small badge that stays on top of every app and lets clicks pass through.	Небольшой значок поверх всех приложений; щелчки проходят сквозь него.
+Settings_Cam_HelperNotInstalled_Title	Camera control isn't installed	Управление камерой не установлено
+Settings_Cam_HelperNotInstalled_Body	Turning cameras off needs the PrivacyToggle helper service, which the installer sets up (it asks for admin rights once). Run PrivacyToggle-Setup to enable it.	Чтобы выключать камеры, нужна служба-помощник PrivacyToggle — установщик настраивает её (один раз запросит права администратора). Запустите PrivacyToggle-Setup.
+Settings_Cam_OnStart_On	Always on	Всегда включена
+Settings_Cam_OnStart_Off	Always off	Всегда выключена
+Settings_Cam_Devices_Title	Which cameras to turn off	Какие камеры выключать
+Settings_Cam_DevAll	All cameras	Все камеры
+Settings_Cam_NoCameras	No cameras found.	Камеры не найдены.
+Settings_Cam_NoSelectionWarning	No camera selected: turning off will have no effect.	Камера не выбрана: выключение не сработает.
+Settings_Cam_EnforceOff_Title	Keep cameras off	Удерживать выключение
+Settings_Cam_EnforceOff_Hint	If a camera is turned back on elsewhere (for example in Device Manager) while PrivacyToggle has it off, turn it off again. When off, PrivacyToggle follows the change.	Если камеру снова включат (например, в диспетчере устройств), пока PrivacyToggle держит её выключенной, она снова отключится. Если параметр выключен, PrivacyToggle следует изменениям.
+Settings_Cam_Tray_Show	Show the camera icon in the tray	Показывать значок камеры в трее
+Settings_Cam_Tray_Hint	Click it to turn the camera off or on. Right-click for both controls and Settings.	Щёлкните, чтобы выключить или включить камеру. Правый щелчок — управление и настройки.
+Settings_Cam_Notify_Title	Notify me when the camera turns off or on	Уведомлять при включении или выключении камеры
+Settings_Cam_Notify_Hint	Each time you switch it, as a Windows notification or a badge that disappears after 2 seconds.	При каждом переключении — уведомление Windows или значок на 2 секунды.
+Settings_Cam_Overlay_Title	Show a CAM OFF badge while off	Показывать значок CAM OFF, пока выключена
+Settings_Cam_Overlay_Hint	A small badge that stays on top of every app and lets clicks pass through. If it shares a corner with the MIC OFF badge, they sit side by side.	Небольшой значок поверх всех приложений; щелчки проходят сквозь него. Если угол занят значком MIC OFF, они стоят рядом.
+Settings_Cam_FooterHint	Turning the camera off disables it in Windows, the same as Device Manager does. Apps using it lose the picture immediately, and no app can open it until you turn it back on. If a program holds the camera and won't let go, PrivacyToggle asks before closing it; a background service closed this way is started again when you turn the camera back on.	Выключение камеры отключает её в Windows, как в диспетчере устройств. Приложения сразу теряют изображение, и никто не откроет камеру, пока вы не включите её снова. Если программа удерживает камеру, PrivacyToggle спросит перед закрытием; фоновую службу после этого запустят снова при включении камеры.
+Settings_Net_OnStart_Connected	Always connected	Всегда подключена
+Settings_Net_OnStart_Disconnected	Always disconnected	Всегда отключена
+Settings_Net_Devices_Title	Which connections to turn off	Какие подключения отключать
+Settings_Net_DevAll	All (Wi-Fi and wired)	Все (Wi‑Fi и проводные)
+Settings_Net_NoAdapters	No network adapters found.	Сетевые адаптеры не найдены.
+Settings_Net_NoSelectionWarning	No connection selected: turning the network off will have no effect.	Подключение не выбрано: отключение сети не сработает.
+Settings_Net_EnforceOff_Title	Keep the network off	Удерживать отключение сети
+Settings_Net_EnforceOff_Hint	If a connection is turned back on elsewhere (for example in Network Connections) while PrivacyToggle has it off, turn it off again. When off, PrivacyToggle follows the change.	Если подключение снова включат (например, в «Сетевых подключениях»), пока PrivacyToggle держит сеть выключенной, оно снова отключится. Если параметр выключен, PrivacyToggle следует изменениям.
+Settings_Net_Tray_Show	Show the network icon in the tray	Показывать значок сети в трее
+Settings_Net_Tray_Hint	Click it to disconnect or reconnect. Right-click for all controls and Settings.	Щёлкните, чтобы отключить или подключить. Правый щелчок — все элементы управления и настройки.
+Settings_Net_TaskbarSpeed_Title	Show network speed on the taskbar	Показывать скорость сети на панели задач
+Settings_Net_TaskbarSpeed_Hint	The current download and upload speed of this PC, next to the tray icons. Updates every second, and steps aside for fullscreen apps.	Текущая скорость загрузки и отправки рядом со значками в трее. Обновляется каждую секунду и уступает место полноэкранным приложениям.
+Settings_Net_TaskbarSpeed_ShowLabel	Show	Показывать
+Settings_Net_TaskbarSpeed_Both	Download and upload	Загрузку и отправку
+Settings_Net_TaskbarSpeed_Down	Download only	Только загрузку
+Settings_Net_TaskbarSpeed_Up	Upload only	Только отправку
+Settings_Net_Notify_Title	Notify me when the network turns off or on	Уведомлять при отключении или подключении сети
+Settings_Net_Notify_Hint	Each time you switch it, as a Windows notification or a badge that disappears after 2 seconds.	При каждом переключении — уведомление Windows или значок на 2 секунды.
+Settings_Net_Overlay_Title	Show a NET OFF badge while off	Показывать значок NET OFF, пока отключена
+Settings_Net_Overlay_Hint	A small badge that stays on top of every app and lets clicks pass through. If it shares a corner with another OFF badge, they sit side by side.	Небольшой значок поверх всех приложений; щелчки проходят сквозь него. Если угол занят другим значком OFF, они стоят рядом.
+Settings_Net_FooterHint	Turning the network off disables the selected network adapters in Windows, the same as the Network Connections window does. Nothing on this PC can reach the internet or your local network through them until you turn them back on. Virtual adapters (VPNs, virtual machines, WSL) aren't touched. Uninstalling PrivacyToggle turns every adapter it switched off back on.	Отключение сети выключает выбранные адаптеры в Windows, как в окне «Сетевые подключения». Через них ничто на этом ПК не выйдет в интернет или локальную сеть, пока вы не включите их снова. Виртуальные адаптеры (VPN, виртуальные машины, WSL) не затрагиваются. При удалении PrivacyToggle все отключённые им адаптеры снова включаются.
+Settings_General_StartWithWindows_Title	Start with Windows	Запускать вместе с Windows
+Settings_General_StartWithWindows_Hint	Launch PrivacyToggle in the tray when you sign in.	Запускать PrivacyToggle в трее при входе в систему.
+Settings_General_StartMinimized_Title	Start minimized to tray	Запускать свёрнутым в трей
+Settings_General_StartMinimized_Hint	When off, this window opens every time PrivacyToggle starts manually.	Если выключено, это окно открывается при каждом ручном запуске PrivacyToggle.
+Settings_General_ThemeLight_Hint	Light is the classic look: cream paper, black ink and bold colours.	Светлая тема — классический вид: кремовый фон, чёрный текст и яркие акценты.
+Settings_General_PlaySound_Title	Play a sound when switching	Звук при переключении
+Settings_General_PlaySound_Hint	A short tone when the microphone or camera turns on or off (the camera has its own, lower tone). Turn off for silent switching.	Короткий сигнал при включении или выключении микрофона или камеры (у камеры свой, более низкий тон). Выключите для тихого переключения.
+Settings_About_Tagline	Quick privacy toggles for your microphone and camera, from the tray or a global shortcut.	Быстрое управление микрофоном и камерой из трея или по глобальному сочетанию клавиш.
+Settings_About_GitHub	GitHub repository	Репозиторий на GitHub
+Settings_About_OpenSettingsFolder	Open settings folder	Открыть папку настроек
+Settings_About_WhatsNew	What's new	Что нового
+SettingsDyn_Version	Version {0}	Версия {0}
+SettingsDyn_SidebarVersion	PrivacyToggle {0}	PrivacyToggle {0}
+SettingsDyn_NetHotkeyHint	Press {0} to disconnect, and again to reconnect.	Нажмите {0}, чтобы отключить, и снова — чтобы подключить.
+SettingsDyn_MicHotkeyHint_Toggle	Press {0} once to mute and again to unmute.	Нажмите {0}, чтобы выключить, и снова — чтобы включить.
+SettingsDyn_MicHotkeyHint_Ptt	Microphones stay muted and are live only while you hold {0}. The key press is not passed on to other apps.	Микрофоны остаются выключенными и активны только пока удерживаете {0}. Нажатие не передаётся другим приложениям.
+SettingsDyn_CamHotkeyHint	Press {0} to turn the camera off, and again to turn it back on.	Нажмите {0}, чтобы выключить камеру, и снова — чтобы включить.
+SettingsDyn_Status_MicOff	Mic off	Микрофон выкл.
+SettingsDyn_Status_MicOn	Mic on	Микрофон вкл.
+SettingsDyn_Status_NoMicrophone	No microphone	Нет микрофона
+SettingsDyn_Status_CameraOff	Camera off	Камера выкл.
+SettingsDyn_Status_CameraOn	Camera on	Камера вкл.
+SettingsDyn_Status_NoCamera	No camera	Нет камеры
+SettingsDyn_Status_CamNotInstalled	Camera control not installed	Управление камерой не установлено
+SettingsDyn_Status_NetworkOff	Network off	Сеть выкл.
+SettingsDyn_Status_NetworkOn	Network on	Сеть вкл.
+SettingsDyn_Status_NoNetworkAdapter	No network adapter	Нет сетевого адаптера
+SettingsDyn_Status_NetworkUnavailable	Network control unavailable	Управление сетью недоступно
+SettingsDyn_MicCard_Muted	Muted	Выключен
+SettingsDyn_MicCard_Live	Live	Включён
+SettingsDyn_MicCard_NotFound	Not found	Не найден
+SettingsDyn_MicCard_PlugIn	Plug in a microphone.	Подключите микрофон.
+SettingsDyn_MicCard_HoldToTalk	Hold {0} to talk	Удерживайте {0} для разговора
+SettingsDyn_MicCard_Switch	{0} to switch	{0} — переключить
+SettingsDyn_MicCard_OneMic	1 microphone	1 микрофон
+SettingsDyn_MicCard_NMics	{0} microphones	{0} микрофонов
+SettingsDyn_MicCard_Unmute	Unmute	Включить
+SettingsDyn_MicCard_Mute	Mute	Выключить
+SettingsDyn_CamCard_TurningOff	Turning off…	Выключение…
+SettingsDyn_CamCard_TurningOn	Turning on…	Включение…
+SettingsDyn_CamCard_Off	Off	Выкл.
+SettingsDyn_CamCard_On	On	Вкл.
+SettingsDyn_CamCard_Unavailable	Unavailable	Недоступно
+SettingsDyn_CamCard_NeedsHelper	Needs the helper service — see the Camera page.	Нужна служба-помощник — см. страницу «Камера».
+SettingsDyn_CamCard_PlugIn	Plug in a camera.	Подключите камеру.
+SettingsDyn_CamCard_LastError	Last switch failed: {0}	Последнее переключение не удалось: {0}
+SettingsDyn_CamCard_NeedsRestart	Windows needs a restart to finish the switch.	Windows нужно перезагрузить, чтобы завершить переключение.
+SettingsDyn_CamCard_HelperNotInstalled	Helper not installed	Помощник не установлен
+SettingsDyn_CamCard_OneCamera	1 camera	1 камера
+SettingsDyn_CamCard_NCameras	{0} cameras	{0} камер
+SettingsDyn_CamCard_TurnOn	Turn on	Включить
+SettingsDyn_CamCard_TurnOff	Turn off	Выключить
+SettingsDyn_Helper_NotInstalled	Helper service: not installed	Служба-помощник: не установлена
+SettingsDyn_Helper_OldVersion	Helper service: running (an older version, without network control)	Служба-помощник: работает (старая версия без управления сетью)
+SettingsDyn_Helper_Running	Helper service: running	Служба-помощник: работает
+SettingsDyn_NetCard_Disconnecting	Disconnecting…	Отключение…
+SettingsDyn_NetCard_Reconnecting	Reconnecting…	Подключение…
+SettingsDyn_NetCard_NeedsInstaller	Needs the latest installer — see the Network page.	Нужен последний установщик — см. страницу «Сеть».
+SettingsDyn_NetCard_NeedsHelper	Needs the helper service — see the Network page.	Нужна служба-помощник — см. страницу «Сеть».
+SettingsDyn_NetCard_NoAdapter	No Wi-Fi or wired adapter found.	Wi‑Fi или проводной адаптер не найден.
+SettingsDyn_NetCard_HelperNeedsUpdate	Helper needs updating	Помощник нужно обновить
+SettingsDyn_NetCard_OneAdapterConnected	1 adapter · connected	1 адаптер · подключён
+SettingsDyn_NetCard_OneAdapter	1 adapter	1 адаптер
+SettingsDyn_NetCard_NAdapters	{0} adapters	{0} адаптеров
+SettingsDyn_NetCard_NConnected	 · {0} connected	 · {0} подключено
+SettingsDyn_NetCard_Reconnect	Reconnect	Подключить
+SettingsDyn_NetCard_Disconnect	Disconnect	Отключить
+SettingsDyn_NetBanner_UpdateTitle	The helper service needs updating	Службу-помощник нужно обновить
+SettingsDyn_NetBanner_NotInstalledTitle	Network control isn't installed	Управление сетью не установлено
+SettingsDyn_NetBanner_UpdateBody	The PrivacyToggle helper service on this PC is from an older version that can't switch the network. Run the latest PrivacyToggle-Setup to update it.	Служба-помощник PrivacyToggle на этом ПК из старой версии и не может переключать сеть. Запустите последний PrivacyToggle-Setup.
+SettingsDyn_NetBanner_NotInstalledBody	Turning the network off needs the PrivacyToggle helper service, which the installer sets up (it asks for admin rights once). Run PrivacyToggle-Setup to enable it.	Чтобы отключать сеть, нужна служба-помощник PrivacyToggle — установщик настраивает её (один раз запросит права администратора). Запустите PrivacyToggle-Setup.
+SettingsDyn_AdapterLine	{0}: {1} — {2}	{0}: {1} — {2}
+SettingsDyn_Adapter_WiFi	Wi-Fi	Wi‑Fi
+SettingsDyn_Adapter_Mobile	Mobile	Мобильная
+SettingsDyn_Adapter_Wired	Wired	Проводная
+SettingsDyn_Adapter_Off	off	выкл.
+SettingsDyn_Adapter_Connected	connected	подключено
+SettingsDyn_Adapter_NotConnected	not connected	не подключено
+SettingsDyn_HotkeyWarning_Keep	{0} Keeping {1}.	{0} Оставлено {1}.
+SettingsDyn_Update_Checking	Checking for updates…	Проверка обновлений…
+SettingsDyn_Update_CheckFailed	Couldn't check for updates	Не удалось проверить обновления
+SettingsDyn_Update_CheckFailedHint	Check your internet connection and try again.	Проверьте подключение к интернету и попробуйте снова.
+SettingsDyn_Update_Available	Version {0} is available	Доступна версия {0}
+SettingsDyn_Update_AvailableDetail	You have {0}. Update downloads the installer from GitHub ({1} MB), checks it, and installs it; PrivacyToggle restarts afterwards.	У вас {0}. Обновление загрузит установщик с GitHub ({1} МБ), проверит его и установит; затем PrivacyToggle перезапустится.
+SettingsDyn_Update_NoInstallerDetail	You have {0}. This release has no installer attached; download it from the link below.	У вас {0}. К этому выпуску не приложен установщик; скачайте его по ссылке ниже.
+SettingsDyn_Update_Button	Update to {0}	Обновить до {0}
+SettingsDyn_Update_WhatsNewIn	What's new in {0}	Что нового в {0}
+SettingsDyn_Update_UpToDate	You're up to date	У вас актуальная версия
+SettingsDyn_Update_UpToDateDetail	PrivacyToggle {0} is the latest version (checked {1:t}).	PrivacyToggle {0} — последняя версия (проверено {1:t}).
+SettingsDyn_Update_ReleaseNotes	Release notes for {0}	Примечания к выпуску {0}
+SettingsDyn_Update_Downloading	Downloading {0}…	Загрузка {0}…
+SettingsDyn_Update_DownloadProgress	{0}% of {1} MB	{0}% из {1} МБ
+SettingsDyn_Update_StartingInstaller	Starting the installer…	Запуск установщика…
+SettingsDyn_Update_InstallerHint	Windows will ask for permission. PrivacyToggle closes now and restarts when the update is done.	Windows запросит разрешение. PrivacyToggle закроется и перезапустится после обновления.
+SettingsDyn_Update_Cancelled	Update cancelled	Обновление отменено
+SettingsDyn_Update_CancelledHint	The installer needs permission to run. Click Update to try again.	Для установщика нужны права. Нажмите «Обновить», чтобы повторить.
+SettingsDyn_Update_Failed	Update failed	Обновление не удалось
+SettingsDyn_Update_DownloadFailed	The download failed. Check your internet connection and try again.	Загрузка не удалась. Проверьте интернет и попробуйте снова.
+Tray_MuteMicrophone	Mute microphone	Выключить микрофон
+Tray_UnmuteMicrophone	Unmute microphone	Включить микрофон
+Tray_TurnCameraOff	Turn camera off	Выключить камеру
+Tray_TurnCameraOn	Turn camera on	Включить камеру
+Tray_CameraSwitching	Camera: switching…	Камера: переключение…
+Tray_NoCameraFound	No camera found	Камера не найдена
+Tray_CameraNotInstalled	Camera control not installed	Управление камерой не установлено
+Tray_DisconnectNetwork	Disconnect network	Отключить сеть
+Tray_ReconnectNetwork	Reconnect network	Подключить сеть
+Tray_NetworkSwitching	Network: switching…	Сеть: переключение…
+Tray_NoNetworkAdapter	No network adapter found	Сетевой адаптер не найден
+Tray_NetworkNotAvailable	Network control not available	Управление сетью недоступно
+Tray_Settings	Settings…	Настройки…
+Tray_StartWithWindows	Start with Windows	Запускать с Windows
+Tray_Exit	Exit	Выход
+Tray_DefaultMicTooltip	PrivacyToggle microphone	PrivacyToggle — микрофон
+Tray_DefaultCamTooltip	PrivacyToggle camera	PrivacyToggle — камера
+Tray_DefaultNetTooltip	PrivacyToggle network	PrivacyToggle — сеть
+TrayTip_Mic_NoDevice	PrivacyToggle — no microphone found	PrivacyToggle — микрофон не найден
+TrayTip_Mic_Off	Mic OFF — {0}	Микрофон ВЫКЛ — {0}
+TrayTip_Mic_On_Ptt	Mic ON — push-to-talk	Микрофон ВКЛ — режим рации
+TrayTip_Mic_On	Mic ON — {0}	Микрофон ВКЛ — {0}
+TrayTip_Mic_Hint_Unmute	unmute	включить
+TrayTip_Mic_Hint_Mute	mute	выключить
+TrayTip_Mic_Hint_HoldTalk	hold {0} to talk	удерживайте {0} для разговора
+TrayTip_Mic_Hint_Hotkey	{0} to {1}	{0} — {1}
+TrayTip_Mic_Hint_ClickUnavailable	click to {0} (hotkey unavailable)	щелчок — {0} (сочетание недоступно)
+TrayTip_Cam_TurningOff	Camera — turning off…	Камера — выключение…
+TrayTip_Cam_TurningOn	Camera — turning on…	Камера — включение…
+TrayTip_Cam_NotInstalled	Camera control not installed — open Settings	Управление камерой не установлено — откройте настройки
+TrayTip_Cam_NoDevice	PrivacyToggle — no camera found	PrivacyToggle — камера не найдена
+TrayTip_Cam_Off	Camera OFF — {0}	Камера ВЫКЛ — {0}
+TrayTip_Cam_On	Camera ON — {0}	Камера ВКЛ — {0}
+TrayTip_Cam_Hint_TurnOn	turn on	включить
+TrayTip_Cam_Hint_TurnOff	turn off	выключить
+TrayTip_Cam_Hint_Click	click to {0}	щелчок — {0}
+TrayTip_Net_Disconnecting	Network — disconnecting…	Сеть — отключение…
+TrayTip_Net_Reconnecting	Network — reconnecting…	Сеть — подключение…
+TrayTip_Net_NeedsInstaller	Network control needs the latest installer — open Settings	Для управления сетью нужен последний установщик — откройте настройки
+TrayTip_Net_NotInstalled	Network control not installed — open Settings	Управление сетью не установлено — откройте настройки
+TrayTip_Net_NoDevice	PrivacyToggle — no network adapter found	PrivacyToggle — сетевой адаптер не найден
+TrayTip_Net_Off	Network OFF — {0}	Сеть ВЫКЛ — {0}
+TrayTip_Net_On	Network ON — {0}	Сеть ВКЛ — {0}
+TrayTip_Net_Hint_Reconnect	reconnect	подключить
+TrayTip_Net_Hint_Disconnect	disconnect	отключить
+MessageBox_RemoteDisconnect_Body	You're connected to this PC remotely. Turning the network off will end this remote session, and you won't be able to reconnect until someone turns the network back on at the PC.\n\nTurn the network off anyway?	Вы подключены к этому ПК удалённо. Отключение сети завершит сеанс, и вы не сможете подключиться снова, пока кто-то не включит сеть на самом ПК.\n\nВсё равно отключить сеть?
+Notify_Title_HotkeyUnavailable	Hotkey unavailable	Сочетание недоступно
+Notify_Title_PrivacyToggle	PrivacyToggle	PrivacyToggle
+Notify_Title_Camera	Camera	Камера
+Notify_Title_Network	Network	Сеть
+Notify_Mic_NoDevice	No microphone found	Микрофон не найден
+Notify_Mic_Muted	Microphone muted	Микрофон выключен
+Notify_Mic_Live	Microphone is live	Микрофон включён
+Notify_Cam_NotInstalled_Title	Camera control not installed	Управление камерой не установлено
+Notify_Cam_NotInstalled_Body	Camera on/off needs the PrivacyToggle helper, which the installer sets up.	Включение и выключение камеры требует помощника PrivacyToggle, который настраивает установщик.
+Notify_Cam_SwitchFailed	Couldn't switch the camera: {0}	Не удалось переключить камеру: {0}
+Notify_Cam_NeedsRestart	Windows needs a restart to finish switching the camera.	Windows нужно перезагрузить, чтобы завершить переключение камеры.
+Notify_Cam_NoDevice	No camera found	Камера не найдена
+Notify_Cam_Off	Camera turned off	Камера выключена
+Notify_Cam_On	Camera is on	Камера включена
+Notify_Net_NotAvailable_Title	Network control not available	Управление сетью недоступно
+Notify_Net_NotAvailable_Update	Run the latest PrivacyToggle installer to update the helper service; it adds network control.	Запустите последний установщик PrivacyToggle, чтобы обновить службу-помощник и получить управление сетью.
+Notify_Net_NotAvailable_Install	Network on/off needs the PrivacyToggle helper, which the installer sets up.	Включение и отключение сети требует помощника PrivacyToggle, который настраивает установщик.
+Notify_Net_SwitchFailed	Couldn't switch the network: {0}	Не удалось переключить сеть: {0}
+Notify_Net_NeedsRestart	Windows needs a restart to finish switching the network adapter.	Windows нужно перезагрузить, чтобы завершить переключение адаптера.
+Notify_Net_NoDevice	No network adapter found	Сетевой адаптер не найден
+Notify_Net_Off	Network disconnected	Сеть отключена
+Notify_Net_On	Network reconnected	Сеть подключена
+NotifyBadge_NoMic	NO MIC	НЕТ МИК
+NotifyBadge_MicOff	MIC OFF	MIC OFF
+NotifyBadge_MicOn	MIC ON	MIC ON
+NotifyBadge_NoCamera	NO CAMERA	НЕТ КАМ
+NotifyBadge_CamOff	CAM OFF	CAM OFF
+NotifyBadge_CamOn	CAM ON	CAM ON
+NotifyBadge_NoNetwork	NO NETWORK	НЕТ СЕТИ
+NotifyBadge_NetOff	NET OFF	NET OFF
+NotifyBadge_NetOn	NET ON	NET ON
+Hotkey_InUse	{0} is already in use by another app. Pick a different hotkey in Settings.	{0} уже используется другим приложением. Выберите другое сочетание в настройках.
+Hotkey_PttFailed	Could not start push-to-talk (keyboard hook failed).	Не удалось запустить режим рации (не удалось перехватить клавиатуру).
+Hotkey_DuplicateDevice	{0} is already the {1} shortcut.	{0} уже назначено для {1}.
+Hotkey_AlreadyInUse	Hotkey already in use: {0} is taken by another app.	Сочетание занято: {0} используется другим приложением.
+Hotkey_Device_microphone	microphone	микрофона
+Hotkey_Device_camera	camera	камеры
+Hotkey_Device_network	network	сети
+HotkeyRecorder_PressShortcut	Press a shortcut…	Нажмите сочетание…
+HotkeyRecorder_AddModifier	Add Ctrl, Alt, Shift or Win	Добавьте Ctrl, Alt, Shift или Win
+HotkeyRecorder_EscCancel	Esc to cancel	Esc — отмена
+HotkeyRecorder_ClickToChange	Click to change	Щёлкните, чтобы изменить
+HotkeyRecorder_PartialSuffix	…	…
+Blocker_Title	PrivacyToggle — camera in use	PrivacyToggle — камера занята
+Blocker_Heading	Camera in use	Камера используется
+Blocker_Subheading	The camera is being held open	Камера удерживается открытой
+Blocker_Message	{0} is holding the camera open, so Windows can't turn it off.\n\nClose it and turn the camera off?	{0} удерживает камеру открытой, и Windows не может её выключить.\n\nЗакрыть программу и выключить камеру?
+Blocker_Note_Service	It's a background service. PrivacyToggle will start it again when you turn the camera back on.	Это фоновая служба. PrivacyToggle запустит её снова, когда вы включите камеру.
+Blocker_Note_App	Any unsaved work in that program will be lost.	Несохранённые данные в этой программе будут потеряны.
+Overlay_WindowTitle	PrivacyToggle overlay	Наложение PrivacyToggle
+Overlay_MicOff	MIC OFF	MIC OFF
+Overlay_CamOff	CAM OFF	CAM OFF
+Overlay_NetOff	NET OFF	NET OFF
+UpdateService_UnexpectedTag	Unexpected release tag "{0}".	Неожиданный тег выпуска «{0}».
+UpdateService_NoInstaller	This release has no installer attached.	К этому выпуску не приложен установщик.
+UpdateService_BadUrl	The installer link doesn't point to PrivacyToggle's GitHub releases.	Ссылка на установщик не ведёт на выпуски PrivacyToggle на GitHub.
+UpdateService_ChecksumFailed	The download didn't match GitHub's checksum, so it was deleted. Please try again.	Загрузка не совпала с контрольной суммой GitHub и была удалена. Попробуйте снова.
+NetworkUsage_NeedsHelper	Per-app network use needs the PrivacyToggle helper service, which the installer sets up.	Учёт сети по приложениям требует службы-помощника PrivacyToggle, которую настраивает установщик.
+NetworkUsage_NeedsUpdate	The helper service needs updating to count network use. Run the latest PrivacyToggle installer.	Службу-помощник нужно обновить для учёта сети. Запустите последний установщик PrivacyToggle.
+Activity_InfoTooltip	PrivacyToggle combines Windows' usage records with what it sees directly: apps recording from a microphone, apps connecting to the camera, and the bytes each app sends and receives over the network (counted by the helper service). It keeps 7 days of history while it runs. Time while a device is muted or off isn't counted. Everything stays on this PC.	PrivacyToggle объединяет записи Windows с тем, что видит сам: приложения, записывающие с микрофона, подключающиеся к камере, и объём данных, которое каждое приложение отправляет и получает (считает служба-помощник). Пока программа работает, хранится 7 дней истории. Время, когда устройство выключено, не учитывается. Всё остаётся на этом ПК.
+Activity_Title	Activity	Активность
+Activity_Export	Export	Экспорт
+Activity_ExportSoon	Export is coming soon	Экспорт скоро появится
+Activity_Subtitle	What's using your microphone, camera and network — right now and over time.	Что использует микрофон, камеру и сеть — сейчас и за период.
+Activity_RightNow	Right now	Сейчас
+Activity_History	History	История
+Activity_ViewTimeline	Timeline	Шкала времени
+Activity_ViewList	List	Список
+Activity_Sort	Sort	Сортировка
+Activity_Sort_LiveFirst	Live first, then recent	Сначала активные, затем недавние
+Activity_Sort_MostData	Most data	Больше данных
+Activity_Sort_LongestMic	Longest mic time	Дольше всего микрофон
+Activity_Sort_Name	Name	Имя
+Activity_Range_1h	1h	1 ч
+Activity_Range_6h	6h	6 ч
+Activity_Range_24h	24h	24 ч
+Activity_Range_7d	7d	7 д
+Activity_Filter_All	All	Все
+Activity_Filter_Microphone	Microphone	Микрофон
+Activity_Filter_Camera	Camera	Камера
+Activity_Filter_Network	Network	Сеть
+Activity_Today	Today	Сегодня
+Activity_ShowLess	Show less	Свернуть
+Activity_OpenFileLocation	Open file location	Открыть расположение файла
+Activity_SwitchToList	Switch to List for every session.	Переключитесь на «Список», чтобы увидеть все сеансы.
+Activity_ListHeader_Started	Started	Начало
+Activity_ListHeader_App	App	Приложение
+Activity_ListHeader_Used	Used	Использовано
+Activity_ListHeader_Duration	Duration	Длительность
+Activity_ListHeader_Data	Data during session	Данные за сеанс
+Activity_ExportDialogTitle	Export activity	Экспорт активности
+Activity_ExportFilter	CSV file (*.csv)|*.csv	Файл CSV (*.csv)|*.csv
+Activity_ExportSaveFailed	Couldn't save the file: {0}	Не удалось сохранить файл: {0}
+Activity_Legend_Mic	Mic	Мик
+Activity_Legend_Camera	Camera	Камера
+Activity_Legend_Data	Data	Данные
+Activity_Divider_Earlier	EARLIER	РАНЬШЕ
+Activity_Divider_EarlierToday	EARLIER TODAY	РАНЬШЕ СЕГОДНЯ
+Activity_Badge_Live	LIVE	LIVE
+Activity_Badge_New	NEW	NEW
+Activity_Lane_Camera	Camera	Камера
+Activity_Lane_Microphone	Microphone	Микрофон
+Activity_Lane_MicShort	Mic	Мик
+Activity_Lane_Network	Network	Сеть
+Activity_Tooltip_MicTime	Microphone time in this range	Время микрофона в этом диапазоне
+Activity_Tooltip_CamTime	Camera time in this range	Время камеры в этом диапазоне
+Activity_Tooltip_DataRange	Data in this range: ↓ {0} · ↑ {1}	Данные в диапазоне: ↓ {0} · ↑ {1}
+Activity_Ongoing	ongoing	идёт
+Activity_EmptyDash	—	—
+Activity_LargeUpload	 — large upload	 — большая отправка
+Activity_LessThan1KB	< 1 KB	< 1 КБ
+Activity_SoFar	 so far	 пока
+ActivityDyn_Empty	No {0}activity in the last {1}.	Нет {0}активности за последние {1}.
+ActivityDyn_FilterMic	microphone 	микрофона 
+ActivityDyn_FilterCam	camera 	камеры 
+ActivityDyn_FilterNet	network 	сети 
+ActivityDyn_ShowLastRange	Show the last {0}	Показать последние {0}
+ActivityDyn_MoreApps	Show {0} more app	Показать ещё {0} приложение
+ActivityDyn_MoreApps_Plural	Show {0} more apps	Показать ещё {0} приложений
+ActivityDyn_MoreSessions	Show {0} more session	Показать ещё {0} сеанс
+ActivityDyn_MoreSessions_Plural	Show {0} more sessions	Показать ещё {0} сеансов
+ActivityDyn_Range_LastHour	Last hour	Последний час
+ActivityDyn_Range_Last6Hours	Last 6 hours	Последние 6 часов
+ActivityDyn_Range_Last24Hours	Last 24 hours	Последние 24 часа
+ActivityDyn_Range_Last7Days	Last 7 days	Последние 7 дней
+ActivityDyn_RangeLabel_hour	hour	час
+ActivityDyn_RangeLabel_6hours	6 hours	6 часов
+ActivityDyn_RangeLabel_24hours	24 hours	24 часа
+ActivityDyn_RangeLabel_7days	7 days	7 дней
+ActivityDyn_TotalLine	{0}: {1} {2}	{0}: {1} {2}
+ActivityDyn_NetworkTotalExtra	(↓ {0} · ↑ {1})	(↓ {0} · ↑ {1})
+ActivityDyn_Pill_LiveApps	LIVE · {0} APP	LIVE · {0} ПРИЛ
+ActivityDyn_Pill_LiveApps_Plural	LIVE · {0} APPS	LIVE · {0} ПРИЛ
+ActivityDyn_Pill_Off	OFF	ВЫКЛ
+ActivityDyn_Pill_Quiet	QUIET	ТИХО
+ActivityDyn_Pill_Apps	{0} APP	{0} ПРИЛ
+ActivityDyn_Pill_Apps_Plural	{0} APPS	{0} ПРИЛ
+ActivityDyn_Pill_Unavailable	UNAVAILABLE	НЕДОСТУПНО
+ActivityDyn_Card_Apps	· {0} app	· {0} приложение
+ActivityDyn_Card_Apps_Plural	· {0} apps	· {0} приложений
+ActivityDyn_CamConnectedUncertain	Connected · may not be using it	Подключено · возможно, не используется
+ActivityDyn_CamAction_NotInstalled	Not installed	Не установлено
+ActivityDyn_CamAction_NoCamera	No camera	Нет камеры
+ActivityDyn_CamAction_TurnOn	Turn on	Включить
+ActivityDyn_CamAction_TurnOff	Turn off	Выключить
+ActivityDyn_MicAction_NoMic	No microphone	Нет микрофона
+ActivityDyn_MicAction_Unmute	Unmute	Включить
+ActivityDyn_MicAction_Mute	Mute	Выключить
+ActivityDyn_OffLastUsed	Off · last used by {0}, {1}	Выкл. · последний раз: {0}, {1}
+ActivityDyn_OffNoUse7Days	Off · no app has used the {0} in the last 7 days	Выкл. · за 7 дней ни одно приложение не использовало {0}
+ActivityDyn_Device_camera	camera	камеру
+ActivityDyn_Device_microphone	microphone	микрофон
+ActivityDyn_NetIdle_Off	The network is off. Turn it back on from the Network page or with its shortcut.	Сеть отключена. Включите её на странице «Сеть» или сочетанием клавиш.
+ActivityDyn_NetIdle_Quiet	No app is sending or receiving data right now.	Сейчас ни одно приложение не отправляет и не получает данные.
+ActivityDyn_NetIdle_Last	{0} Last: {1}, {2} (↓ {3})	{0} Последний: {1}, {2} (↓ {3})
+ActivityDyn_NetAction_Connect	Connect	Подключить
+ActivityDyn_NetAction_Disconnect	Disconnect	Отключить
+ActivityDyn_NetAction_NoAdapter	No adapter	Нет адаптера
+ActivityDyn_NetAction_NotInstalled	Not installed	Не установлено
+ActivityDyn_Summary_MicCamOff_Quiet	Mic and camera are off · network quiet	Микрофон и камера выкл. · сеть тихая
+ActivityDyn_Summary_MicCamOff_NetApps	Mic and camera are off · {0} apps using the network	Микрофон и камера выкл. · {0} приложений используют сеть
+ActivityDyn_Summary_MicCamOff_NetApp	Mic and camera are off · {0} app using the network	Микрофон и камера выкл. · {0} приложение использует сеть
+ActivityDyn_Summary_OnMic	{0} on mic	{0} на микрофоне
+ActivityDyn_Summary_OnCamera	{0} on camera	{0} на камере
+ActivityDyn_Summary_OnNetwork	{0} on network	{0} в сети
+ActivityDyn_Announce	{0} started using the {1}	{0} начал(а) использовать {1}
+ActivityDyn_Announce_microphone	microphone	микрофон
+ActivityDyn_Announce_camera	camera	камеру
+ActivityDyn_TooltipSpan	{0} · {1}\n{2} · {3}	{0} · {1}\n{2} · {3}
+ActivityDyn_TooltipSpan_Live	since {0} · {1} now	с {0} · {1} сейчас
+ActivityDyn_TooltipSpan_Range	{0} – {1}	{0} – {1}
+ActivityDyn_LiveWord_inuse	in use	используется
+ActivityDyn_LiveWord_connected	connected	подключено
+ActivityDyn_Time_now	 – now	 – сейчас
+ActivityDyn_Ago_justnow	just now	только что
+ActivityDyn_Ago_minutes	{0} min ago	{0} мин назад
+ActivityDyn_Ago_hours	{0} h ago	{0} ч назад
+ActivityDyn_Ago_yesterday	yesterday	вчера
+ActivityDyn_Ago_days	{0} days ago	{0} дн. назад
+ActivityDyn_Duration_under1min	under 1 min	меньше 1 мин
+ActivityDyn_Duration_minutes	{0} min	{0} мин
+ActivityDyn_Duration_hours	{0} h	{0} ч
+ActivityDyn_Duration_hoursMinutes	{0} h {1} min	{0} ч {1} мин
+ActivityDyn_Short_under1m	<1m	<1м
+ActivityDyn_Short_minutes	{0}m	{0}м
+ActivityDyn_Short_hours	{0}h	{0}ч
+ActivityDyn_Short_hoursMinutes	{0}h {1}m	{0}ч {1}м
+ActivityDyn_DeviceName_Camera	Camera	Камера
+ActivityDyn_DeviceName_Microphone	Microphone	Микрофон
+ActivityDyn_ExportFileName	PrivacyToggle activity {0}.csv	Активность PrivacyToggle {0}.csv
+TaskbarSpeed_WindowTitle	PrivacyToggle network speed	Скорость сети PrivacyToggle
+TaskbarSpeed_Tooltip	Network speed — click to open PrivacyToggle's Network page	Скорость сети — нажмите, чтобы открыть страницу «Сеть»

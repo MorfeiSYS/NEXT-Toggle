@@ -1,7 +1,8 @@
 <Window x:Class="PrivacyToggle.Views.TaskbarSpeedWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="PrivacyToggle network speed" WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        xmlns:loc="clr-namespace:PrivacyToggle.Properties"
+        Title="{x:Static loc:Resources.TaskbarSpeed_WindowTitle}" WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         Topmost="True" ShowInTaskbar="False" ShowActivated="False" Focusable="False"
         ResizeMode="NoResize" SizeToContent="WidthAndHeight" Cursor="Hand"
         UseLayoutRounding="True" TextOptions.TextFormattingMode="Display">
@@ -11,7 +12,7 @@
         (fully transparent pixels of a layered window let clicks through).
     -->
     <StackPanel x:Name="Lines" VerticalAlignment="Center" Background="#01000000" Margin="6,0"
-                ToolTip="Network speed — click to open PrivacyToggle's Network page"
+                ToolTip="{x:Static loc:Resources.TaskbarSpeed_Tooltip}"
                 MouseLeftButtonUp="Lines_MouseLeftButtonUp">
         <TextBlock x:Name="DownText" FontFamily="Segoe UI Variable Text, Segoe UI" FontSize="11.5" FontWeight="SemiBold"
                    TextAlignment="Right" MinWidth="76" />

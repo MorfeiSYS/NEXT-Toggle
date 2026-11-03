@@ -9,6 +9,9 @@ public enum OverlayCorner { TopLeft, TopRight, BottomLeft, BottomRight }
 public enum CameraStartState { KeepLast, On, Off }
 public enum ThemeMode { System, Light, Dark }
 
+/// <summary>Interface language: follow Windows, or force English / Russian.</summary>
+public enum UiLanguage { System, English, Russian }
+
 /// <summary>How a switch is announced: a Windows notification, or a short-lived badge in a screen corner.</summary>
 public enum NotifyStyle { Windows, Badge }
 
@@ -22,6 +25,9 @@ public sealed class AppSettings
 
     /// <summary>Follow the Windows app theme, or force light / dark. New installs start in light.</summary>
     public ThemeMode Theme { get; set; } = ThemeMode.Light;
+
+    /// <summary>Follow the Windows UI language, or force English / Russian.</summary>
+    public UiLanguage Language { get; set; } = UiLanguage.System;
     public OnStartState OnStartState { get; set; } = OnStartState.KeepLast;
     public bool LastMuted { get; set; }
 

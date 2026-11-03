@@ -185,8 +185,7 @@ public sealed class NetworkUsageService : IDisposable
             if (response?.Traffic == null)
             {
                 Available = false;
-                Problem = response == null ? "Per-app network use needs the PrivacyToggle helper service, which the installer sets up."
-                    : "The helper service needs updating to count network use. Run the latest PrivacyToggle installer.";
+                Problem = response == null ? PrivacyToggle.Properties.Resources.NetworkUsage_NeedsHelper : PrivacyToggle.Properties.Resources.NetworkUsage_NeedsUpdate;
                 Live = Array.Empty<LiveTraffic>();
             }
             else if (response.TrafficError != null)

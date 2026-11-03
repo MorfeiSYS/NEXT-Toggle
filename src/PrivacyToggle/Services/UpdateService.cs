@@ -62,7 +62,7 @@ public static class UpdateService
         var root = doc.RootElement;
         string tag = root.GetProperty("tag_name").GetString() ?? "";
         if (!Version.TryParse(tag.TrimStart('v', 'V'), out var latest))
-            throw new InvalidOperationException($"Unexpected release tag \"{tag}\".");
+            throw new InvalidOperationException(LocalizationService.Format(PrivacyToggle.Properties.Resources.UpdateService_UnexpectedTag, tag));
 
         // The installer is the release's "...Setup....exe" asset.
         string? name = null, url = null, sha = null;
@@ -92,10 +92,10 @@ public static class UpdateService
     public static async Task<string> DownloadAsync(UpdateInfo info, IProgress<double>? progress, CancellationToken ct = default)
     {
         if (info.InstallerUrl == null || info.InstallerName == null)
-            throw new InvalidOperationException("This release has no installer attached.");
+            throw new InvalidOperationException(PrivacyToggle.Properties.Resources.UpdateService_NoInstaller);
         // Only ever download from this project's own GitHub releases.
         if (!info.InstallerUrl.StartsWith(DownloadPrefix, StringComparison.OrdinalIgnoreCase))
-            throw new InvalidOperationException("The installer link doesn't point to PrivacyToggle's GitHub releases.");
+            throw new InvalidOperationException(PrivacyToggle.Properties.Resources.UpdateService_BadUrl);
 
         string folder = Path.Combine(Path.GetTempPath(), "PrivacyToggle-Update");
         try { if (Directory.Exists(folder)) Directory.Delete(folder, recursive: true); } catch { }
@@ -127,7 +127,7 @@ public static class UpdateService
         if (info.Sha256 != null && !actual.Equals(info.Sha256, StringComparison.OrdinalIgnoreCase))
         {
             try { File.Delete(path); } catch { }
-            throw new InvalidOperationException("The download didn't match GitHub's checksum, so it was deleted. Please try again.");
+            throw new InvalidOperationException(PrivacyToggle.Properties.Resources.UpdateService_ChecksumFailed);
         }
         return path;
     }

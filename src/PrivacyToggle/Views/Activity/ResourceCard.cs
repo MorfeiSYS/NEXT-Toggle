@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using PrivacyToggle.Services;
 
 namespace PrivacyToggle.Views;
 
@@ -84,7 +85,7 @@ public sealed class ResourceCard : Border
         DockPanel.SetDock(_action, Dock.Right);
         footer.Children.Add(_action);
         var today = new StackPanel { VerticalAlignment = VerticalAlignment.Bottom };
-        var todayLabel = new TextBlock { Text = "Today", FontSize = 11, FontWeight = FontWeights.SemiBold };
+        var todayLabel = new TextBlock { Text = PrivacyToggle.Properties.Resources.Activity_Today, FontSize = 11, FontWeight = FontWeights.SemiBold };
         todayLabel.SetResourceReference(TextBlock.ForegroundProperty, "TextSecondary");
         today.Children.Add(todayLabel);
         var totals = new DockPanel();
@@ -169,7 +170,9 @@ public sealed class ResourceCard : Border
         foreach (var row in Expanded ? _allRows : _allRows.Take(MaxRows)) _rows.Children.Add(row);
         int hidden = _allRows.Count - MaxRows;
         _more.Visibility = hidden > 0 ? Visibility.Visible : Visibility.Collapsed;
-        _more.Content = Expanded ? "Show less" : $"Show {hidden} more app{(hidden == 1 ? "" : "s")}";
+        _more.Content = Expanded ? PrivacyToggle.Properties.Resources.Activity_ShowLess
+            : hidden == 1 ? LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_MoreApps, hidden)
+            : LocalizationService.Format(PrivacyToggle.Properties.Resources.ActivityDyn_MoreApps_Plural, hidden);
         AutomationProperties.SetHelpText(_more, Expanded ? "expanded" : "collapsed");
     }
 

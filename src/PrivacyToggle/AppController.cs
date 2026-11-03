@@ -71,6 +71,7 @@ public sealed class AppController : IDisposable
     public void Start(bool minimizedArg, bool showArg = false, bool promoteTrayArg = false)
     {
         Settings.Load();
+        LocalizationService.Apply(S.Language);
         ThemeService.Initialize(S.Theme);
         LoadIcons();
 
@@ -135,11 +136,11 @@ public sealed class AppController : IDisposable
         OnMicStateChanged();
 
         if (HotkeyError != null)
-            Notify("Hotkey unavailable", HotkeyError);
+            Notify(PrivacyToggle.Properties.Resources.Notify_Title_HotkeyUnavailable, HotkeyError);
         else if (CameraHotkeyError != null)
-            Notify("Hotkey unavailable", CameraHotkeyError);
+            Notify(PrivacyToggle.Properties.Resources.Notify_Title_HotkeyUnavailable, CameraHotkeyError);
         else if (NetworkHotkeyError != null)
-            Notify("Hotkey unavailable", NetworkHotkeyError);
+            Notify(PrivacyToggle.Properties.Resources.Notify_Title_HotkeyUnavailable, NetworkHotkeyError);
 
         if (showArg || (!minimizedArg && !S.StartMinimized))
             ShowSettings();
@@ -179,7 +180,7 @@ public sealed class AppController : IDisposable
             {
                 Id = StableTrayId("microphone"),
                 Icon = (System.Drawing.Icon)_micIcons[Mic.State].Clone(),
-                ToolTipText = "PrivacyToggle microphone",
+                ToolTipText = PrivacyToggle.Properties.Resources.Tray_DefaultMicTooltip,
                 ContextMenu = _micMenu,
                 MenuActivation = PopupActivationMode.RightClick,
                 LeftClickCommand = new RelayCommand(OnMicTrayClick),
@@ -202,7 +203,7 @@ public sealed class AppController : IDisposable
             {
                 Id = StableTrayId("camera"),
                 Icon = (System.Drawing.Icon)_camIcons[Camera.State].Clone(),
-                ToolTipText = "PrivacyToggle camera",
+                ToolTipText = PrivacyToggle.Properties.Resources.Tray_DefaultCamTooltip,
                 ContextMenu = _camMenu,
                 MenuActivation = PopupActivationMode.RightClick,
                 LeftClickCommand = new RelayCommand(UserToggleCamera),
@@ -223,7 +224,7 @@ public sealed class AppController : IDisposable
             {
                 Id = StableTrayId("network"),
                 Icon = (System.Drawing.Icon)_netIcons[Network.State].Clone(),
-                ToolTipText = "PrivacyToggle network",
+                ToolTipText = PrivacyToggle.Properties.Resources.Tray_DefaultNetTooltip,
                 ContextMenu = _netMenu,
                 MenuActivation = PopupActivationMode.RightClick,
                 LeftClickCommand = new RelayCommand(UserToggleNetwork),
@@ -322,46 +323,67 @@ public sealed class AppController : IDisposable
 
     private string BuildMicTooltip()
     {
-        string hk = S.Hotkey.ToString();
         bool ptt = S.HotkeyMode == HotkeyMode.PushToTalk;
-        string hint = HotkeyError != null ? "click to {0} (hotkey unavailable)"
-            : ptt ? $"hold {hk} to talk"
-            : $"{hk} to {{0}}";
-
         return Mic.State switch
         {
-            MicState.NoDevice => "PrivacyToggle — no microphone found",
-            MicState.Muted => "Mic OFF — " + string.Format(hint, "unmute"),
-            _ => ptt && HotkeyError == null ? "Mic ON — push-to-talk" : "Mic ON — " + string.Format(hint, "mute"),
+            MicState.NoDevice => PrivacyToggle.Properties.Resources.TrayTip_Mic_NoDevice,
+            MicState.Muted => LocalizationService.Format(PrivacyToggle.Properties.Resources.TrayTip_Mic_Off, MicHintAction(true)),
+            _ => ptt && HotkeyError == null
+                ? PrivacyToggle.Properties.Resources.TrayTip_Mic_On_Ptt
+                : LocalizationService.Format(PrivacyToggle.Properties.Resources.TrayTip_Mic_On, MicHintAction(false)),
         };
+    }
+
+    private string MicHintAction(bool unmute)
+    {
+        string verb = unmute ? PrivacyToggle.Properties.Resources.TrayTip_Mic_Hint_Unmute : PrivacyToggle.Properties.Resources.TrayTip_Mic_Hint_Mute;
+        if (HotkeyError != null)
+            return LocalizationService.Format(PrivacyToggle.Properties.Resources.TrayTip_Mic_Hint_ClickUnavailable, verb);
+        if (S.HotkeyMode == HotkeyMode.PushToTalk)
+            return LocalizationService.Format(PrivacyToggle.Properties.Resources.TrayTip_Mic_Hint_HoldTalk, S.Hotkey);
+        return LocalizationService.Format(PrivacyToggle.Properties.Resources.TrayTip_Mic_Hint_Hotkey, S.Hotkey, verb);
     }
 
     private string BuildCameraTooltip()
     {
-        string hint = CameraHotkeyError != null ? "click to {0}" : $"{S.CameraHotkey} to {{0}}";
-        if (Camera.Busy) return Camera.DesiredOff ? "Camera — turning off…" : "Camera — turning on…";
+        if (Camera.Busy) return Camera.DesiredOff ? PrivacyToggle.Properties.Resources.TrayTip_Cam_TurningOff : PrivacyToggle.Properties.Resources.TrayTip_Cam_TurningOn;
         return Camera.State switch
         {
-            CameraState.Unavailable => "Camera control not installed — open Settings",
-            CameraState.NoDevice => "PrivacyToggle — no camera found",
-            CameraState.Off => "Camera OFF — " + string.Format(hint, "turn on"),
-            _ => "Camera ON — " + string.Format(hint, "turn off"),
+            CameraState.Unavailable => PrivacyToggle.Properties.Resources.TrayTip_Cam_NotInstalled,
+            CameraState.NoDevice => PrivacyToggle.Properties.Resources.TrayTip_Cam_NoDevice,
+            CameraState.Off => LocalizationService.Format(PrivacyToggle.Properties.Resources.TrayTip_Cam_Off, CamHintAction(true)),
+            _ => LocalizationService.Format(PrivacyToggle.Properties.Resources.TrayTip_Cam_On, CamHintAction(false)),
         };
+    }
+
+    private string CamHintAction(bool turnOn)
+    {
+        string verb = turnOn ? PrivacyToggle.Properties.Resources.TrayTip_Cam_Hint_TurnOn : PrivacyToggle.Properties.Resources.TrayTip_Cam_Hint_TurnOff;
+        if (CameraHotkeyError != null)
+            return LocalizationService.Format(PrivacyToggle.Properties.Resources.TrayTip_Cam_Hint_Click, verb);
+        return LocalizationService.Format(PrivacyToggle.Properties.Resources.TrayTip_Mic_Hint_Hotkey, S.CameraHotkey, verb);
     }
 
     private string BuildNetworkTooltip()
     {
-        string hint = NetworkHotkeyError != null ? "click to {0}" : $"{S.NetworkHotkey} to {{0}}";
-        if (Network.Busy) return Network.DesiredOff ? "Network — disconnecting…" : "Network — reconnecting…";
+        if (Network.Busy) return Network.DesiredOff ? PrivacyToggle.Properties.Resources.TrayTip_Net_Disconnecting : PrivacyToggle.Properties.Resources.TrayTip_Net_Reconnecting;
         return Network.State switch
         {
             NetworkState.Unavailable => Network.HelperOutdated
-                ? "Network control needs the latest installer — open Settings"
-                : "Network control not installed — open Settings",
-            NetworkState.NoDevice => "PrivacyToggle — no network adapter found",
-            NetworkState.Off => "Network OFF — " + string.Format(hint, "reconnect"),
-            _ => "Network ON — " + string.Format(hint, "disconnect"),
+                ? PrivacyToggle.Properties.Resources.TrayTip_Net_NeedsInstaller
+                : PrivacyToggle.Properties.Resources.TrayTip_Net_NotInstalled,
+            NetworkState.NoDevice => PrivacyToggle.Properties.Resources.TrayTip_Net_NoDevice,
+            NetworkState.Off => LocalizationService.Format(PrivacyToggle.Properties.Resources.TrayTip_Net_Off, NetHintAction(true)),
+            _ => LocalizationService.Format(PrivacyToggle.Properties.Resources.TrayTip_Net_On, NetHintAction(false)),
         };
+    }
+
+    private string NetHintAction(bool reconnect)
+    {
+        string verb = reconnect ? PrivacyToggle.Properties.Resources.TrayTip_Net_Hint_Reconnect : PrivacyToggle.Properties.Resources.TrayTip_Net_Hint_Disconnect;
+        if (NetworkHotkeyError != null)
+            return LocalizationService.Format(PrivacyToggle.Properties.Resources.TrayTip_Cam_Hint_Click, verb);
+        return LocalizationService.Format(PrivacyToggle.Properties.Resources.TrayTip_Mic_Hint_Hotkey, S.NetworkHotkey, verb);
     }
 
     /// <summary>
@@ -454,16 +476,16 @@ public sealed class AppController : IDisposable
             if (S.MicNotifyStyle == NotifyStyle.Badge)
                 FlashBadge(PrivacyDevice.Microphone, Mic.State switch
                 {
-                    MicState.NoDevice => (null, "NO MIC"),
-                    MicState.Muted => (true, "MIC OFF"),
-                    _ => (false, "MIC ON"),
+                    MicState.NoDevice => (null, PrivacyToggle.Properties.Resources.NotifyBadge_NoMic),
+                    MicState.Muted => (true, PrivacyToggle.Properties.Resources.NotifyBadge_MicOff),
+                    _ => (false, PrivacyToggle.Properties.Resources.NotifyBadge_MicOn),
                 });
             else
-                Notify("PrivacyToggle", Mic.State switch
+                Notify(PrivacyToggle.Properties.Resources.Notify_Title_PrivacyToggle, Mic.State switch
                 {
-                    MicState.NoDevice => "No microphone found",
-                    MicState.Muted => "Microphone muted",
-                    _ => "Microphone is live",
+                    MicState.NoDevice => PrivacyToggle.Properties.Resources.Notify_Mic_NoDevice,
+                    MicState.Muted => PrivacyToggle.Properties.Resources.Notify_Mic_Muted,
+                    _ => PrivacyToggle.Properties.Resources.Notify_Mic_Live,
                 });
         }
     }
@@ -506,8 +528,7 @@ public sealed class AppController : IDisposable
     {
         if (Camera.State == CameraState.Unavailable)
         {
-            Notify("Camera control not installed",
-                "Camera on/off needs the PrivacyToggle helper, which the installer sets up.");
+            Notify(PrivacyToggle.Properties.Resources.Notify_Cam_NotInstalled_Title, PrivacyToggle.Properties.Resources.Notify_Cam_NotInstalled_Body);
             return;
         }
         if (Camera.Busy) return;
@@ -530,22 +551,22 @@ public sealed class AppController : IDisposable
         }
 
         if (Camera.LastError != null)
-            Notify("Camera", "Couldn't switch the camera: " + Camera.LastError);
+            Notify(PrivacyToggle.Properties.Resources.Notify_Title_Camera, LocalizationService.Format(PrivacyToggle.Properties.Resources.Notify_Cam_SwitchFailed, Camera.LastError));
         else if (Camera.NeedsRestart)
-            Notify("Camera", "Windows needs a restart to finish switching the camera.");
+            Notify(PrivacyToggle.Properties.Resources.Notify_Title_Camera, PrivacyToggle.Properties.Resources.Notify_Cam_NeedsRestart);
         else if (S.CamNotify && S.CamNotifyStyle == NotifyStyle.Badge)
             FlashBadge(PrivacyDevice.Camera, Camera.State switch
             {
-                CameraState.NoDevice => (null, "NO CAMERA"),
-                CameraState.Off => (true, "CAM OFF"),
-                _ => (false, "CAM ON"),
+                CameraState.NoDevice => (null, PrivacyToggle.Properties.Resources.NotifyBadge_NoCamera),
+                CameraState.Off => (true, PrivacyToggle.Properties.Resources.NotifyBadge_CamOff),
+                _ => (false, PrivacyToggle.Properties.Resources.NotifyBadge_CamOn),
             });
         else if (S.CamNotify)
-            Notify("PrivacyToggle", Camera.State switch
+            Notify(PrivacyToggle.Properties.Resources.Notify_Title_PrivacyToggle, Camera.State switch
             {
-                CameraState.NoDevice => "No camera found",
-                CameraState.Off => "Camera turned off",
-                _ => "Camera is on",
+                CameraState.NoDevice => PrivacyToggle.Properties.Resources.Notify_Cam_NoDevice,
+                CameraState.Off => PrivacyToggle.Properties.Resources.Notify_Cam_Off,
+                _ => PrivacyToggle.Properties.Resources.Notify_Cam_On,
             });
     }
 
@@ -567,9 +588,9 @@ public sealed class AppController : IDisposable
     {
         if (Network.State == NetworkState.Unavailable)
         {
-            Notify("Network control not available", Network.HelperOutdated
-                ? "Run the latest PrivacyToggle installer to update the helper service; it adds network control."
-                : "Network on/off needs the PrivacyToggle helper, which the installer sets up.");
+            Notify(PrivacyToggle.Properties.Resources.Notify_Net_NotAvailable_Title, Network.HelperOutdated
+                ? PrivacyToggle.Properties.Resources.Notify_Net_NotAvailable_Update
+                : PrivacyToggle.Properties.Resources.Notify_Net_NotAvailable_Install);
             return;
         }
         if (Network.Busy || Network.State == NetworkState.NoDevice) return;
@@ -577,31 +598,30 @@ public sealed class AppController : IDisposable
         bool off = Network.State == NetworkState.On;
         // Over Remote Desktop, disconnecting also cuts this session off, with no way to reconnect from here.
         if (off && SystemParameters.IsRemoteSession && MessageBox.Show(
-                "You're connected to this PC remotely. Turning the network off will end this remote session, " +
-                "and you won't be able to reconnect until someone turns the network back on at the PC.\n\nTurn the network off anyway?",
-                "PrivacyToggle — network", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) != MessageBoxResult.Yes)
+                PrivacyToggle.Properties.Resources.MessageBox_RemoteDisconnect_Body,
+                PrivacyToggle.Properties.Resources.MessageBox_Title_Network, MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) != MessageBoxResult.Yes)
             return;
 
         if (S.PlaySound) Sounds.Play(off, camera: true);
         await Network.SetOffAsync(off);
 
         if (Network.LastError != null)
-            Notify("Network", "Couldn't switch the network: " + Network.LastError);
+            Notify(PrivacyToggle.Properties.Resources.Notify_Title_Network, LocalizationService.Format(PrivacyToggle.Properties.Resources.Notify_Net_SwitchFailed, Network.LastError));
         else if (Network.NeedsRestart)
-            Notify("Network", "Windows needs a restart to finish switching the network adapter.");
+            Notify(PrivacyToggle.Properties.Resources.Notify_Title_Network, PrivacyToggle.Properties.Resources.Notify_Net_NeedsRestart);
         else if (S.NetNotify && S.NetNotifyStyle == NotifyStyle.Badge)
             FlashBadge(PrivacyDevice.Network, Network.State switch
             {
-                NetworkState.NoDevice => (null, "NO NETWORK"),
-                NetworkState.Off => (true, "NET OFF"),
-                _ => (false, "NET ON"),
+                NetworkState.NoDevice => (null, PrivacyToggle.Properties.Resources.NotifyBadge_NoNetwork),
+                NetworkState.Off => (true, PrivacyToggle.Properties.Resources.NotifyBadge_NetOff),
+                _ => (false, PrivacyToggle.Properties.Resources.NotifyBadge_NetOn),
             });
         else if (S.NetNotify)
-            Notify("PrivacyToggle", Network.State switch
+            Notify(PrivacyToggle.Properties.Resources.Notify_Title_PrivacyToggle, Network.State switch
             {
-                NetworkState.NoDevice => "No network adapter found",
-                NetworkState.Off => "Network disconnected",
-                _ => "Network reconnected",
+                NetworkState.NoDevice => PrivacyToggle.Properties.Resources.Notify_Net_NoDevice,
+                NetworkState.Off => PrivacyToggle.Properties.Resources.Notify_Net_Off,
+                _ => PrivacyToggle.Properties.Resources.Notify_Net_On,
             });
     }
 
@@ -631,18 +651,18 @@ public sealed class AppController : IDisposable
         if (S.HotkeyMode == HotkeyMode.Toggle)
         {
             if (!Hotkeys.Register(HotkeyService.MicId, S.Hotkey))
-                HotkeyError = $"{S.Hotkey} is already in use by another app. Pick a different hotkey in Settings.";
+                HotkeyError = LocalizationService.Format(PrivacyToggle.Properties.Resources.Hotkey_InUse, S.Hotkey);
         }
         else if (!PushToTalk.Start(S.Hotkey))
         {
-            HotkeyError = "Could not start push-to-talk (keyboard hook failed).";
+            HotkeyError = PrivacyToggle.Properties.Resources.Hotkey_PttFailed;
         }
 
         if (!Hotkeys.Register(HotkeyService.CameraId, S.CameraHotkey))
-            CameraHotkeyError = $"{S.CameraHotkey} is already in use by another app. Pick a different hotkey in Settings.";
+            CameraHotkeyError = LocalizationService.Format(PrivacyToggle.Properties.Resources.Hotkey_InUse, S.CameraHotkey);
 
         if (!Hotkeys.Register(HotkeyService.NetworkId, S.NetworkHotkey))
-            NetworkHotkeyError = $"{S.NetworkHotkey} is already in use by another app. Pick a different hotkey in Settings.";
+            NetworkHotkeyError = LocalizationService.Format(PrivacyToggle.Properties.Resources.Hotkey_InUse, S.NetworkHotkey);
     }
 
     /// <summary>Called while a Settings recorder box captures keys, so the current hotkeys don't fire.</summary>
@@ -668,7 +688,7 @@ public sealed class AppController : IDisposable
     {
         foreach (var other in Enum.GetValues<PrivacyDevice>().Where(t => t != target))
             if (hotkey.SameAs(HotkeyFor(other)))
-                return $"{hotkey} is already the {other.ToString().ToLowerInvariant()} shortcut.";
+                return LocalizationService.Format(PrivacyToggle.Properties.Resources.Hotkey_DuplicateDevice, hotkey, HotkeyDeviceLabel(other));
 
         if (target != PrivacyDevice.Microphone || S.HotkeyMode == HotkeyMode.Toggle)
         {
@@ -680,7 +700,7 @@ public sealed class AppController : IDisposable
             if (!ok)
             {
                 ApplyHotkeys();
-                return $"Hotkey already in use: {hotkey} is taken by another app.";
+                return LocalizationService.Format(PrivacyToggle.Properties.Resources.Hotkey_AlreadyInUse, hotkey);
             }
         }
 
@@ -734,6 +754,20 @@ public sealed class AppController : IDisposable
         Settings.Save();
         ThemeService.SetMode(mode);
     }
+
+    public void SetLanguage(UiLanguage language)
+    {
+        S.Language = language;
+        Settings.Save();
+        LocalizationService.Apply(language);
+    }
+
+    private static string HotkeyDeviceLabel(PrivacyDevice device) => device switch
+    {
+        PrivacyDevice.Camera => PrivacyToggle.Properties.Resources.Hotkey_Device_camera,
+        PrivacyDevice.Network => PrivacyToggle.Properties.Resources.Hotkey_Device_network,
+        _ => PrivacyToggle.Properties.Resources.Hotkey_Device_microphone,
+    };
 
     public void SetShowMicTrayIcon(bool on)
     {

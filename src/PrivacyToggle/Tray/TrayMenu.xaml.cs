@@ -17,27 +17,27 @@ public partial class TrayMenu : ContextMenu
 
     public void Refresh()
     {
-        ToggleItem.Header = _app.Mic.State == MicState.Muted ? "Unmute microphone" : "Mute microphone";
+        ToggleItem.Header = _app.Mic.State == MicState.Muted ? PrivacyToggle.Properties.Resources.Tray_UnmuteMicrophone : PrivacyToggle.Properties.Resources.Tray_MuteMicrophone;
 
         var cam = _app.Camera;
-        CameraItem.Header = cam.Busy ? "Camera: switching…"
+        CameraItem.Header = cam.Busy ? PrivacyToggle.Properties.Resources.Tray_CameraSwitching
             : cam.State switch
             {
-                CameraState.Off => "Turn camera on",
-                CameraState.On => "Turn camera off",
-                CameraState.NoDevice => "No camera found",
-                _ => "Camera control not installed",
+                CameraState.Off => PrivacyToggle.Properties.Resources.Tray_TurnCameraOn,
+                CameraState.On => PrivacyToggle.Properties.Resources.Tray_TurnCameraOff,
+                CameraState.NoDevice => PrivacyToggle.Properties.Resources.Tray_NoCameraFound,
+                _ => PrivacyToggle.Properties.Resources.Tray_CameraNotInstalled,
             };
         CameraItem.IsEnabled = !cam.Busy && cam.State is CameraState.On or CameraState.Off;
 
         var net = _app.Network;
-        NetworkItem.Header = net.Busy ? "Network: switching…"
+        NetworkItem.Header = net.Busy ? PrivacyToggle.Properties.Resources.Tray_NetworkSwitching
             : net.State switch
             {
-                NetworkState.Off => "Reconnect network",
-                NetworkState.On => "Disconnect network",
-                NetworkState.NoDevice => "No network adapter found",
-                _ => "Network control not available",
+                NetworkState.Off => PrivacyToggle.Properties.Resources.Tray_ReconnectNetwork,
+                NetworkState.On => PrivacyToggle.Properties.Resources.Tray_DisconnectNetwork,
+                NetworkState.NoDevice => PrivacyToggle.Properties.Resources.Tray_NoNetworkAdapter,
+                _ => PrivacyToggle.Properties.Resources.Tray_NetworkNotAvailable,
             };
         NetworkItem.IsEnabled = !net.Busy && net.State is NetworkState.On or NetworkState.Off;
 

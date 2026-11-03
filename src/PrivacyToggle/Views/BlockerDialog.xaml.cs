@@ -15,11 +15,8 @@ public partial class BlockerDialog : Window
             BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
         Glyph.Source = decoder.Frames.OrderByDescending(f => f.PixelWidth).First();
 
-        Message.Text = $"{blocker.Name} is holding the camera open, so Windows can't turn it off.\n\n" +
-                       "Close it and turn the camera off?";
-        Note.Text = blocker.IsService
-            ? "It's a background service. PrivacyToggle will start it again when you turn the camera back on."
-            : "Any unsaved work in that program will be lost.";
+        Message.Text = LocalizationService.Format(PrivacyToggle.Properties.Resources.Blocker_Message, blocker.Name);
+        Note.Text = blocker.IsService ? PrivacyToggle.Properties.Resources.Blocker_Note_Service : PrivacyToggle.Properties.Resources.Blocker_Note_App;
 
         SourceInitialized += (_, _) => ThemeService.ApplyTitleBar(this);
     }

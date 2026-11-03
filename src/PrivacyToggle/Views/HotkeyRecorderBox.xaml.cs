@@ -60,7 +60,7 @@ public partial class HotkeyRecorderBox : UserControl
     private void OnModifiersChanged(ModifierKeys mods)
     {
         if (!_recording) return;
-        Display.Text = mods == ModifierKeys.None ? "Press a shortcut…" : PartialText(mods) + "…";
+        Display.Text = mods == ModifierKeys.None ? PrivacyToggle.Properties.Resources.HotkeyRecorder_PressShortcut : PartialText(mods) + PrivacyToggle.Properties.Resources.HotkeyRecorder_PartialSuffix;
     }
 
     private void OnKeyPressed(ModifierKeys mods, Key key)
@@ -75,7 +75,7 @@ public partial class HotkeyRecorderBox : UserControl
 
         if (mods == ModifierKeys.None)
         {
-            Display.Text = "Add Ctrl, Alt, Shift or Win";
+            Display.Text = PrivacyToggle.Properties.Resources.HotkeyRecorder_AddModifier;
             return;
         }
 
@@ -110,8 +110,8 @@ public partial class HotkeyRecorderBox : UserControl
     {
         if (_recording)
         {
-            Display.Text = "Press a shortcut…";
-            Badge.Text = "Esc to cancel";
+            Display.Text = PrivacyToggle.Properties.Resources.HotkeyRecorder_PressShortcut;
+            Badge.Text = PrivacyToggle.Properties.Resources.HotkeyRecorder_EscCancel;
             // Recording: the box lights up yellow.
             Frame.SetResourceReference(Border.BackgroundProperty, "Accent");
             Display.SetResourceReference(TextBlock.ForegroundProperty, "AccentText");
@@ -121,7 +121,7 @@ public partial class HotkeyRecorderBox : UserControl
         else
         {
             Display.Text = _hotkey.ToString();
-            Badge.Text = "Click to change";
+            Badge.Text = PrivacyToggle.Properties.Resources.HotkeyRecorder_ClickToChange;
             Frame.SetResourceReference(Border.BackgroundProperty, "ControlBg");
             Display.SetResourceReference(TextBlock.ForegroundProperty, "TextPrimary");
             Badge.SetResourceReference(TextBlock.ForegroundProperty, "TextSecondary");
@@ -132,10 +132,10 @@ public partial class HotkeyRecorderBox : UserControl
     private static string PartialText(ModifierKeys mods)
     {
         var parts = new List<string>();
-        if (mods.HasFlag(ModifierKeys.Control)) parts.Add("Ctrl");
-        if (mods.HasFlag(ModifierKeys.Alt)) parts.Add("Alt");
-        if (mods.HasFlag(ModifierKeys.Shift)) parts.Add("Shift");
-        if (mods.HasFlag(ModifierKeys.Windows)) parts.Add("Win");
+        if (mods.HasFlag(ModifierKeys.Control)) parts.Add(PrivacyToggle.Properties.Resources.Key_Ctrl);
+        if (mods.HasFlag(ModifierKeys.Alt)) parts.Add(PrivacyToggle.Properties.Resources.Key_Alt);
+        if (mods.HasFlag(ModifierKeys.Shift)) parts.Add(PrivacyToggle.Properties.Resources.Key_Shift);
+        if (mods.HasFlag(ModifierKeys.Windows)) parts.Add(PrivacyToggle.Properties.Resources.Key_Win);
         return string.Join("+", parts) + "+";
     }
 }

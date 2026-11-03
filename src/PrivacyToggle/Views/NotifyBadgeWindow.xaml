@@ -1,7 +1,8 @@
 <Window x:Class="PrivacyToggle.Views.NotifyBadgeWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="PrivacyToggle notification" WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        xmlns:loc="clr-namespace:PrivacyToggle.Properties"
+        Title="{x:Static loc:Resources.Notify_Title_PrivacyToggle}" WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         Topmost="True" ShowInTaskbar="False" ShowActivated="False" Focusable="False"
         ResizeMode="NoResize" SizeToContent="WidthAndHeight" IsHitTestVisible="False" Opacity="0">
     <!-- Same neubrutal look as the MIC OFF / CAM OFF badges; the colour follows the new state. -->
@@ -32,7 +33,7 @@
                     </Canvas>
                 </Canvas>
             </Viewbox>
-            <TextBlock x:Name="Label" Text="MIC OFF" Foreground="#111111" FontFamily="Segoe UI Black, Segoe UI" FontWeight="Black" FontSize="13"
+            <TextBlock x:Name="Label" Text="{x:Static loc:Resources.NotifyBadge_MicOff}" Foreground="#111111" FontFamily="Segoe UI Black, Segoe UI" FontWeight="Black" FontSize="13"
                        Margin="7,0,0,1" VerticalAlignment="Center" />
         </StackPanel>
     </Border>
