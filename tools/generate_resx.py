@@ -4,7 +4,7 @@ from __future__ import annotations
 import xml.sax.saxutils as xu
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent / "src" / "PrivacyToggle" / "Properties"
+ROOT = Path(__file__).resolve().parent.parent / "src" / "NextToggle" / "Properties"
 TSV = Path(__file__).resolve().parent / "i18n.tsv"
 
 

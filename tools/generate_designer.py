@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 
-RESX = Path(__file__).resolve().parent.parent / "src" / "PrivacyToggle" / "Properties" / "Resources.resx"
+RESX = Path(__file__).resolve().parent.parent / "src" / "NextToggle" / "Properties" / "Resources.resx"
 OUT = RESX.parent / "Resources.Designer.cs"
 
 text = RESX.read_text(encoding="utf-8")
@@ -9,7 +9,7 @@ keys = [k for k in re.findall(r'<data name="([^"]+)"', text) if k != "Culture"]
 
 lines = [
     "#nullable enable",
-    "namespace PrivacyToggle.Properties;",
+    "namespace NextToggle.Properties;",
     "",
     "using System.Globalization;",
     "",
@@ -24,7 +24,7 @@ lines = [
     "    {",
     "        get",
     "        {",
-    '            resourceMan ??= new global::System.Resources.ResourceManager("PrivacyToggle.Properties.Resources", typeof(Resources).Assembly);',
+    '            resourceMan ??= new global::System.Resources.ResourceManager("NextToggle.Properties.Resources", typeof(Resources).Assembly);',
     "            return resourceMan;",
     "        }",
     "    }",

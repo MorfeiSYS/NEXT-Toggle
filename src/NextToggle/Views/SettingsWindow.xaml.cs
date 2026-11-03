@@ -1,0 +1,857 @@
+using System.Diagnostics;
+using System.Net.Http;
+using System.Reflection;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using NextToggle.Models;
+using NextToggle.Services;
+
+namespace NextToggle.Views;
+
+public partial class SettingsWindow : Window
+{
+    private readonly AppController _app;
+    private readonly Dictionary<string, ImageSource> _images = new();
+    private bool _loading;
+
+    private AppSettings S => _app.Settings.Current;
+
+    public SettingsWindow(AppController app)
+    {
+        _app = app;
+        InitializeComponent();
+
+        var version = Assembly.GetExecutingAssembly().GetName().Version;
+        string v = version == null ? "" : $"{version.Major}.{version.Minor}.{version.Build}";
+        VersionText.Text = LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_Version, v);
+        SidebarVersion.Text = LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_SidebarVersion, v);
+        AboutIcon.Source = BrandIcon.Source = Image("app.ico");
+
+        LoadValues();
+        RefreshDevices();
+        RefreshCameras();
+        RefreshNetwork();
+        RefreshStatus();
+
+        Recorder.HotkeyRecorded += h => OnHotkeyRecorded(h, PrivacyDevice.Microphone);
+        Recorder.RecordingChanged += recording => _app.SuspendHotkey(recording);
+        CamRecorder.HotkeyRecorded += h => OnHotkeyRecorded(h, PrivacyDevice.Camera);
+        CamRecorder.RecordingChanged += recording => _app.SuspendHotkey(recording);
+        NetRecorder.HotkeyRecorded += h => OnHotkeyRecorded(h, PrivacyDevice.Network);
+        NetRecorder.RecordingChanged += recording => _app.SuspendHotkey(recording);
+
+        ActivityPage.Attach(_app);
+        _ = CheckForUpdatesAsync(); // quietly, so the About item can show "NEW"
+
+        _app.StateChanged += RefreshStatus;
+        _app.DevicesChanged += RefreshDevices;
+        _app.CameraDevicesChanged += RefreshCameras;
+        _app.NetworkAdaptersChanged += RefreshNetwork;
+        ThemeService.Changed += OnThemeChanged;
+        SourceInitialized += (_, _) => ThemeService.ApplyTitleBar(this);
+        Closed += (_, _) =>
+        {
+            ActivityPage.Detach();
+            _app.StateChanged -= RefreshStatus;
+            _app.DevicesChanged -= RefreshDevices;
+            _app.CameraDevicesChanged -= RefreshCameras;
+            _app.NetworkAdaptersChanged -= RefreshNetwork;
+            ThemeService.Changed -= OnThemeChanged;
+        };
+    }
+
+    private void OnThemeChanged() => ThemeService.ApplyTitleBar(this);
+
+    // ---------------- custom title bar ----------------
+
+    private void Minimize_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
+
+    private void Maximize_Click(object sender, RoutedEventArgs e) =>
+        WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+
+    private void Close_Click(object sender, RoutedEventArgs e) => Close();
+
+    protected override void OnStateChanged(EventArgs e)
+    {
+        base.OnStateChanged(e);
+        bool max = WindowState == WindowState.Maximized;
+        // A maximized custom-chrome window hangs a few pixels past the screen edges; pull the content in.
+        Frame.Margin = max ? new Thickness(7) : new Thickness(0);
+        MaxGlyph.Data = System.Windows.Media.Geometry.Parse(max
+            ? "M3,0.5 H11.5 V9 M0.5,3 H9 V11.5 H0.5 Z"   // restore: two overlapping boxes
+            : "M0.5,0.5 H11.5 V11.5 H0.5 Z");
+        MaxButton.ToolTip = max ? NextToggle.Properties.Resources.Settings_Caption_Restore : NextToggle.Properties.Resources.Settings_Caption_Maximize;
+    }
+
+    /// <summary>The largest frame of an .ico (an Image given the .ico directly would upscale the 16px one).</summary>
+    private ImageSource Image(string name)
+    {
+        if (!_images.TryGetValue(name, out var source))
+        {
+            var decoder = BitmapDecoder.Create(new Uri($"pack://application:,,,/Assets/{name}"),
+                BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+            source = decoder.Frames.OrderByDescending(f => f.PixelWidth).First();
+            _images[name] = source;
+        }
+        return source;
+    }
+
+    private void LoadValues()
+    {
+        _loading = true;
+
+        // microphone
+        StartKeepLast.IsChecked = S.OnStartState == OnStartState.KeepLast;
+        StartUnmuted.IsChecked = S.OnStartState == OnStartState.Unmuted;
+        StartMuted.IsChecked = S.OnStartState == OnStartState.Muted;
+        DevAll.IsChecked = S.DeviceMode == DeviceMode.All;
+        DevSelected.IsChecked = S.DeviceMode == DeviceMode.Selected;
+        EnforceBox.IsChecked = S.EnforceMute;
+
+        // camera
+        CamStartKeepLast.IsChecked = S.CameraOnStartState == CameraStartState.KeepLast;
+        CamStartOn.IsChecked = S.CameraOnStartState == CameraStartState.On;
+        CamStartOff.IsChecked = S.CameraOnStartState == CameraStartState.Off;
+        CamDevAll.IsChecked = S.CameraDeviceMode == DeviceMode.All;
+        CamDevSelected.IsChecked = S.CameraDeviceMode == DeviceMode.Selected;
+        CamEnforceBox.IsChecked = S.EnforceCameraOff;
+
+        // network
+        NetStartKeepLast.IsChecked = S.NetworkOnStartState == CameraStartState.KeepLast;
+        NetStartOn.IsChecked = S.NetworkOnStartState == CameraStartState.On;
+        NetStartOff.IsChecked = S.NetworkOnStartState == CameraStartState.Off;
+        NetDevAll.IsChecked = S.NetworkDeviceMode == DeviceMode.All;
+        NetDevSelected.IsChecked = S.NetworkDeviceMode == DeviceMode.Selected;
+        NetEnforceBox.IsChecked = S.EnforceNetworkOff;
+        NetTrayBox.IsChecked = S.ShowNetworkTrayIcon;
+        TaskbarSpeedBox.IsChecked = S.TaskbarSpeed;
+        TaskbarShowBoth.IsChecked = S.TaskbarSpeedShow == TaskbarSpeedShow.Both;
+        TaskbarShowDown.IsChecked = S.TaskbarSpeedShow == TaskbarSpeedShow.Download;
+        TaskbarShowUp.IsChecked = S.TaskbarSpeedShow == TaskbarSpeedShow.Upload;
+
+        // shortcuts
+        Recorder.Hotkey = S.Hotkey;
+        CamRecorder.Hotkey = S.CameraHotkey;
+        NetRecorder.Hotkey = S.NetworkHotkey;
+        ModeToggle.IsChecked = S.HotkeyMode == HotkeyMode.Toggle;
+        ModePtt.IsChecked = S.HotkeyMode == HotkeyMode.PushToTalk;
+
+        // alerts (per device) + sound
+        PlaySoundBox.IsChecked = S.PlaySound;
+        MicNotifyBox.IsChecked = S.MicNotify;
+        MicNotifyWindows.IsChecked = S.MicNotifyStyle == NotifyStyle.Windows;
+        MicNotifyBadge.IsChecked = S.MicNotifyStyle == NotifyStyle.Badge;
+        SetCorner(MicNotifyCorners, S.MicNotifyCorner);
+        MicOverlayBox.IsChecked = S.MicOverlay;
+        SetCorner(MicCorners, S.MicOverlayCorner);
+        CamNotifyBox.IsChecked = S.CamNotify;
+        CamNotifyWindows.IsChecked = S.CamNotifyStyle == NotifyStyle.Windows;
+        CamNotifyBadge.IsChecked = S.CamNotifyStyle == NotifyStyle.Badge;
+        SetCorner(CamNotifyCorners, S.CamNotifyCorner);
+        CamOverlayBox.IsChecked = S.CamOverlay;
+        SetCorner(CamCorners, S.CamOverlayCorner);
+        NetNotifyBox.IsChecked = S.NetNotify;
+        NetNotifyWindows.IsChecked = S.NetNotifyStyle == NotifyStyle.Windows;
+        NetNotifyBadge.IsChecked = S.NetNotifyStyle == NotifyStyle.Badge;
+        SetCorner(NetNotifyCorners, S.NetNotifyCorner);
+        NetOverlayBox.IsChecked = S.NetOverlay;
+        SetCorner(NetCorners, S.NetOverlayCorner);
+
+        // general
+        StartWithWindowsBox.IsChecked = S.StartWithWindows;
+        StartMinimizedBox.IsChecked = S.StartMinimized;
+        ThemeSystem.IsChecked = S.Theme == ThemeMode.System;
+        ThemeLight.IsChecked = S.Theme == ThemeMode.Light;
+        ThemeDark.IsChecked = S.Theme == ThemeMode.Dark;
+        LangSystem.IsChecked = S.Language == UiLanguage.System;
+        LangEnglish.IsChecked = S.Language == UiLanguage.English;
+        LangRussian.IsChecked = S.Language == UiLanguage.Russian;
+        MicTrayBox.IsChecked = S.ShowMicTrayIcon;
+        CamTrayBox.IsChecked = S.ShowCameraTrayIcon;
+        DoubleClickBox.IsChecked = S.DoubleClickOpensSettings;
+
+        _loading = false;
+        UpdateDependentControls();
+    }
+
+    private void UpdateDependentControls()
+    {
+        MicCornerPanel.IsEnabled = MicOverlayBox.IsChecked == true;
+        CamCornerPanel.IsEnabled = CamOverlayBox.IsChecked == true;
+        MicNotifyStylePanel.IsEnabled = MicNotifyBox.IsChecked == true;
+        CamNotifyStylePanel.IsEnabled = CamNotifyBox.IsChecked == true;
+        MicNotifyCornerPanel.Visibility = MicNotifyBadge.IsChecked == true ? Visibility.Visible : Visibility.Collapsed;
+        CamNotifyCornerPanel.Visibility = CamNotifyBadge.IsChecked == true ? Visibility.Visible : Visibility.Collapsed;
+        NetCornerPanel.IsEnabled = NetOverlayBox.IsChecked == true;
+        TaskbarSpeedShowPanel.IsEnabled = TaskbarSpeedBox.IsChecked == true;
+        NetNotifyStylePanel.IsEnabled = NetNotifyBox.IsChecked == true;
+        NetNotifyCornerPanel.Visibility = NetNotifyBadge.IsChecked == true ? Visibility.Visible : Visibility.Collapsed;
+        DeviceListPanel.IsEnabled = DevSelected.IsChecked == true;
+        CamListPanel.IsEnabled = CamDevSelected.IsChecked == true;
+        NetListPanel.IsEnabled = NetDevSelected.IsChecked == true;
+        NetSelectNoneWarning.Visibility = S.NetworkDeviceMode == DeviceMode.Selected && S.SelectedNetworkIds.Count == 0
+            ? Visibility.Visible : Visibility.Collapsed;
+        NetHotkeyHint.Text = LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_NetHotkeyHint, S.NetworkHotkey);
+        SelectNoneWarning.Visibility = S.DeviceMode == DeviceMode.Selected && S.SelectedDeviceIds.Count == 0
+            ? Visibility.Visible : Visibility.Collapsed;
+        CamSelectNoneWarning.Visibility = S.CameraDeviceMode == DeviceMode.Selected && S.SelectedCameraIds.Count == 0
+            ? Visibility.Visible : Visibility.Collapsed;
+        ModeHint.Text = S.HotkeyMode == HotkeyMode.Toggle
+            ? LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_MicHotkeyHint_Toggle, S.Hotkey)
+            : LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_MicHotkeyHint_Ptt, S.Hotkey);
+        CamHotkeyHint.Text = LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_CamHotkeyHint, S.CameraHotkey);
+        MicNoTrayWarning.Visibility = CamNoTrayWarning.Visibility =
+            !S.ShowMicTrayIcon && !S.ShowCameraTrayIcon && !S.ShowNetworkTrayIcon ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    // ---------------- status ----------------
+
+    /// <summary>
+    /// The sidebar status box: whether each one is on or off ("Mic on", "Camera off", "Network on"). How many apps
+    /// use them is on the Activity page.
+    /// </summary>
+    private void RefreshSidebar()
+    {
+        void Set(System.Windows.Shapes.Ellipse dot, TextBlock chip, string text, string color)
+        {
+            chip.Text = text;
+            dot.SetResourceReference(System.Windows.Shapes.Shape.FillProperty, color);
+        }
+
+        switch (_app.Mic.State)
+        {
+            case MicState.Muted: Set(MicDot, MicChip, NextToggle.Properties.Resources.SettingsDyn_Status_MicOff, "StatusOff"); break;
+            case MicState.NoDevice: Set(MicDot, MicChip, NextToggle.Properties.Resources.SettingsDyn_Status_NoMicrophone, "NoneColor"); break;
+            default: Set(MicDot, MicChip, NextToggle.Properties.Resources.SettingsDyn_Status_MicOn, "StatusOn"); break;
+        }
+        switch (_app.Camera.State)
+        {
+            case CameraState.Off: Set(CamDot, CamChip, NextToggle.Properties.Resources.SettingsDyn_Status_CameraOff, "StatusOff"); break;
+            case CameraState.On: Set(CamDot, CamChip, NextToggle.Properties.Resources.SettingsDyn_Status_CameraOn, "StatusOn"); break;
+            case CameraState.NoDevice: Set(CamDot, CamChip, NextToggle.Properties.Resources.SettingsDyn_Status_NoCamera, "NoneColor"); break;
+            default: Set(CamDot, CamChip, NextToggle.Properties.Resources.SettingsDyn_Status_CamNotInstalled, "NoneColor"); break;
+        }
+        switch (_app.Network.State)
+        {
+            case NetworkState.Off: Set(NetDot, NetChip, NextToggle.Properties.Resources.SettingsDyn_Status_NetworkOff, "StatusOff"); break;
+            case NetworkState.On: Set(NetDot, NetChip, NextToggle.Properties.Resources.SettingsDyn_Status_NetworkOn, "StatusOn"); break;
+            case NetworkState.NoDevice: Set(NetDot, NetChip, NextToggle.Properties.Resources.SettingsDyn_Status_NoNetworkAdapter, "NoneColor"); break;
+            default: Set(NetDot, NetChip, NextToggle.Properties.Resources.SettingsDyn_Status_NetworkUnavailable, "NoneColor"); break;
+        }
+    }
+
+    private void RefreshStatus()
+    {
+        RefreshSidebar();
+
+        // microphone
+        var mic = _app.Mic.State;
+        string micColor = mic switch { MicState.Muted => "MutedColor", MicState.Live => "LiveColor", _ => "NoneColor" };
+        MicStateBadge.SetResourceReference(Border.BackgroundProperty, micColor.Replace("Color", "Fill"));
+        MicCardIcon.Source = Image(mic switch { MicState.Muted => "mic-off.ico", MicState.Live => "mic-on.ico", _ => "mic-none.ico" });
+        MicCardState.Text = mic switch { MicState.Muted => NextToggle.Properties.Resources.SettingsDyn_MicCard_Muted, MicState.Live => NextToggle.Properties.Resources.SettingsDyn_MicCard_Live, _ => NextToggle.Properties.Resources.SettingsDyn_MicCard_NotFound };
+        MicCardHint.Text = mic == MicState.NoDevice
+            ? NextToggle.Properties.Resources.SettingsDyn_MicCard_PlugIn
+            : S.HotkeyMode == HotkeyMode.PushToTalk
+                ? LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_MicCard_HoldToTalk, S.Hotkey)
+                : LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_MicCard_Switch, S.Hotkey);
+        int micCount = _app.Mic.Devices.Count;
+        MicCardDevices.Text = micCount == 1 ? NextToggle.Properties.Resources.SettingsDyn_MicCard_OneMic : LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_MicCard_NMics, micCount);
+        MicCardButton.Content = mic == MicState.Muted ? NextToggle.Properties.Resources.SettingsDyn_MicCard_Unmute : NextToggle.Properties.Resources.SettingsDyn_MicCard_Mute;
+        MicCardButton.IsEnabled = mic != MicState.NoDevice;
+
+        // camera
+        var camService = _app.Camera;
+        var cam = camService.State;
+        string camColor = cam switch { CameraState.Off => "MutedColor", CameraState.On => "LiveColor", _ => "NoneColor" };
+        CamStateBadge.SetResourceReference(Border.BackgroundProperty, camColor.Replace("Color", "Fill"));
+        CamCardIcon.Source = Image(cam switch { CameraState.Off => "cam-off.ico", CameraState.On => "cam-on.ico", _ => "cam-none.ico" });
+        CamCardState.Text = camService.Busy ? (camService.DesiredOff ? NextToggle.Properties.Resources.SettingsDyn_CamCard_TurningOff : NextToggle.Properties.Resources.SettingsDyn_CamCard_TurningOn) : cam switch
+        {
+            CameraState.Off => NextToggle.Properties.Resources.SettingsDyn_CamCard_Off,
+            CameraState.On => NextToggle.Properties.Resources.SettingsDyn_CamCard_On,
+            CameraState.NoDevice => NextToggle.Properties.Resources.SettingsDyn_MicCard_NotFound,
+            _ => NextToggle.Properties.Resources.SettingsDyn_CamCard_Unavailable,
+        };
+        CamCardHint.Text = cam switch
+        {
+            CameraState.Unavailable => NextToggle.Properties.Resources.SettingsDyn_CamCard_NeedsHelper,
+            CameraState.NoDevice => NextToggle.Properties.Resources.SettingsDyn_CamCard_PlugIn,
+            _ when camService.LastError != null => LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_CamCard_LastError, camService.LastError),
+            _ when camService.NeedsRestart => NextToggle.Properties.Resources.SettingsDyn_CamCard_NeedsRestart,
+            _ => LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_MicCard_Switch, S.CameraHotkey),
+        };
+        int camCount = camService.Devices.Count;
+        CamCardDevices.Text = cam == CameraState.Unavailable ? NextToggle.Properties.Resources.SettingsDyn_CamCard_HelperNotInstalled
+            : camCount == 1 ? NextToggle.Properties.Resources.SettingsDyn_CamCard_OneCamera : LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_CamCard_NCameras, camCount);
+        CamCardButton.Content = cam == CameraState.Off ? NextToggle.Properties.Resources.SettingsDyn_CamCard_TurnOn : NextToggle.Properties.Resources.SettingsDyn_CamCard_TurnOff;
+        CamCardButton.IsEnabled = !camService.Busy && cam is CameraState.On or CameraState.Off;
+        CamHelperBanner.Visibility = cam == CameraState.Unavailable ? Visibility.Visible : Visibility.Collapsed;
+        HelperStatusText.Text = cam == CameraState.Unavailable
+            ? NextToggle.Properties.Resources.SettingsDyn_Helper_NotInstalled
+            : _app.Network.HelperOutdated ? NextToggle.Properties.Resources.SettingsDyn_Helper_OldVersion
+            : NextToggle.Properties.Resources.SettingsDyn_Helper_Running;
+
+        // network
+        var netService = _app.Network;
+        var net = netService.State;
+        string netColor = net switch { NetworkState.Off => "MutedColor", NetworkState.On => "LiveColor", _ => "NoneColor" };
+        NetStateBadge.SetResourceReference(Border.BackgroundProperty, netColor.Replace("Color", "Fill"));
+        NetCardIcon.Source = Image(net switch { NetworkState.Off => "net-off.ico", NetworkState.On => "net-on.ico", _ => "net-none.ico" });
+        NetCardState.Text = netService.Busy ? (netService.DesiredOff ? NextToggle.Properties.Resources.SettingsDyn_NetCard_Disconnecting : NextToggle.Properties.Resources.SettingsDyn_NetCard_Reconnecting) : net switch
+        {
+            NetworkState.Off => NextToggle.Properties.Resources.SettingsDyn_CamCard_Off,
+            NetworkState.On => NextToggle.Properties.Resources.SettingsDyn_CamCard_On,
+            NetworkState.NoDevice => NextToggle.Properties.Resources.SettingsDyn_MicCard_NotFound,
+            _ => NextToggle.Properties.Resources.SettingsDyn_CamCard_Unavailable,
+        };
+        NetCardHint.Text = net switch
+        {
+            NetworkState.Unavailable => netService.HelperOutdated
+                ? NextToggle.Properties.Resources.SettingsDyn_NetCard_NeedsInstaller
+                : NextToggle.Properties.Resources.SettingsDyn_NetCard_NeedsHelper,
+            NetworkState.NoDevice => NextToggle.Properties.Resources.SettingsDyn_NetCard_NoAdapter,
+            _ when netService.LastError != null => LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_CamCard_LastError, netService.LastError),
+            _ when netService.NeedsRestart => NextToggle.Properties.Resources.SettingsDyn_CamCard_NeedsRestart,
+            _ => LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_MicCard_Switch, S.NetworkHotkey),
+        };
+        var targets = netService.Targets;
+        int connected = targets.Count(a => a.Connected);
+        NetCardDevices.Text = net == NetworkState.Unavailable ? NextToggle.Properties.Resources.SettingsDyn_NetCard_HelperNeedsUpdate
+            : targets.Count == 1 ? (connected == 1 ? NextToggle.Properties.Resources.SettingsDyn_NetCard_OneAdapterConnected : NextToggle.Properties.Resources.SettingsDyn_NetCard_OneAdapter)
+            : LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_NetCard_NAdapters, targets.Count)
+              + (connected > 0 ? LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_NetCard_NConnected, connected) : "");
+        NetCardButton.Content = net == NetworkState.Off ? NextToggle.Properties.Resources.SettingsDyn_NetCard_Reconnect : NextToggle.Properties.Resources.SettingsDyn_NetCard_Disconnect;
+        NetCardButton.IsEnabled = !netService.Busy && net is NetworkState.On or NetworkState.Off;
+        NetHelperBanner.Visibility = net == NetworkState.Unavailable ? Visibility.Visible : Visibility.Collapsed;
+        NetHelperBannerTitle.Text = netService.HelperOutdated ? NextToggle.Properties.Resources.SettingsDyn_NetBanner_UpdateTitle : NextToggle.Properties.Resources.SettingsDyn_NetBanner_NotInstalledTitle;
+        NetHelperBannerText.Text = netService.HelperOutdated
+            ? NextToggle.Properties.Resources.SettingsDyn_NetBanner_UpdateBody
+            : NextToggle.Properties.Resources.SettingsDyn_NetBanner_NotInstalledBody;
+
+        // shortcuts
+        HotkeyWarning.Text = _app.HotkeyError ?? "";
+        HotkeyWarning.Visibility = _app.HotkeyError == null ? Visibility.Collapsed : Visibility.Visible;
+        CamHotkeyWarning.Text = _app.CameraHotkeyError ?? "";
+        CamHotkeyWarning.Visibility = _app.CameraHotkeyError == null ? Visibility.Collapsed : Visibility.Visible;
+        NetHotkeyWarning.Text = _app.NetworkHotkeyError ?? "";
+        NetHotkeyWarning.Visibility = _app.NetworkHotkeyError == null ? Visibility.Collapsed : Visibility.Visible;
+
+        _loading = true;
+        StartWithWindowsBox.IsChecked = S.StartWithWindows;
+        _loading = false;
+    }
+
+    private void RefreshDevices()
+    {
+        FillChecklist(DeviceList, _app.Mic.Devices.Select(d => (d.Id, d.Name)), S.SelectedDeviceIds, DeviceCheck_Changed);
+        NoDevicesText.Visibility = _app.Mic.Devices.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+        RefreshStatus();
+    }
+
+    private void RefreshCameras()
+    {
+        FillChecklist(CamList, _app.Camera.Devices.Select(d => (d.Id, d.Name)), S.SelectedCameraIds, CamCheck_Changed);
+        NoCamerasText.Visibility = _app.Camera.Devices.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+        RefreshStatus();
+    }
+
+    private void RefreshNetwork()
+    {
+        FillChecklist(NetList, _app.Network.Adapters.Select(a => (a.Id, AdapterLabel(a))), S.SelectedNetworkIds, NetCheck_Changed);
+        NoAdaptersText.Visibility = _app.Network.Adapters.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+        RefreshStatus();
+    }
+
+    /// <summary>"Wi-Fi · Intel(R) Wi-Fi 6E AX211 — connected".</summary>
+    private static string AdapterLabel(Helper.NetworkAdapter a)
+    {
+        string kind = a.Kind switch
+        {
+            Helper.NetworkKind.WiFi => NextToggle.Properties.Resources.SettingsDyn_Adapter_WiFi,
+            Helper.NetworkKind.Mobile => NextToggle.Properties.Resources.SettingsDyn_Adapter_Mobile,
+            _ => NextToggle.Properties.Resources.SettingsDyn_Adapter_Wired,
+        };
+        string state = !a.Enabled ? NextToggle.Properties.Resources.SettingsDyn_Adapter_Off
+            : a.Connected ? NextToggle.Properties.Resources.SettingsDyn_Adapter_Connected : NextToggle.Properties.Resources.SettingsDyn_Adapter_NotConnected;
+        string name = a.Alias.Equals(a.Name, StringComparison.OrdinalIgnoreCase) ? a.Name : $"{a.Alias} · {a.Name}";
+        return LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_AdapterLine, kind, name, state);
+    }
+
+    private void FillChecklist(ItemsControl list, IEnumerable<(string Id, string Name)> devices, List<string> selectedIds,
+        RoutedEventHandler changed)
+    {
+        var selected = selectedIds.ToHashSet(StringComparer.OrdinalIgnoreCase);
+        list.Items.Clear();
+        foreach (var (id, name) in devices.OrderBy(d => d.Name))
+        {
+            var box = new CheckBox
+            {
+                Style = (Style)FindResource("CheckItem"),
+                Content = name,
+                Tag = id,
+                IsChecked = selected.Contains(id),
+            };
+            box.Checked += changed;
+            box.Unchecked += changed;
+            list.Items.Add(box);
+        }
+    }
+
+    /// <summary>Switches to a device's page (e.g. the taskbar speed opens Network).</summary>
+    public void ShowPage(PrivacyDevice device) =>
+        (device switch { PrivacyDevice.Camera => NavCamera, PrivacyDevice.Network => NavNetwork, _ => NavMic }).IsChecked = true;
+
+    /// <summary>Opens the Network page scrolled to the Taskbar speed settings (clicking the taskbar speed lands here).</summary>
+    public void ShowTaskbarSpeedSettings()
+    {
+        ShowPage(PrivacyDevice.Network);
+        // Once laid out (a window that just opened isn't yet, and the section would seem to be at the top), then
+        // again when everything has settled, in case the page above it grew meanwhile (the adapter list filling in).
+        Dispatcher.BeginInvoke(ScrollToTaskbarSpeed, System.Windows.Threading.DispatcherPriority.Loaded);
+        Dispatcher.BeginInvoke(ScrollToTaskbarSpeed, System.Windows.Threading.DispatcherPriority.ApplicationIdle);
+    }
+
+    private void ScrollToTaskbarSpeed()
+    {
+        if (PageNetwork.Content is not Visual content) return;
+        PageNetwork.UpdateLayout();
+        if (!TaskbarSpeedSection.IsDescendantOf(content)) return; // page not built yet; the second try gets it
+        // Measured within the page's content, not the scroll viewer, whose top padding would scroll the heading
+        // just past the top edge; the heading's own top margin is kept above it.
+        double top = TaskbarSpeedSection.TransformToAncestor(content).Transform(new Point(0, 0)).Y;
+        PageNetwork.ScrollToVerticalOffset(Math.Max(0, top - TaskbarSpeedSection.Margin.Top));
+    }
+
+    /// <summary>
+    /// Clicking an Overview card (not its button: the button handles its own click) opens that device's page.
+    /// </summary>
+    private void OverviewCard_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (sender is FrameworkElement { Tag: string page } && Enum.TryParse<PrivacyDevice>(page, out var device))
+            ShowPage(device);
+    }
+
+    private void MicCardButton_Click(object sender, RoutedEventArgs e) => _app.UserToggle();
+    private void CamCardButton_Click(object sender, RoutedEventArgs e) => _app.UserToggleCamera();
+    private void NetCardButton_Click(object sender, RoutedEventArgs e) => _app.UserToggleNetwork();
+
+    // ---------------- navigation ----------------
+
+    private void Nav_Checked(object sender, RoutedEventArgs e)
+    {
+        if (PageOverview == null) return; // during InitializeComponent
+        var pages = new (RadioButton Nav, FrameworkElement Page)[]
+        {
+            (NavOverview, PageOverview), (NavActivity, PageActivity), (NavMic, PageMic), (NavCamera, PageCamera),
+            (NavNetwork, PageNetwork), (NavGeneral, PageGeneral), (NavAbout, PageAbout),
+        };
+        foreach (var (nav, page) in pages)
+            page.Visibility = nav.IsChecked == true ? Visibility.Visible : Visibility.Collapsed;
+        ActivityPage.SetActive(NavActivity.IsChecked == true);
+        if (NavAbout.IsChecked == true && !_updateBusy && DateTime.Now - UpdateService.LastChecked > TimeSpan.FromMinutes(10))
+            _ = CheckForUpdatesAsync();
+    }
+
+    // ---------------- microphone ----------------
+
+    private void OnStart_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        S.OnStartState = StartMuted.IsChecked == true ? OnStartState.Muted
+            : StartUnmuted.IsChecked == true ? OnStartState.Unmuted
+            : OnStartState.KeepLast;
+        _app.Save();
+    }
+
+    private void Devices_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        SaveDeviceTargets();
+    }
+
+    private void DeviceCheck_Changed(object sender, RoutedEventArgs e) => SaveDeviceTargets();
+
+    private void SaveDeviceTargets()
+    {
+        var ids = SelectedIds(DeviceList, S.SelectedDeviceIds);
+        _app.SetDeviceTargets(DevSelected.IsChecked == true ? DeviceMode.Selected : DeviceMode.All, ids);
+        UpdateDependentControls();
+    }
+
+    /// <summary>Checked items, plus earlier selections for devices that are currently unplugged.</summary>
+    private static List<string> SelectedIds(ItemsControl list, List<string> previous)
+    {
+        var present = list.Items.OfType<CheckBox>().ToList();
+        var presentIds = present.Select(b => (string)b.Tag).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        return previous.Where(id => !presentIds.Contains(id))
+            .Concat(present.Where(b => b.IsChecked == true).Select(b => (string)b.Tag))
+            .ToList();
+    }
+
+    private void Enforce_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        _app.SetEnforceMute(EnforceBox.IsChecked == true);
+    }
+
+    // ---------------- camera ----------------
+
+    private void CamOnStart_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        S.CameraOnStartState = CamStartOff.IsChecked == true ? CameraStartState.Off
+            : CamStartOn.IsChecked == true ? CameraStartState.On
+            : CameraStartState.KeepLast;
+        _app.Save();
+    }
+
+    private void CamDevices_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        SaveCameraTargets();
+    }
+
+    private void CamCheck_Changed(object sender, RoutedEventArgs e) => SaveCameraTargets();
+
+    private void SaveCameraTargets()
+    {
+        var ids = SelectedIds(CamList, S.SelectedCameraIds);
+        _app.SetCameraTargets(CamDevSelected.IsChecked == true ? DeviceMode.Selected : DeviceMode.All, ids);
+        UpdateDependentControls();
+    }
+
+    private void CamEnforce_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        _app.SetEnforceCameraOff(CamEnforceBox.IsChecked == true);
+    }
+
+    // ---------------- network ----------------
+
+    private void TaskbarSpeed_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        _app.SetTaskbarSpeed(TaskbarSpeedBox.IsChecked == true,
+            TaskbarShowDown.IsChecked == true ? TaskbarSpeedShow.Download
+            : TaskbarShowUp.IsChecked == true ? TaskbarSpeedShow.Upload
+            : TaskbarSpeedShow.Both);
+        UpdateDependentControls();
+    }
+
+    private void NetOnStart_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        S.NetworkOnStartState = NetStartOff.IsChecked == true ? CameraStartState.Off
+            : NetStartOn.IsChecked == true ? CameraStartState.On
+            : CameraStartState.KeepLast;
+        _app.Save();
+    }
+
+    private void NetDevices_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        SaveNetworkTargets();
+    }
+
+    private void NetCheck_Changed(object sender, RoutedEventArgs e) => SaveNetworkTargets();
+
+    private void SaveNetworkTargets()
+    {
+        var ids = SelectedIds(NetList, S.SelectedNetworkIds);
+        _app.SetNetworkTargets(NetDevSelected.IsChecked == true ? DeviceMode.Selected : DeviceMode.All, ids);
+        UpdateDependentControls();
+    }
+
+    private void NetEnforce_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        _app.SetEnforceNetworkOff(NetEnforceBox.IsChecked == true);
+    }
+
+    private void NetTray_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        _app.SetShowNetworkTrayIcon(NetTrayBox.IsChecked == true);
+        UpdateDependentControls();
+    }
+
+    // ---------------- shortcuts ----------------
+
+    private void OnHotkeyRecorded(HotkeySetting hotkey, PrivacyDevice target)
+    {
+        var error = _app.TryChangeHotkey(hotkey, target);
+        var (recorder, warning) = target switch
+        {
+            PrivacyDevice.Camera => (CamRecorder, CamHotkeyWarning),
+            PrivacyDevice.Network => (NetRecorder, NetHotkeyWarning),
+            _ => (Recorder, HotkeyWarning),
+        };
+        recorder.Hotkey = _app.HotkeyFor(target);
+        if (error == null)
+        {
+            warning.Visibility = Visibility.Collapsed;
+        }
+        else
+        {
+            warning.Text = LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_HotkeyWarning_Keep, error, recorder.Hotkey);
+            warning.Visibility = Visibility.Visible;
+        }
+        UpdateDependentControls();
+        RefreshStatus();
+        if (error != null) warning.Visibility = Visibility.Visible; // RefreshStatus shows only runtime errors
+    }
+
+    private void ResetHotkey_Click(object sender, RoutedEventArgs e) => OnHotkeyRecorded(HotkeySetting.Default, PrivacyDevice.Microphone);
+    private void ResetCamHotkey_Click(object sender, RoutedEventArgs e) => OnHotkeyRecorded(HotkeySetting.CameraDefault, PrivacyDevice.Camera);
+    private void ResetNetHotkey_Click(object sender, RoutedEventArgs e) => OnHotkeyRecorded(HotkeySetting.NetworkDefault, PrivacyDevice.Network);
+
+    private void Mode_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        _app.SetHotkeyMode(ModePtt.IsChecked == true ? HotkeyMode.PushToTalk : HotkeyMode.Toggle);
+        UpdateDependentControls();
+    }
+
+    // ---------------- alerts (Microphone and Camera pages) ----------------
+
+    private (RadioButton Button, OverlayCorner Corner)[] MicCorners => new[]
+    {
+        (MicCornerTL, OverlayCorner.TopLeft), (MicCornerTR, OverlayCorner.TopRight),
+        (MicCornerBL, OverlayCorner.BottomLeft), (MicCornerBR, OverlayCorner.BottomRight),
+    };
+
+    private (RadioButton Button, OverlayCorner Corner)[] CamCorners => new[]
+    {
+        (CamCornerTL, OverlayCorner.TopLeft), (CamCornerTR, OverlayCorner.TopRight),
+        (CamCornerBL, OverlayCorner.BottomLeft), (CamCornerBR, OverlayCorner.BottomRight),
+    };
+
+    // The switch badge only offers the top corners.
+    private (RadioButton Button, OverlayCorner Corner)[] MicNotifyCorners => new[]
+    {
+        (MicNotifyCornerTL, OverlayCorner.TopLeft), (MicNotifyCornerTR, OverlayCorner.TopRight),
+    };
+
+    private (RadioButton Button, OverlayCorner Corner)[] CamNotifyCorners => new[]
+    {
+        (CamNotifyCornerTL, OverlayCorner.TopLeft), (CamNotifyCornerTR, OverlayCorner.TopRight),
+    };
+
+    private (RadioButton Button, OverlayCorner Corner)[] NetCorners => new[]
+    {
+        (NetCornerTL, OverlayCorner.TopLeft), (NetCornerTR, OverlayCorner.TopRight),
+        (NetCornerBL, OverlayCorner.BottomLeft), (NetCornerBR, OverlayCorner.BottomRight),
+    };
+
+    private (RadioButton Button, OverlayCorner Corner)[] NetNotifyCorners => new[]
+    {
+        (NetNotifyCornerTL, OverlayCorner.TopLeft), (NetNotifyCornerTR, OverlayCorner.TopRight),
+    };
+
+    private static void SetCorner((RadioButton Button, OverlayCorner Corner)[] buttons, OverlayCorner corner)
+    {
+        foreach (var (button, c) in buttons) button.IsChecked = c == corner;
+    }
+
+    private static OverlayCorner GetCorner((RadioButton Button, OverlayCorner Corner)[] buttons) =>
+        buttons.FirstOrDefault(b => b.Button.IsChecked == true) is { Button: not null } chosen ? chosen.Corner : OverlayCorner.TopRight;
+
+    /// <summary>Any alert switch or badge corner changed on any page: save every device's choices.</summary>
+    private void Alerts_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        _app.SetAlerts(PrivacyDevice.Microphone, MicNotifyBox.IsChecked == true,
+            MicNotifyBadge.IsChecked == true ? NotifyStyle.Badge : NotifyStyle.Windows, GetCorner(MicNotifyCorners),
+            MicOverlayBox.IsChecked == true, GetCorner(MicCorners));
+        _app.SetAlerts(PrivacyDevice.Camera, CamNotifyBox.IsChecked == true,
+            CamNotifyBadge.IsChecked == true ? NotifyStyle.Badge : NotifyStyle.Windows, GetCorner(CamNotifyCorners),
+            CamOverlayBox.IsChecked == true, GetCorner(CamCorners));
+        _app.SetAlerts(PrivacyDevice.Network, NetNotifyBox.IsChecked == true,
+            NetNotifyBadge.IsChecked == true ? NotifyStyle.Badge : NotifyStyle.Windows, GetCorner(NetNotifyCorners),
+            NetOverlayBox.IsChecked == true, GetCorner(NetCorners));
+        UpdateDependentControls();
+    }
+
+    // ---------------- general ----------------
+
+    /// <summary>Flags that only need saving.</summary>
+    private void Simple_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        S.StartMinimized = StartMinimizedBox.IsChecked == true;
+        S.PlaySound = PlaySoundBox.IsChecked == true;
+        _app.Save();
+    }
+
+    private void StartWithWindows_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        _app.SetStartWithWindows(StartWithWindowsBox.IsChecked == true);
+    }
+
+    private void Theme_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        _app.SetTheme(ThemeLight.IsChecked == true ? ThemeMode.Light : ThemeDark.IsChecked == true ? ThemeMode.Dark : ThemeMode.System);
+    }
+
+    private void Language_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        var language = LangEnglish.IsChecked == true ? UiLanguage.English
+            : LangRussian.IsChecked == true ? UiLanguage.Russian
+            : UiLanguage.System;
+        _app.SetLanguage(language);
+        if (MessageBox.Show(NextToggle.Properties.Resources.Language_RestartMessage, NextToggle.Properties.Resources.Language_RestartTitle,
+                MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
+            LocalizationService.RestartApp();
+    }
+
+    private void MicTray_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        _app.SetShowMicTrayIcon(MicTrayBox.IsChecked == true);
+        UpdateDependentControls();
+    }
+
+    private void CamTray_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        _app.SetShowCameraTrayIcon(CamTrayBox.IsChecked == true);
+        UpdateDependentControls();
+    }
+
+    private void DoubleClick_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+        _app.SetDoubleClickOpensSettings(DoubleClickBox.IsChecked == true);
+    }
+
+    // ---------------- updates ----------------
+
+    private bool _updateBusy;
+
+    private void CheckUpdates_Click(object sender, RoutedEventArgs e) => _ = CheckForUpdatesAsync();
+
+    /// <summary>Asks GitHub for the latest release and shows either "up to date" or an Update button.</summary>
+    private async Task CheckForUpdatesAsync()
+    {
+        if (_updateBusy) return;
+        _updateBusy = true;
+        UpdateStatus.Text = NextToggle.Properties.Resources.SettingsDyn_Update_Checking;
+        UpdateDetail.Text = "";
+        CheckUpdatesButton.IsEnabled = false;
+        UpdateButton.Visibility = Visibility.Collapsed;
+        try
+        {
+            ShowUpdateResult(await UpdateService.CheckAsync());
+        }
+        catch (Exception ex)
+        {
+            UpdateStatus.Text = NextToggle.Properties.Resources.SettingsDyn_Update_CheckFailed;
+            UpdateDetail.Text = ex is HttpRequestException or TaskCanceledException
+                ? NextToggle.Properties.Resources.SettingsDyn_Update_CheckFailedHint
+                : ex.Message;
+            ReleaseLinkText.Visibility = Visibility.Collapsed;
+        }
+        finally
+        {
+            _updateBusy = false;
+            CheckUpdatesButton.IsEnabled = true;
+        }
+    }
+
+    private void ShowUpdateResult(UpdateInfo info)
+    {
+        var current = UpdateService.Current;
+        ReleaseLink.NavigateUri = new Uri(info.PageUrl);
+        ReleaseLinkText.Visibility = Visibility.Visible;
+        if (info.IsNewer)
+        {
+            UpdateStatus.Text = LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_Update_Available, info.Latest);
+            UpdateDetail.Text = info.InstallerUrl != null
+                ? LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_Update_AvailableDetail, current, info.InstallerSize / 1048576.0)
+                : LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_Update_NoInstallerDetail, current);
+            UpdateButton.Content = LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_Update_Button, info.Latest);
+            UpdateButton.Visibility = info.InstallerUrl != null ? Visibility.Visible : Visibility.Collapsed;
+            ReleaseLinkRun.Text = LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_Update_WhatsNewIn, info.Tag);
+            AboutUpdateBadge.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            UpdateStatus.Text = NextToggle.Properties.Resources.SettingsDyn_Update_UpToDate;
+            UpdateDetail.Text = LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_Update_UpToDateDetail, current, UpdateService.LastChecked);
+            UpdateButton.Visibility = Visibility.Collapsed;
+            ReleaseLinkRun.Text = LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_Update_ReleaseNotes, info.Tag);
+            AboutUpdateBadge.Visibility = Visibility.Collapsed;
+        }
+    }
+
+    /// <summary>Downloads the new installer, verifies it, starts it, and closes NEXT-Toggle so it can be replaced.</summary>
+    private async void UpdateNow_Click(object sender, RoutedEventArgs e)
+    {
+        var info = UpdateService.LastResult;
+        if (info?.InstallerUrl == null || _updateBusy) return;
+
+        _updateBusy = true;
+        UpdateButton.IsEnabled = CheckUpdatesButton.IsEnabled = false;
+        UpdateProgress.Value = 0;
+        UpdateProgress.Visibility = Visibility.Visible;
+        UpdateStatus.Text = LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_Update_Downloading, info.Latest);
+        UpdateDetail.Text = "";
+        try
+        {
+            var progress = new Progress<double>(p =>
+            {
+                UpdateProgress.Value = p;
+                UpdateDetail.Text = LocalizationService.Format(NextToggle.Properties.Resources.SettingsDyn_Update_DownloadProgress, p * 100, info.InstallerSize / 1048576.0);
+            });
+            string installer = await UpdateService.DownloadAsync(info, progress);
+
+            UpdateStatus.Text = NextToggle.Properties.Resources.SettingsDyn_Update_StartingInstaller;
+            UpdateDetail.Text = NextToggle.Properties.Resources.SettingsDyn_Update_InstallerHint;
+            if (UpdateService.StartInstaller(installer))
+            {
+                await Task.Delay(800); // let the installer window appear first
+                Application.Current.Shutdown();
+                return;
+            }
+            UpdateStatus.Text = NextToggle.Properties.Resources.SettingsDyn_Update_Cancelled;
+            UpdateDetail.Text = NextToggle.Properties.Resources.SettingsDyn_Update_CancelledHint;
+        }
+        catch (Exception ex)
+        {
+            UpdateStatus.Text = NextToggle.Properties.Resources.SettingsDyn_Update_Failed;
+            UpdateDetail.Text = ex is HttpRequestException ? NextToggle.Properties.Resources.SettingsDyn_Update_DownloadFailed : ex.Message;
+        }
+        finally
+        {
+            _updateBusy = false;
+            UpdateButton.IsEnabled = CheckUpdatesButton.IsEnabled = true;
+            UpdateProgress.Visibility = Visibility.Collapsed;
+        }
+    }
+
+    // ---------------- about ----------------
+
+    private void Link_RequestNavigate(object sender, RequestNavigateEventArgs e)
+    {
+        OpenShell(e.Uri.AbsoluteUri);
+        e.Handled = true;
+    }
+
+    private void OpenSettingsFolder_Click(object sender, RoutedEventArgs e)
+    {
+        System.IO.Directory.CreateDirectory(_app.Settings.FolderPath);
+        OpenShell(_app.Settings.FolderPath);
+    }
+
+    private static void OpenShell(string target)
+    {
+        try { Process.Start(new ProcessStartInfo(target) { UseShellExecute = true }); } catch { }
+    }
+}

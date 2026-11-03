@@ -1,14 +1,14 @@
 <div align="center">
 
-<img src="docs/icon-app.png" alt="PrivacyToggle icon" width="100">
+<img src="docs/icon-app.png" alt="NEXT-Toggle icon" width="100">
 
-# PrivacyToggle
+# NEXT-Toggle
 
 **Kill your microphone, camera and internet with one click or one shortcut, from the Windows tray.**
 
 ![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D6?logo=windows)
 ![.NET](https://img.shields.io/badge/.NET-8-512BD4?logo=dotnet)
-[![Latest release](https://img.shields.io/github/v/release/azahinhasan/Privacy-Toggle?label=version&color=blue)](https://github.com/azahinhasan/Privacy-Toggle/releases/latest)
+[![Latest release](https://img.shields.io/github/v/release/MorfeiSYS/NEXT-Toggle?label=version&color=blue)](https://github.com/MorfeiSYS/NEXT-Toggle/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 | | Live | Off | None found | Shortcut(Default) |
@@ -28,7 +28,7 @@
 - **Toggle or push-to-talk**, with a global shortcut that works even in fullscreen apps.
 
 ### 📷 Camera
-- **Real camera off.** Disables the webcam in Windows, like Device Manager does. Apps lose the picture at once and can't reopen it. If a program won't let go, PrivacyToggle tells you which one and asks before closing it.
+- **Real camera off.** Disables the webcam in Windows, like Device Manager does. Apps lose the picture at once and can't reopen it. If a program won't let go, NEXT-Toggle tells you which one and asks before closing it.
 
 ### 🌐 Network
 - **Internet kill switch.** Turns your network adapters (Wi-Fi, Ethernet, mobile broadband) off and back on, like disabling them in Windows. Every app loses the internet at once, not just the browser. If you're connected over Remote Desktop, it asks first, so you don't lock yourself out.
@@ -60,10 +60,10 @@
 
 ## Install
 
-Download `PrivacyToggle-Setup-<version>.exe` from the [latest release](https://github.com/azahinhasan/Privacy-Toggle/releases/latest) and run it. Settings opens when setup finishes.
+Download `NEXT-Toggle-Setup-<version>.exe` from the [latest release](https://github.com/MorfeiSYS/NEXT-Toggle/releases/latest) and run it. Settings opens when setup finishes.
 
 > [!NOTE]
-> Camera control, the network kill switch and per-app network use need the small **PrivacyToggle Helper** service, which the installer sets up (one admin prompt). The tray app itself never runs as admin. Mic control and the taskbar speed meter work without the service.
+> Camera control, the network kill switch and per-app network use need the small **NEXT-Toggle Helper** service, which the installer sets up (one admin prompt). The tray app itself never runs as admin. Mic control and the taskbar speed meter work without the service.
 
 **Requirements:** Windows 10 or 11, 64-bit. Nothing else to install; .NET is included.
 
@@ -76,19 +76,19 @@ Download `PrivacyToggle-Setup-<version>.exe` from the [latest release](https://g
   - **Microphone / Camera / Network:** global shortcut, devices, start state, tray icon and alerts for each. The Network page also has the taskbar speed meter.
   - **General:** startup, appearance and sound.
   - **About:** version and updates.
-- Changes save instantly to `%AppData%\PrivacyToggle\settings.json`.
-- Launching the app again opens Settings of the running copy. `PrivacyToggle.exe --exit` closes it.
+- Changes save instantly to `%AppData%\NEXT-Toggle\settings.json`.
+- Launching the app again opens Settings of the running copy. `NEXT-Toggle.exe --exit` closes it.
 
 ## Privacy
 
-PrivacyToggle has no accounts, analytics, ads or telemetry. It never records audio or video, and it never looks at what you send or receive over the network, only how much each app moves. Everything it records stays on your PC:
+NEXT-Toggle has no accounts, analytics, ads or telemetry. It never records audio or video, and it never looks at what you send or receive over the network, only how much each app moves. Everything it records stays on your PC:
 
 | File | What's in it |
 |---|---|
-| `%AppData%\PrivacyToggle\settings.json` | Your settings |
-| `%AppData%\PrivacyToggle\usage.json` | Which apps used the mic and camera, and when (7 days) |
-| `%AppData%\PrivacyToggle\network-history.json` | How much data each app sent and received (7 days) |
-| `%ProgramData%\PrivacyToggle\` | The devices PrivacyToggle turned off, so it can turn them back on |
+| `%AppData%\NEXT-Toggle\settings.json` | Your settings |
+| `%AppData%\NEXT-Toggle\usage.json` | Which apps used the mic and camera, and when (7 days) |
+| `%AppData%\NEXT-Toggle\network-history.json` | How much data each app sent and received (7 days) |
+| `%ProgramData%\NEXT-Toggle\` | The devices NEXT-Toggle turned off, so it can turn them back on |
 
 The only connection the app makes is to GitHub, to check for and download updates. Full details: [PRIVACY.md](PRIVACY.md).
 
@@ -102,12 +102,12 @@ Requires the .NET 8 SDK.
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File build.ps1   # release build + installer
-dotnet run --project src/PrivacyToggle               # dev run
+dotnet run --project src/NextToggle               # dev run
 ```
 
-- `publish\PrivacyToggle.exe`: self-contained single file, no .NET install needed.
-- `installer\Output\PrivacyToggle-Setup-<version>.exe`: built if [Inno Setup 6](https://jrsoftware.org/isinfo.php) is installed. Installs the helper service, offers *Start with Windows*, and the uninstaller turns cameras and network adapters back on and removes everything.
-- The version comes from `<Version>` in `src\PrivacyToggle\PrivacyToggle.csproj`; `build.ps1` passes it to the installer.
+- `publish\NEXT-Toggle.exe`: self-contained single file, no .NET install needed.
+- `installer\Output\NEXT-Toggle-Setup-<version>.exe`: built if [Inno Setup 6](https://jrsoftware.org/isinfo.php) is installed. Installs the helper service, offers *Start with Windows*, and the uninstaller turns cameras and network adapters back on and removes everything.
+- The version comes from `<Version>` in `src\NextToggle\NEXT-Toggle.csproj`; `build.ps1` passes it to the installer.
 - Icons (tray, app and the images in `docs\`) are generated by `tools\make-icons.ps1`.
 
 ### Diagnostics
@@ -116,8 +116,8 @@ Command-line switches for troubleshooting (run from an **admin** terminal; in Co
 
 | Switch | What it does |
 |---|---|
-| `--list-cameras` | Lists the cameras PrivacyToggle can control |
-| `--list-adapters` | Lists the network adapters PrivacyToggle can control |
+| `--list-cameras` | Lists the cameras NEXT-Toggle can control |
+| `--list-adapters` | Lists the network adapters NEXT-Toggle can control |
 | `--camera-in-use` | Says whether any app is using a camera right now |
 | `--network-usage` | Prints the busiest apps' network speeds every second for 20 seconds, then totals |
 

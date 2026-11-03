@@ -1,19 +1,19 @@
-MessageBox_Title_App	PrivacyToggle	PrivacyToggle
-MessageBox_Title_Network	PrivacyToggle — network	PrivacyToggle — сеть
+MessageBox_Title_App	NEXT-Toggle	NEXT-Toggle
+MessageBox_Title_Network	NEXT-Toggle — network	NEXT-Toggle — сеть
 Button_Cancel	Cancel	Отмена
 Button_Reset	Reset	Сброс
 Button_CloseItAndTurnOff	Close it and turn off	Закрыть и выключить
 Button_CheckAgain	Check again	Проверить снова
 Button_UpdateNow	Update now	Обновить
-Common_BrandName	PrivacyToggle	PrivacyToggle
+Common_BrandName	NEXT-Toggle	NEXT-Toggle
 Common_Beta	BETA	BETA
 Common_New	NEW	NEW
 Language_Section	Language	Язык
 Language_MatchWindows	Match Windows	Как в Windows
 Language_English	English	English
 Language_Russian	Russian	Русский
-Language_RestartHint	Changes apply after you restart PrivacyToggle.	Изменения вступят в силу после перезапуска PrivacyToggle.
-Language_RestartTitle	Restart PrivacyToggle?	Перезапустить PrivacyToggle?
+Language_RestartHint	Changes apply after you restart NEXT-Toggle.	Изменения вступят в силу после перезапуска NEXT-Toggle.
+Language_RestartTitle	Restart NEXT-Toggle?	Перезапустить NEXT-Toggle?
 Language_RestartMessage	The new language will be used after restart. Restart now?	Новый язык будет использован после перезапуска. Перезапустить сейчас?
 Language_RestartNow	Restart now	Перезапустить
 Language_RestartLater	Later	Позже
@@ -39,7 +39,7 @@ Key_OemQuotes	'	'
 Key_OemComma	,	,
 Key_OemPeriod	.	.
 Key_OemQuestion	/	/
-Settings_Title	PrivacyToggle Settings	Настройки PrivacyToggle
+Settings_Title	NEXT-Toggle Settings	Настройки NEXT-Toggle
 Settings_Caption_Minimize	Minimize	Свернуть
 Settings_Caption_Maximize	Maximize	Развернуть
 Settings_Caption_Restore	Restore	Восстановить
@@ -52,7 +52,7 @@ Settings_Nav_Network	Network	Сеть
 Settings_Nav_General	General	Общие
 Settings_Nav_About	About	О программе
 Settings_Section_Shortcut	Shortcut	Сочетание клавиш
-Settings_Section_OnStart	When PrivacyToggle starts	При запуске PrivacyToggle
+Settings_Section_OnStart	When NEXT-Toggle starts	При запуске NEXT-Toggle
 Settings_Section_TrayIcon	Tray icon	Значок в трее
 Settings_Section_Alerts	Alerts	Уведомления
 Settings_Section_Startup	Startup	Автозапуск
@@ -87,10 +87,10 @@ Settings_Mic_Devices_Title	Which microphones to mute	Какие микрофон
 Settings_Mic_NoDevices	No active microphones found.	Активные микрофоны не найдены.
 Settings_Mic_NoSelectionWarning	No microphone selected: muting will have no effect.	Микрофон не выбран: отключение не сработает.
 Settings_Mic_EnforceMute_Title	Enforce mute	Удерживать отключение
-Settings_Mic_EnforceMute_Hint	If another app or a headset button unmutes a microphone while PrivacyToggle has it muted, mute it again right away. When off, PrivacyToggle follows the change.	Если другое приложение или кнопка на гарнитуре снова включит микрофон, пока PrivacyToggle держит его выключенным, он сразу отключится снова. Если выключено, PrivacyToggle следует изменениям.
+Settings_Mic_EnforceMute_Hint	If another app or a headset button unmutes a microphone while NEXT-Toggle has it muted, mute it again right away. When off, NEXT-Toggle follows the change.	Если другое приложение или кнопка на гарнитуре снова включит микрофон, пока NEXT-Toggle держит его выключенным, он сразу отключится снова. Если выключено, NEXT-Toggle следует изменениям.
 Settings_Mic_Tray_Show	Show the microphone icon in the tray	Показывать значок микрофона в трее
 Settings_Mic_Tray_Hint	Click it to mute or unmute. Right-click for both controls and Settings.	Щёлкните, чтобы включить или выключить. Правый щелчок — управление и настройки.
-Settings_Mic_NoTrayWarning	With both tray icons hidden, use the shortcuts, or start PrivacyToggle again to open this window.	Если оба значка в трее скрыты, используйте сочетания клавиш или запустите PrivacyToggle снова, чтобы открыть это окно.
+Settings_Mic_NoTrayWarning	With both tray icons hidden, use the shortcuts, or start NEXT-Toggle again to open this window.	Если оба значка в трее скрыты, используйте сочетания клавиш или запустите NEXT-Toggle снова, чтобы открыть это окно.
 Settings_Mic_DoubleClick_Title	Double-click the icon to open Settings	Двойной щелчок по значку открывает настройки
 Settings_Mic_DoubleClick_Hint	Single clicks stay instant; a double-click undoes that click.	Один щелчок срабатывает сразу; двойной отменяет его.
 Settings_Mic_Notify_Title	Notify me when the microphone mutes or unmutes	Уведомлять при включении или выключении микрофона
@@ -98,7 +98,7 @@ Settings_Mic_Notify_Hint	Each time you switch it, as a Windows notification or a
 Settings_Mic_Overlay_Title	Show a MIC OFF badge while muted	Показывать значок MIC OFF, пока выключен
 Settings_Mic_Overlay_Hint	A small badge that stays on top of every app and lets clicks pass through.	Небольшой значок поверх всех приложений; щелчки проходят сквозь него.
 Settings_Cam_HelperNotInstalled_Title	Camera control isn't installed	Управление камерой не установлено
-Settings_Cam_HelperNotInstalled_Body	Turning cameras off needs the PrivacyToggle helper service, which the installer sets up (it asks for admin rights once). Run PrivacyToggle-Setup to enable it.	Чтобы выключать камеры, нужна служба-помощник PrivacyToggle — установщик настраивает её (один раз запросит права администратора). Запустите PrivacyToggle-Setup.
+Settings_Cam_HelperNotInstalled_Body	Turning cameras off needs the NEXT-Toggle helper service, which the installer sets up (it asks for admin rights once). Run NEXT-Toggle-Setup to enable it.	Чтобы выключать камеры, нужна служба-помощник NEXT-Toggle — установщик настраивает её (один раз запросит права администратора). Запустите NEXT-Toggle-Setup.
 Settings_Cam_OnStart_On	Always on	Всегда включена
 Settings_Cam_OnStart_Off	Always off	Всегда выключена
 Settings_Cam_Devices_Title	Which cameras to turn off	Какие камеры выключать
@@ -106,14 +106,14 @@ Settings_Cam_DevAll	All cameras	Все камеры
 Settings_Cam_NoCameras	No cameras found.	Камеры не найдены.
 Settings_Cam_NoSelectionWarning	No camera selected: turning off will have no effect.	Камера не выбрана: выключение не сработает.
 Settings_Cam_EnforceOff_Title	Keep cameras off	Удерживать выключение
-Settings_Cam_EnforceOff_Hint	If a camera is turned back on elsewhere (for example in Device Manager) while PrivacyToggle has it off, turn it off again. When off, PrivacyToggle follows the change.	Если камеру снова включат (например, в диспетчере устройств), пока PrivacyToggle держит её выключенной, она снова отключится. Если параметр выключен, PrivacyToggle следует изменениям.
+Settings_Cam_EnforceOff_Hint	If a camera is turned back on elsewhere (for example in Device Manager) while NEXT-Toggle has it off, turn it off again. When off, NEXT-Toggle follows the change.	Если камеру снова включат (например, в диспетчере устройств), пока NEXT-Toggle держит её выключенной, она снова отключится. Если параметр выключен, NEXT-Toggle следует изменениям.
 Settings_Cam_Tray_Show	Show the camera icon in the tray	Показывать значок камеры в трее
 Settings_Cam_Tray_Hint	Click it to turn the camera off or on. Right-click for both controls and Settings.	Щёлкните, чтобы выключить или включить камеру. Правый щелчок — управление и настройки.
 Settings_Cam_Notify_Title	Notify me when the camera turns off or on	Уведомлять при включении или выключении камеры
 Settings_Cam_Notify_Hint	Each time you switch it, as a Windows notification or a badge that disappears after 2 seconds.	При каждом переключении — уведомление Windows или значок на 2 секунды.
 Settings_Cam_Overlay_Title	Show a CAM OFF badge while off	Показывать значок CAM OFF, пока выключена
 Settings_Cam_Overlay_Hint	A small badge that stays on top of every app and lets clicks pass through. If it shares a corner with the MIC OFF badge, they sit side by side.	Небольшой значок поверх всех приложений; щелчки проходят сквозь него. Если угол занят значком MIC OFF, они стоят рядом.
-Settings_Cam_FooterHint	Turning the camera off disables it in Windows, the same as Device Manager does. Apps using it lose the picture immediately, and no app can open it until you turn it back on. If a program holds the camera and won't let go, PrivacyToggle asks before closing it; a background service closed this way is started again when you turn the camera back on.	Выключение камеры отключает её в Windows, как в диспетчере устройств. Приложения сразу теряют изображение, и никто не откроет камеру, пока вы не включите её снова. Если программа удерживает камеру, PrivacyToggle спросит перед закрытием; фоновую службу после этого запустят снова при включении камеры.
+Settings_Cam_FooterHint	Turning the camera off disables it in Windows, the same as Device Manager does. Apps using it lose the picture immediately, and no app can open it until you turn it back on. If a program holds the camera and won't let go, NEXT-Toggle asks before closing it; a background service closed this way is started again when you turn the camera back on.	Выключение камеры отключает её в Windows, как в диспетчере устройств. Приложения сразу теряют изображение, и никто не откроет камеру, пока вы не включите её снова. Если программа удерживает камеру, NEXT-Toggle спросит перед закрытием; фоновую службу после этого запустят снова при включении камеры.
 Settings_Net_OnStart_Connected	Always connected	Всегда подключена
 Settings_Net_OnStart_Disconnected	Always disconnected	Всегда отключена
 Settings_Net_Devices_Title	Which connections to turn off	Какие подключения отключать
@@ -121,7 +121,7 @@ Settings_Net_DevAll	All (Wi-Fi and wired)	Все (Wi‑Fi и проводные)
 Settings_Net_NoAdapters	No network adapters found.	Сетевые адаптеры не найдены.
 Settings_Net_NoSelectionWarning	No connection selected: turning the network off will have no effect.	Подключение не выбрано: отключение сети не сработает.
 Settings_Net_EnforceOff_Title	Keep the network off	Удерживать отключение сети
-Settings_Net_EnforceOff_Hint	If a connection is turned back on elsewhere (for example in Network Connections) while PrivacyToggle has it off, turn it off again. When off, PrivacyToggle follows the change.	Если подключение снова включат (например, в «Сетевых подключениях»), пока PrivacyToggle держит сеть выключенной, оно снова отключится. Если параметр выключен, PrivacyToggle следует изменениям.
+Settings_Net_EnforceOff_Hint	If a connection is turned back on elsewhere (for example in Network Connections) while NEXT-Toggle has it off, turn it off again. When off, NEXT-Toggle follows the change.	Если подключение снова включат (например, в «Сетевых подключениях»), пока NEXT-Toggle держит сеть выключенной, оно снова отключится. Если параметр выключен, NEXT-Toggle следует изменениям.
 Settings_Net_Tray_Show	Show the network icon in the tray	Показывать значок сети в трее
 Settings_Net_Tray_Hint	Click it to disconnect or reconnect. Right-click for all controls and Settings.	Щёлкните, чтобы отключить или подключить. Правый щелчок — все элементы управления и настройки.
 Settings_Net_TaskbarSpeed_Title	Show network speed on the taskbar	Показывать скорость сети на панели задач
@@ -134,11 +134,11 @@ Settings_Net_Notify_Title	Notify me when the network turns off or on	Уведо�
 Settings_Net_Notify_Hint	Each time you switch it, as a Windows notification or a badge that disappears after 2 seconds.	При каждом переключении — уведомление Windows или значок на 2 секунды.
 Settings_Net_Overlay_Title	Show a NET OFF badge while off	Показывать значок NET OFF, пока отключена
 Settings_Net_Overlay_Hint	A small badge that stays on top of every app and lets clicks pass through. If it shares a corner with another OFF badge, they sit side by side.	Небольшой значок поверх всех приложений; щелчки проходят сквозь него. Если угол занят другим значком OFF, они стоят рядом.
-Settings_Net_FooterHint	Turning the network off disables the selected network adapters in Windows, the same as the Network Connections window does. Nothing on this PC can reach the internet or your local network through them until you turn them back on. Virtual adapters (VPNs, virtual machines, WSL) aren't touched. Uninstalling PrivacyToggle turns every adapter it switched off back on.	Отключение сети выключает выбранные адаптеры в Windows, как в окне «Сетевые подключения». Через них ничто на этом ПК не выйдет в интернет или локальную сеть, пока вы не включите их снова. Виртуальные адаптеры (VPN, виртуальные машины, WSL) не затрагиваются. При удалении PrivacyToggle все отключённые им адаптеры снова включаются.
+Settings_Net_FooterHint	Turning the network off disables the selected network adapters in Windows, the same as the Network Connections window does. Nothing on this PC can reach the internet or your local network through them until you turn them back on. Virtual adapters (VPNs, virtual machines, WSL) aren't touched. Uninstalling NEXT-Toggle turns every adapter it switched off back on.	Отключение сети выключает выбранные адаптеры в Windows, как в окне «Сетевые подключения». Через них ничто на этом ПК не выйдет в интернет или локальную сеть, пока вы не включите их снова. Виртуальные адаптеры (VPN, виртуальные машины, WSL) не затрагиваются. При удалении NEXT-Toggle все отключённые им адаптеры снова включаются.
 Settings_General_StartWithWindows_Title	Start with Windows	Запускать вместе с Windows
-Settings_General_StartWithWindows_Hint	Launch PrivacyToggle in the tray when you sign in.	Запускать PrivacyToggle в трее при входе в систему.
+Settings_General_StartWithWindows_Hint	Launch NEXT-Toggle in the tray when you sign in.	Запускать NEXT-Toggle в трее при входе в систему.
 Settings_General_StartMinimized_Title	Start minimized to tray	Запускать свёрнутым в трей
-Settings_General_StartMinimized_Hint	When off, this window opens every time PrivacyToggle starts manually.	Если выключено, это окно открывается при каждом ручном запуске PrivacyToggle.
+Settings_General_StartMinimized_Hint	When off, this window opens every time NEXT-Toggle starts manually.	Если выключено, это окно открывается при каждом ручном запуске NEXT-Toggle.
 Settings_General_ThemeLight_Hint	Light is the classic look: cream paper, black ink and bold colours.	Светлая тема — классический вид: кремовый фон, чёрный текст и яркие акценты.
 Settings_General_PlaySound_Title	Play a sound when switching	Звук при переключении
 Settings_General_PlaySound_Hint	A short tone when the microphone or camera turns on or off (the camera has its own, lower tone). Turn off for silent switching.	Короткий сигнал при включении или выключении микрофона или камеры (у камеры свой, более низкий тон). Выключите для тихого переключения.
@@ -147,7 +147,7 @@ Settings_About_GitHub	GitHub repository	Репозиторий на GitHub
 Settings_About_OpenSettingsFolder	Open settings folder	Открыть папку настроек
 Settings_About_WhatsNew	What's new	Что нового
 SettingsDyn_Version	Version {0}	Версия {0}
-SettingsDyn_SidebarVersion	PrivacyToggle {0}	PrivacyToggle {0}
+SettingsDyn_SidebarVersion	NEXT-Toggle {0}	NEXT-Toggle {0}
 SettingsDyn_NetHotkeyHint	Press {0} to disconnect, and again to reconnect.	Нажмите {0}, чтобы отключить, и снова — чтобы подключить.
 SettingsDyn_MicHotkeyHint_Toggle	Press {0} once to mute and again to unmute.	Нажмите {0}, чтобы выключить, и снова — чтобы включить.
 SettingsDyn_MicHotkeyHint_Ptt	Microphones stay muted and are live only while you hold {0}. The key press is not passed on to other apps.	Микрофоны остаются выключенными и активны только пока удерживаете {0}. Нажатие не передаётся другим приложениям.
@@ -204,8 +204,8 @@ SettingsDyn_NetCard_Reconnect	Reconnect	Подключить
 SettingsDyn_NetCard_Disconnect	Disconnect	Отключить
 SettingsDyn_NetBanner_UpdateTitle	The helper service needs updating	Службу-помощник нужно обновить
 SettingsDyn_NetBanner_NotInstalledTitle	Network control isn't installed	Управление сетью не установлено
-SettingsDyn_NetBanner_UpdateBody	The PrivacyToggle helper service on this PC is from an older version that can't switch the network. Run the latest PrivacyToggle-Setup to update it.	Служба-помощник PrivacyToggle на этом ПК из старой версии и не может переключать сеть. Запустите последний PrivacyToggle-Setup.
-SettingsDyn_NetBanner_NotInstalledBody	Turning the network off needs the PrivacyToggle helper service, which the installer sets up (it asks for admin rights once). Run PrivacyToggle-Setup to enable it.	Чтобы отключать сеть, нужна служба-помощник PrivacyToggle — установщик настраивает её (один раз запросит права администратора). Запустите PrivacyToggle-Setup.
+SettingsDyn_NetBanner_UpdateBody	The NEXT-Toggle helper service on this PC is from an older version that can't switch the network. Run the latest NEXT-Toggle-Setup to update it.	Служба-помощник NEXT-Toggle на этом ПК из старой версии и не может переключать сеть. Запустите последний NEXT-Toggle-Setup.
+SettingsDyn_NetBanner_NotInstalledBody	Turning the network off needs the NEXT-Toggle helper service, which the installer sets up (it asks for admin rights once). Run NEXT-Toggle-Setup to enable it.	Чтобы отключать сеть, нужна служба-помощник NEXT-Toggle — установщик настраивает её (один раз запросит права администратора). Запустите NEXT-Toggle-Setup.
 SettingsDyn_AdapterLine	{0}: {1} — {2}	{0}: {1} — {2}
 SettingsDyn_Adapter_WiFi	Wi-Fi	Wi‑Fi
 SettingsDyn_Adapter_Mobile	Mobile	Мобильная
@@ -218,17 +218,17 @@ SettingsDyn_Update_Checking	Checking for updates…	Проверка обнов�
 SettingsDyn_Update_CheckFailed	Couldn't check for updates	Не удалось проверить обновления
 SettingsDyn_Update_CheckFailedHint	Check your internet connection and try again.	Проверьте подключение к интернету и попробуйте снова.
 SettingsDyn_Update_Available	Version {0} is available	Доступна версия {0}
-SettingsDyn_Update_AvailableDetail	You have {0}. Update downloads the installer from GitHub ({1} MB), checks it, and installs it; PrivacyToggle restarts afterwards.	У вас {0}. Обновление загрузит установщик с GitHub ({1} МБ), проверит его и установит; затем PrivacyToggle перезапустится.
+SettingsDyn_Update_AvailableDetail	You have {0}. Update downloads the installer from GitHub ({1} MB), checks it, and installs it; NEXT-Toggle restarts afterwards.	У вас {0}. Обновление загрузит установщик с GitHub ({1} МБ), проверит его и установит; затем NEXT-Toggle перезапустится.
 SettingsDyn_Update_NoInstallerDetail	You have {0}. This release has no installer attached; download it from the link below.	У вас {0}. К этому выпуску не приложен установщик; скачайте его по ссылке ниже.
 SettingsDyn_Update_Button	Update to {0}	Обновить до {0}
 SettingsDyn_Update_WhatsNewIn	What's new in {0}	Что нового в {0}
 SettingsDyn_Update_UpToDate	You're up to date	У вас актуальная версия
-SettingsDyn_Update_UpToDateDetail	PrivacyToggle {0} is the latest version (checked {1:t}).	PrivacyToggle {0} — последняя версия (проверено {1:t}).
+SettingsDyn_Update_UpToDateDetail	NEXT-Toggle {0} is the latest version (checked {1:t}).	NEXT-Toggle {0} — последняя версия (проверено {1:t}).
 SettingsDyn_Update_ReleaseNotes	Release notes for {0}	Примечания к выпуску {0}
 SettingsDyn_Update_Downloading	Downloading {0}…	Загрузка {0}…
 SettingsDyn_Update_DownloadProgress	{0}% of {1} MB	{0}% из {1} МБ
 SettingsDyn_Update_StartingInstaller	Starting the installer…	Запуск установщика…
-SettingsDyn_Update_InstallerHint	Windows will ask for permission. PrivacyToggle closes now and restarts when the update is done.	Windows запросит разрешение. PrivacyToggle закроется и перезапустится после обновления.
+SettingsDyn_Update_InstallerHint	Windows will ask for permission. NEXT-Toggle closes now and restarts when the update is done.	Windows запросит разрешение. NEXT-Toggle закроется и перезапустится после обновления.
 SettingsDyn_Update_Cancelled	Update cancelled	Обновление отменено
 SettingsDyn_Update_CancelledHint	The installer needs permission to run. Click Update to try again.	Для установщика нужны права. Нажмите «Обновить», чтобы повторить.
 SettingsDyn_Update_Failed	Update failed	Обновление не удалось
@@ -248,10 +248,10 @@ Tray_NetworkNotAvailable	Network control not available	Управление се
 Tray_Settings	Settings…	Настройки…
 Tray_StartWithWindows	Start with Windows	Запускать с Windows
 Tray_Exit	Exit	Выход
-Tray_DefaultMicTooltip	PrivacyToggle microphone	PrivacyToggle — микрофон
-Tray_DefaultCamTooltip	PrivacyToggle camera	PrivacyToggle — камера
-Tray_DefaultNetTooltip	PrivacyToggle network	PrivacyToggle — сеть
-TrayTip_Mic_NoDevice	PrivacyToggle — no microphone found	PrivacyToggle — микрофон не найден
+Tray_DefaultMicTooltip	NEXT-Toggle microphone	NEXT-Toggle — микрофон
+Tray_DefaultCamTooltip	NEXT-Toggle camera	NEXT-Toggle — камера
+Tray_DefaultNetTooltip	NEXT-Toggle network	NEXT-Toggle — сеть
+TrayTip_Mic_NoDevice	NEXT-Toggle — no microphone found	NEXT-Toggle — микрофон не найден
 TrayTip_Mic_Off	Mic OFF — {0}	Микрофон ВЫКЛ — {0}
 TrayTip_Mic_On_Ptt	Mic ON — push-to-talk	Микрофон ВКЛ — режим рации
 TrayTip_Mic_On	Mic ON — {0}	Микрофон ВКЛ — {0}
@@ -263,7 +263,7 @@ TrayTip_Mic_Hint_ClickUnavailable	click to {0} (hotkey unavailable)	щелчок
 TrayTip_Cam_TurningOff	Camera — turning off…	Камера — выключение…
 TrayTip_Cam_TurningOn	Camera — turning on…	Камера — включение…
 TrayTip_Cam_NotInstalled	Camera control not installed — open Settings	Управление камерой не установлено — откройте настройки
-TrayTip_Cam_NoDevice	PrivacyToggle — no camera found	PrivacyToggle — камера не найдена
+TrayTip_Cam_NoDevice	NEXT-Toggle — no camera found	NEXT-Toggle — камера не найдена
 TrayTip_Cam_Off	Camera OFF — {0}	Камера ВЫКЛ — {0}
 TrayTip_Cam_On	Camera ON — {0}	Камера ВКЛ — {0}
 TrayTip_Cam_Hint_TurnOn	turn on	включить
@@ -273,29 +273,29 @@ TrayTip_Net_Disconnecting	Network — disconnecting…	Сеть — отключ
 TrayTip_Net_Reconnecting	Network — reconnecting…	Сеть — подключение…
 TrayTip_Net_NeedsInstaller	Network control needs the latest installer — open Settings	Для управления сетью нужен последний установщик — откройте настройки
 TrayTip_Net_NotInstalled	Network control not installed — open Settings	Управление сетью не установлено — откройте настройки
-TrayTip_Net_NoDevice	PrivacyToggle — no network adapter found	PrivacyToggle — сетевой адаптер не найден
+TrayTip_Net_NoDevice	NEXT-Toggle — no network adapter found	NEXT-Toggle — сетевой адаптер не найден
 TrayTip_Net_Off	Network OFF — {0}	Сеть ВЫКЛ — {0}
 TrayTip_Net_On	Network ON — {0}	Сеть ВКЛ — {0}
 TrayTip_Net_Hint_Reconnect	reconnect	подключить
 TrayTip_Net_Hint_Disconnect	disconnect	отключить
 MessageBox_RemoteDisconnect_Body	You're connected to this PC remotely. Turning the network off will end this remote session, and you won't be able to reconnect until someone turns the network back on at the PC.\n\nTurn the network off anyway?	Вы подключены к этому ПК удалённо. Отключение сети завершит сеанс, и вы не сможете подключиться снова, пока кто-то не включит сеть на самом ПК.\n\nВсё равно отключить сеть?
 Notify_Title_HotkeyUnavailable	Hotkey unavailable	Сочетание недоступно
-Notify_Title_PrivacyToggle	PrivacyToggle	PrivacyToggle
+Notify_Title_Brand	NEXT-Toggle	NEXT-Toggle
 Notify_Title_Camera	Camera	Камера
 Notify_Title_Network	Network	Сеть
 Notify_Mic_NoDevice	No microphone found	Микрофон не найден
 Notify_Mic_Muted	Microphone muted	Микрофон выключен
 Notify_Mic_Live	Microphone is live	Микрофон включён
 Notify_Cam_NotInstalled_Title	Camera control not installed	Управление камерой не установлено
-Notify_Cam_NotInstalled_Body	Camera on/off needs the PrivacyToggle helper, which the installer sets up.	Включение и выключение камеры требует помощника PrivacyToggle, который настраивает установщик.
+Notify_Cam_NotInstalled_Body	Camera on/off needs the NEXT-Toggle helper, which the installer sets up.	Включение и выключение камеры требует помощника NEXT-Toggle, который настраивает установщик.
 Notify_Cam_SwitchFailed	Couldn't switch the camera: {0}	Не удалось переключить камеру: {0}
 Notify_Cam_NeedsRestart	Windows needs a restart to finish switching the camera.	Windows нужно перезагрузить, чтобы завершить переключение камеры.
 Notify_Cam_NoDevice	No camera found	Камера не найдена
 Notify_Cam_Off	Camera turned off	Камера выключена
 Notify_Cam_On	Camera is on	Камера включена
 Notify_Net_NotAvailable_Title	Network control not available	Управление сетью недоступно
-Notify_Net_NotAvailable_Update	Run the latest PrivacyToggle installer to update the helper service; it adds network control.	Запустите последний установщик PrivacyToggle, чтобы обновить службу-помощник и получить управление сетью.
-Notify_Net_NotAvailable_Install	Network on/off needs the PrivacyToggle helper, which the installer sets up.	Включение и отключение сети требует помощника PrivacyToggle, который настраивает установщик.
+Notify_Net_NotAvailable_Update	Run the latest NEXT-Toggle installer to update the helper service; it adds network control.	Запустите последний установщик NEXT-Toggle, чтобы обновить службу-помощник и получить управление сетью.
+Notify_Net_NotAvailable_Install	Network on/off needs the NEXT-Toggle helper, which the installer sets up.	Включение и отключение сети требует помощника NEXT-Toggle, который настраивает установщик.
 Notify_Net_SwitchFailed	Couldn't switch the network: {0}	Не удалось переключить сеть: {0}
 Notify_Net_NeedsRestart	Windows needs a restart to finish switching the network adapter.	Windows нужно перезагрузить, чтобы завершить переключение адаптера.
 Notify_Net_NoDevice	No network adapter found	Сетевой адаптер не найден
@@ -322,23 +322,23 @@ HotkeyRecorder_AddModifier	Add Ctrl, Alt, Shift or Win	Добавьте Ctrl, Al
 HotkeyRecorder_EscCancel	Esc to cancel	Esc — отмена
 HotkeyRecorder_ClickToChange	Click to change	Щёлкните, чтобы изменить
 HotkeyRecorder_PartialSuffix	…	…
-Blocker_Title	PrivacyToggle — camera in use	PrivacyToggle — камера занята
+Blocker_Title	NEXT-Toggle — camera in use	NEXT-Toggle — камера занята
 Blocker_Heading	Camera in use	Камера используется
 Blocker_Subheading	The camera is being held open	Камера удерживается открытой
 Blocker_Message	{0} is holding the camera open, so Windows can't turn it off.\n\nClose it and turn the camera off?	{0} удерживает камеру открытой, и Windows не может её выключить.\n\nЗакрыть программу и выключить камеру?
-Blocker_Note_Service	It's a background service. PrivacyToggle will start it again when you turn the camera back on.	Это фоновая служба. PrivacyToggle запустит её снова, когда вы включите камеру.
+Blocker_Note_Service	It's a background service. NEXT-Toggle will start it again when you turn the camera back on.	Это фоновая служба. NEXT-Toggle запустит её снова, когда вы включите камеру.
 Blocker_Note_App	Any unsaved work in that program will be lost.	Несохранённые данные в этой программе будут потеряны.
-Overlay_WindowTitle	PrivacyToggle overlay	Наложение PrivacyToggle
+Overlay_WindowTitle	NEXT-Toggle overlay	Наложение NEXT-Toggle
 Overlay_MicOff	MIC OFF	MIC OFF
 Overlay_CamOff	CAM OFF	CAM OFF
 Overlay_NetOff	NET OFF	NET OFF
 UpdateService_UnexpectedTag	Unexpected release tag "{0}".	Неожиданный тег выпуска «{0}».
 UpdateService_NoInstaller	This release has no installer attached.	К этому выпуску не приложен установщик.
-UpdateService_BadUrl	The installer link doesn't point to PrivacyToggle's GitHub releases.	Ссылка на установщик не ведёт на выпуски PrivacyToggle на GitHub.
+UpdateService_BadUrl	The installer link doesn't point to NEXT-Toggle's GitHub releases.	Ссылка на установщик не ведёт на выпуски NEXT-Toggle на GitHub.
 UpdateService_ChecksumFailed	The download didn't match GitHub's checksum, so it was deleted. Please try again.	Загрузка не совпала с контрольной суммой GitHub и была удалена. Попробуйте снова.
-NetworkUsage_NeedsHelper	Per-app network use needs the PrivacyToggle helper service, which the installer sets up.	Учёт сети по приложениям требует службы-помощника PrivacyToggle, которую настраивает установщик.
-NetworkUsage_NeedsUpdate	The helper service needs updating to count network use. Run the latest PrivacyToggle installer.	Службу-помощник нужно обновить для учёта сети. Запустите последний установщик PrivacyToggle.
-Activity_InfoTooltip	PrivacyToggle combines Windows' usage records with what it sees directly: apps recording from a microphone, apps connecting to the camera, and the bytes each app sends and receives over the network (counted by the helper service). It keeps 7 days of history while it runs. Time while a device is muted or off isn't counted. Everything stays on this PC.	PrivacyToggle объединяет записи Windows с тем, что видит сам: приложения, записывающие с микрофона, подключающиеся к камере, и объём данных, которое каждое приложение отправляет и получает (считает служба-помощник). Пока программа работает, хранится 7 дней истории. Время, когда устройство выключено, не учитывается. Всё остаётся на этом ПК.
+NetworkUsage_NeedsHelper	Per-app network use needs the NEXT-Toggle helper service, which the installer sets up.	Учёт сети по приложениям требует службы-помощника NEXT-Toggle, которую настраивает установщик.
+NetworkUsage_NeedsUpdate	The helper service needs updating to count network use. Run the latest NEXT-Toggle installer.	Службу-помощник нужно обновить для учёта сети. Запустите последний установщик NEXT-Toggle.
+Activity_InfoTooltip	NEXT-Toggle combines Windows' usage records with what it sees directly: apps recording from a microphone, apps connecting to the camera, and the bytes each app sends and receives over the network (counted by the helper service). It keeps 7 days of history while it runs. Time while a device is muted or off isn't counted. Everything stays on this PC.	NEXT-Toggle объединяет записи Windows с тем, что видит сам: приложения, записывающие с микрофона, подключающиеся к камере, и объём данных, которое каждое приложение отправляет и получает (считает служба-помощник). Пока программа работает, хранится 7 дней истории. Время, когда устройство выключено, не учитывается. Всё остаётся на этом ПК.
 Activity_Title	Activity	Активность
 Activity_Export	Export	Экспорт
 Activity_ExportSoon	Export is coming soon	Экспорт скоро появится
@@ -468,6 +468,6 @@ ActivityDyn_Short_hours	{0}h	{0}ч
 ActivityDyn_Short_hoursMinutes	{0}h {1}m	{0}ч {1}м
 ActivityDyn_DeviceName_Camera	Camera	Камера
 ActivityDyn_DeviceName_Microphone	Microphone	Микрофон
-ActivityDyn_ExportFileName	PrivacyToggle activity {0}.csv	Активность PrivacyToggle {0}.csv
-TaskbarSpeed_WindowTitle	PrivacyToggle network speed	Скорость сети PrivacyToggle
-TaskbarSpeed_Tooltip	Network speed — click to open PrivacyToggle's Network page	Скорость сети — нажмите, чтобы открыть страницу «Сеть»
+ActivityDyn_ExportFileName	NEXT-Toggle activity {0}.csv	Активность NEXT-Toggle {0}.csv
+TaskbarSpeed_WindowTitle	NEXT-Toggle network speed	Скорость сети NEXT-Toggle
+TaskbarSpeed_Tooltip	Network speed — click to open NEXT-Toggle's Network page	Скорость сети — нажмите, чтобы открыть страницу «Сеть»

@@ -1,0 +1,1480 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActivityDyn_Ago_days" xml:space="preserve">
+    <value>{0} days ago</value>
+  </data>
+  <data name="ActivityDyn_Ago_hours" xml:space="preserve">
+    <value>{0} h ago</value>
+  </data>
+  <data name="ActivityDyn_Ago_justnow" xml:space="preserve">
+    <value>just now</value>
+  </data>
+  <data name="ActivityDyn_Ago_minutes" xml:space="preserve">
+    <value>{0} min ago</value>
+  </data>
+  <data name="ActivityDyn_Ago_yesterday" xml:space="preserve">
+    <value>yesterday</value>
+  </data>
+  <data name="ActivityDyn_Announce" xml:space="preserve">
+    <value>{0} started using the {1}</value>
+  </data>
+  <data name="ActivityDyn_Announce_camera" xml:space="preserve">
+    <value>camera</value>
+  </data>
+  <data name="ActivityDyn_Announce_microphone" xml:space="preserve">
+    <value>microphone</value>
+  </data>
+  <data name="ActivityDyn_CamAction_NoCamera" xml:space="preserve">
+    <value>No camera</value>
+  </data>
+  <data name="ActivityDyn_CamAction_NotInstalled" xml:space="preserve">
+    <value>Not installed</value>
+  </data>
+  <data name="ActivityDyn_CamAction_TurnOff" xml:space="preserve">
+    <value>Turn off</value>
+  </data>
+  <data name="ActivityDyn_CamAction_TurnOn" xml:space="preserve">
+    <value>Turn on</value>
+  </data>
+  <data name="ActivityDyn_CamConnectedUncertain" xml:space="preserve">
+    <value>Connected · may not be using it</value>
+  </data>
+  <data name="ActivityDyn_Card_Apps" xml:space="preserve">
+    <value>· {0} app</value>
+  </data>
+  <data name="ActivityDyn_Card_Apps_Plural" xml:space="preserve">
+    <value>· {0} apps</value>
+  </data>
+  <data name="ActivityDyn_DeviceName_Camera" xml:space="preserve">
+    <value>Camera</value>
+  </data>
+  <data name="ActivityDyn_DeviceName_Microphone" xml:space="preserve">
+    <value>Microphone</value>
+  </data>
+  <data name="ActivityDyn_Device_camera" xml:space="preserve">
+    <value>camera</value>
+  </data>
+  <data name="ActivityDyn_Device_microphone" xml:space="preserve">
+    <value>microphone</value>
+  </data>
+  <data name="ActivityDyn_Duration_hours" xml:space="preserve">
+    <value>{0} h</value>
+  </data>
+  <data name="ActivityDyn_Duration_hoursMinutes" xml:space="preserve">
+    <value>{0} h {1} min</value>
+  </data>
+  <data name="ActivityDyn_Duration_minutes" xml:space="preserve">
+    <value>{0} min</value>
+  </data>
+  <data name="ActivityDyn_Duration_under1min" xml:space="preserve">
+    <value>under 1 min</value>
+  </data>
+  <data name="ActivityDyn_Empty" xml:space="preserve">
+    <value>No {0}activity in the last {1}.</value>
+  </data>
+  <data name="ActivityDyn_ExportFileName" xml:space="preserve">
+    <value>NEXT-Toggle activity {0}.csv</value>
+  </data>
+  <data name="ActivityDyn_FilterCam" xml:space="preserve">
+    <value>camera </value>
+  </data>
+  <data name="ActivityDyn_FilterMic" xml:space="preserve">
+    <value>microphone </value>
+  </data>
+  <data name="ActivityDyn_FilterNet" xml:space="preserve">
+    <value>network </value>
+  </data>
+  <data name="ActivityDyn_LiveWord_connected" xml:space="preserve">
+    <value>connected</value>
+  </data>
+  <data name="ActivityDyn_LiveWord_inuse" xml:space="preserve">
+    <value>in use</value>
+  </data>
+  <data name="ActivityDyn_MicAction_Mute" xml:space="preserve">
+    <value>Mute</value>
+  </data>
+  <data name="ActivityDyn_MicAction_NoMic" xml:space="preserve">
+    <value>No microphone</value>
+  </data>
+  <data name="ActivityDyn_MicAction_Unmute" xml:space="preserve">
+    <value>Unmute</value>
+  </data>
+  <data name="ActivityDyn_MoreApps" xml:space="preserve">
+    <value>Show {0} more app</value>
+  </data>
+  <data name="ActivityDyn_MoreApps_Plural" xml:space="preserve">
+    <value>Show {0} more apps</value>
+  </data>
+  <data name="ActivityDyn_MoreSessions" xml:space="preserve">
+    <value>Show {0} more session</value>
+  </data>
+  <data name="ActivityDyn_MoreSessions_Plural" xml:space="preserve">
+    <value>Show {0} more sessions</value>
+  </data>
+  <data name="ActivityDyn_NetAction_Connect" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="ActivityDyn_NetAction_Disconnect" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="ActivityDyn_NetAction_NoAdapter" xml:space="preserve">
+    <value>No adapter</value>
+  </data>
+  <data name="ActivityDyn_NetAction_NotInstalled" xml:space="preserve">
+    <value>Not installed</value>
+  </data>
+  <data name="ActivityDyn_NetIdle_Last" xml:space="preserve">
+    <value>{0} Last: {1}, {2} (↓ {3})</value>
+  </data>
+  <data name="ActivityDyn_NetIdle_Off" xml:space="preserve">
+    <value>The network is off. Turn it back on from the Network page or with its shortcut.</value>
+  </data>
+  <data name="ActivityDyn_NetIdle_Quiet" xml:space="preserve">
+    <value>No app is sending or receiving data right now.</value>
+  </data>
+  <data name="ActivityDyn_NetworkTotalExtra" xml:space="preserve">
+    <value>(↓ {0} · ↑ {1})</value>
+  </data>
+  <data name="ActivityDyn_OffLastUsed" xml:space="preserve">
+    <value>Off · last used by {0}, {1}</value>
+  </data>
+  <data name="ActivityDyn_OffNoUse7Days" xml:space="preserve">
+    <value>Off · no app has used the {0} in the last 7 days</value>
+  </data>
+  <data name="ActivityDyn_Pill_Apps" xml:space="preserve">
+    <value>{0} APP</value>
+  </data>
+  <data name="ActivityDyn_Pill_Apps_Plural" xml:space="preserve">
+    <value>{0} APPS</value>
+  </data>
+  <data name="ActivityDyn_Pill_LiveApps" xml:space="preserve">
+    <value>LIVE · {0} APP</value>
+  </data>
+  <data name="ActivityDyn_Pill_LiveApps_Plural" xml:space="preserve">
+    <value>LIVE · {0} APPS</value>
+  </data>
+  <data name="ActivityDyn_Pill_Off" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+  <data name="ActivityDyn_Pill_Quiet" xml:space="preserve">
+    <value>QUIET</value>
+  </data>
+  <data name="ActivityDyn_Pill_Unavailable" xml:space="preserve">
+    <value>UNAVAILABLE</value>
+  </data>
+  <data name="ActivityDyn_RangeLabel_24hours" xml:space="preserve">
+    <value>24 hours</value>
+  </data>
+  <data name="ActivityDyn_RangeLabel_6hours" xml:space="preserve">
+    <value>6 hours</value>
+  </data>
+  <data name="ActivityDyn_RangeLabel_7days" xml:space="preserve">
+    <value>7 days</value>
+  </data>
+  <data name="ActivityDyn_RangeLabel_hour" xml:space="preserve">
+    <value>hour</value>
+  </data>
+  <data name="ActivityDyn_Range_Last24Hours" xml:space="preserve">
+    <value>Last 24 hours</value>
+  </data>
+  <data name="ActivityDyn_Range_Last6Hours" xml:space="preserve">
+    <value>Last 6 hours</value>
+  </data>
+  <data name="ActivityDyn_Range_Last7Days" xml:space="preserve">
+    <value>Last 7 days</value>
+  </data>
+  <data name="ActivityDyn_Range_LastHour" xml:space="preserve">
+    <value>Last hour</value>
+  </data>
+  <data name="ActivityDyn_Short_hours" xml:space="preserve">
+    <value>{0}h</value>
+  </data>
+  <data name="ActivityDyn_Short_hoursMinutes" xml:space="preserve">
+    <value>{0}h {1}m</value>
+  </data>
+  <data name="ActivityDyn_Short_minutes" xml:space="preserve">
+    <value>{0}m</value>
+  </data>
+  <data name="ActivityDyn_Short_under1m" xml:space="preserve">
+    <value>&lt;1m</value>
+  </data>
+  <data name="ActivityDyn_ShowLastRange" xml:space="preserve">
+    <value>Show the last {0}</value>
+  </data>
+  <data name="ActivityDyn_Summary_MicCamOff_NetApp" xml:space="preserve">
+    <value>Mic and camera are off · {0} app using the network</value>
+  </data>
+  <data name="ActivityDyn_Summary_MicCamOff_NetApps" xml:space="preserve">
+    <value>Mic and camera are off · {0} apps using the network</value>
+  </data>
+  <data name="ActivityDyn_Summary_MicCamOff_Quiet" xml:space="preserve">
+    <value>Mic and camera are off · network quiet</value>
+  </data>
+  <data name="ActivityDyn_Summary_OnCamera" xml:space="preserve">
+    <value>{0} on camera</value>
+  </data>
+  <data name="ActivityDyn_Summary_OnMic" xml:space="preserve">
+    <value>{0} on mic</value>
+  </data>
+  <data name="ActivityDyn_Summary_OnNetwork" xml:space="preserve">
+    <value>{0} on network</value>
+  </data>
+  <data name="ActivityDyn_Time_now" xml:space="preserve">
+    <value> – now</value>
+  </data>
+  <data name="ActivityDyn_TooltipSpan" xml:space="preserve">
+    <value>{0} · {1}&amp;#10;{2} · {3}</value>
+  </data>
+  <data name="ActivityDyn_TooltipSpan_Live" xml:space="preserve">
+    <value>since {0} · {1} now</value>
+  </data>
+  <data name="ActivityDyn_TooltipSpan_Range" xml:space="preserve">
+    <value>{0} – {1}</value>
+  </data>
+  <data name="ActivityDyn_TotalLine" xml:space="preserve">
+    <value>{0}: {1} {2}</value>
+  </data>
+  <data name="Activity_Badge_Live" xml:space="preserve">
+    <value>LIVE</value>
+  </data>
+  <data name="Activity_Badge_New" xml:space="preserve">
+    <value>NEW</value>
+  </data>
+  <data name="Activity_Divider_Earlier" xml:space="preserve">
+    <value>EARLIER</value>
+  </data>
+  <data name="Activity_Divider_EarlierToday" xml:space="preserve">
+    <value>EARLIER TODAY</value>
+  </data>
+  <data name="Activity_EmptyDash" xml:space="preserve">
+    <value>—</value>
+  </data>
+  <data name="Activity_Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Activity_ExportDialogTitle" xml:space="preserve">
+    <value>Export activity</value>
+  </data>
+  <data name="Activity_ExportFilter" xml:space="preserve">
+    <value>CSV file (*.csv)|*.csv</value>
+  </data>
+  <data name="Activity_ExportSaveFailed" xml:space="preserve">
+    <value>Couldn't save the file: {0}</value>
+  </data>
+  <data name="Activity_ExportSoon" xml:space="preserve">
+    <value>Export is coming soon</value>
+  </data>
+  <data name="Activity_Filter_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Activity_Filter_Camera" xml:space="preserve">
+    <value>Camera</value>
+  </data>
+  <data name="Activity_Filter_Microphone" xml:space="preserve">
+    <value>Microphone</value>
+  </data>
+  <data name="Activity_Filter_Network" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="Activity_History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="Activity_InfoTooltip" xml:space="preserve">
+    <value>NEXT-Toggle combines Windows' usage records with what it sees directly: apps recording from a microphone, apps connecting to the camera, and the bytes each app sends and receives over the network (counted by the helper service). It keeps 7 days of history while it runs. Time while a device is muted or off isn't counted. Everything stays on this PC.</value>
+  </data>
+  <data name="Activity_Lane_Camera" xml:space="preserve">
+    <value>Camera</value>
+  </data>
+  <data name="Activity_Lane_MicShort" xml:space="preserve">
+    <value>Mic</value>
+  </data>
+  <data name="Activity_Lane_Microphone" xml:space="preserve">
+    <value>Microphone</value>
+  </data>
+  <data name="Activity_Lane_Network" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="Activity_LargeUpload" xml:space="preserve">
+    <value> — large upload</value>
+  </data>
+  <data name="Activity_Legend_Camera" xml:space="preserve">
+    <value>Camera</value>
+  </data>
+  <data name="Activity_Legend_Data" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="Activity_Legend_Mic" xml:space="preserve">
+    <value>Mic</value>
+  </data>
+  <data name="Activity_LessThan1KB" xml:space="preserve">
+    <value>&lt; 1 KB</value>
+  </data>
+  <data name="Activity_ListHeader_App" xml:space="preserve">
+    <value>App</value>
+  </data>
+  <data name="Activity_ListHeader_Data" xml:space="preserve">
+    <value>Data during session</value>
+  </data>
+  <data name="Activity_ListHeader_Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="Activity_ListHeader_Started" xml:space="preserve">
+    <value>Started</value>
+  </data>
+  <data name="Activity_ListHeader_Used" xml:space="preserve">
+    <value>Used</value>
+  </data>
+  <data name="Activity_Ongoing" xml:space="preserve">
+    <value>ongoing</value>
+  </data>
+  <data name="Activity_OpenFileLocation" xml:space="preserve">
+    <value>Open file location</value>
+  </data>
+  <data name="Activity_Range_1h" xml:space="preserve">
+    <value>1h</value>
+  </data>
+  <data name="Activity_Range_24h" xml:space="preserve">
+    <value>24h</value>
+  </data>
+  <data name="Activity_Range_6h" xml:space="preserve">
+    <value>6h</value>
+  </data>
+  <data name="Activity_Range_7d" xml:space="preserve">
+    <value>7d</value>
+  </data>
+  <data name="Activity_RightNow" xml:space="preserve">
+    <value>Right now</value>
+  </data>
+  <data name="Activity_ShowLess" xml:space="preserve">
+    <value>Show less</value>
+  </data>
+  <data name="Activity_SoFar" xml:space="preserve">
+    <value> so far</value>
+  </data>
+  <data name="Activity_Sort" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="Activity_Sort_LiveFirst" xml:space="preserve">
+    <value>Live first, then recent</value>
+  </data>
+  <data name="Activity_Sort_LongestMic" xml:space="preserve">
+    <value>Longest mic time</value>
+  </data>
+  <data name="Activity_Sort_MostData" xml:space="preserve">
+    <value>Most data</value>
+  </data>
+  <data name="Activity_Sort_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Activity_Subtitle" xml:space="preserve">
+    <value>What's using your microphone, camera and network — right now and over time.</value>
+  </data>
+  <data name="Activity_SwitchToList" xml:space="preserve">
+    <value>Switch to List for every session.</value>
+  </data>
+  <data name="Activity_Title" xml:space="preserve">
+    <value>Activity</value>
+  </data>
+  <data name="Activity_Today" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="Activity_Tooltip_CamTime" xml:space="preserve">
+    <value>Camera time in this range</value>
+  </data>
+  <data name="Activity_Tooltip_DataRange" xml:space="preserve">
+    <value>Data in this range: ↓ {0} · ↑ {1}</value>
+  </data>
+  <data name="Activity_Tooltip_MicTime" xml:space="preserve">
+    <value>Microphone time in this range</value>
+  </data>
+  <data name="Activity_ViewList" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="Activity_ViewTimeline" xml:space="preserve">
+    <value>Timeline</value>
+  </data>
+  <data name="Blocker_Heading" xml:space="preserve">
+    <value>Camera in use</value>
+  </data>
+  <data name="Blocker_Message" xml:space="preserve">
+    <value>{0} is holding the camera open, so Windows can't turn it off.&amp;#10;&amp;#10;Close it and turn the camera off?</value>
+  </data>
+  <data name="Blocker_Note_App" xml:space="preserve">
+    <value>Any unsaved work in that program will be lost.</value>
+  </data>
+  <data name="Blocker_Note_Service" xml:space="preserve">
+    <value>It's a background service. NEXT-Toggle will start it again when you turn the camera back on.</value>
+  </data>
+  <data name="Blocker_Subheading" xml:space="preserve">
+    <value>The camera is being held open</value>
+  </data>
+  <data name="Blocker_Title" xml:space="preserve">
+    <value>NEXT-Toggle — camera in use</value>
+  </data>
+  <data name="Button_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Button_CheckAgain" xml:space="preserve">
+    <value>Check again</value>
+  </data>
+  <data name="Button_CloseItAndTurnOff" xml:space="preserve">
+    <value>Close it and turn off</value>
+  </data>
+  <data name="Button_Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Button_UpdateNow" xml:space="preserve">
+    <value>Update now</value>
+  </data>
+  <data name="Common_Beta" xml:space="preserve">
+    <value>BETA</value>
+  </data>
+  <data name="Common_BrandName" xml:space="preserve">
+    <value>NEXT-Toggle</value>
+  </data>
+  <data name="Common_New" xml:space="preserve">
+    <value>NEW</value>
+  </data>
+  <data name="HotkeyRecorder_AddModifier" xml:space="preserve">
+    <value>Add Ctrl, Alt, Shift or Win</value>
+  </data>
+  <data name="HotkeyRecorder_ClickToChange" xml:space="preserve">
+    <value>Click to change</value>
+  </data>
+  <data name="HotkeyRecorder_EscCancel" xml:space="preserve">
+    <value>Esc to cancel</value>
+  </data>
+  <data name="HotkeyRecorder_PartialSuffix" xml:space="preserve">
+    <value>…</value>
+  </data>
+  <data name="HotkeyRecorder_PressShortcut" xml:space="preserve">
+    <value>Press a shortcut…</value>
+  </data>
+  <data name="Hotkey_AlreadyInUse" xml:space="preserve">
+    <value>Hotkey already in use: {0} is taken by another app.</value>
+  </data>
+  <data name="Hotkey_Device_camera" xml:space="preserve">
+    <value>camera</value>
+  </data>
+  <data name="Hotkey_Device_microphone" xml:space="preserve">
+    <value>microphone</value>
+  </data>
+  <data name="Hotkey_Device_network" xml:space="preserve">
+    <value>network</value>
+  </data>
+  <data name="Hotkey_DuplicateDevice" xml:space="preserve">
+    <value>{0} is already the {1} shortcut.</value>
+  </data>
+  <data name="Hotkey_InUse" xml:space="preserve">
+    <value>{0} is already in use by another app. Pick a different hotkey in Settings.</value>
+  </data>
+  <data name="Hotkey_PttFailed" xml:space="preserve">
+    <value>Could not start push-to-talk (keyboard hook failed).</value>
+  </data>
+  <data name="Key_Alt" xml:space="preserve">
+    <value>Alt</value>
+  </data>
+  <data name="Key_Backspace" xml:space="preserve">
+    <value>Backspace</value>
+  </data>
+  <data name="Key_CapsLock" xml:space="preserve">
+    <value>CapsLock</value>
+  </data>
+  <data name="Key_Ctrl" xml:space="preserve">
+    <value>Ctrl</value>
+  </data>
+  <data name="Key_Enter" xml:space="preserve">
+    <value>Enter</value>
+  </data>
+  <data name="Key_OemCloseBrackets" xml:space="preserve">
+    <value>]</value>
+  </data>
+  <data name="Key_OemComma" xml:space="preserve">
+    <value>,</value>
+  </data>
+  <data name="Key_OemMinus" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="Key_OemOpenBrackets" xml:space="preserve">
+    <value>[</value>
+  </data>
+  <data name="Key_OemPeriod" xml:space="preserve">
+    <value>.</value>
+  </data>
+  <data name="Key_OemPipe" xml:space="preserve">
+    <value>\</value>
+  </data>
+  <data name="Key_OemPlus" xml:space="preserve">
+    <value>=</value>
+  </data>
+  <data name="Key_OemQuestion" xml:space="preserve">
+    <value>/</value>
+  </data>
+  <data name="Key_OemQuotes" xml:space="preserve">
+    <value>'</value>
+  </data>
+  <data name="Key_OemSemicolon" xml:space="preserve">
+    <value>;</value>
+  </data>
+  <data name="Key_OemTilde" xml:space="preserve">
+    <value>`</value>
+  </data>
+  <data name="Key_PageDown" xml:space="preserve">
+    <value>PageDown</value>
+  </data>
+  <data name="Key_PageUp" xml:space="preserve">
+    <value>PageUp</value>
+  </data>
+  <data name="Key_PrintScreen" xml:space="preserve">
+    <value>PrintScreen</value>
+  </data>
+  <data name="Key_Shift" xml:space="preserve">
+    <value>Shift</value>
+  </data>
+  <data name="Key_Unknown" xml:space="preserve">
+    <value>?</value>
+  </data>
+  <data name="Key_Win" xml:space="preserve">
+    <value>Win</value>
+  </data>
+  <data name="Language_English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Language_MatchWindows" xml:space="preserve">
+    <value>Match Windows</value>
+  </data>
+  <data name="Language_RestartHint" xml:space="preserve">
+    <value>Changes apply after you restart NEXT-Toggle.</value>
+  </data>
+  <data name="Language_RestartLater" xml:space="preserve">
+    <value>Later</value>
+  </data>
+  <data name="Language_RestartMessage" xml:space="preserve">
+    <value>The new language will be used after restart. Restart now?</value>
+  </data>
+  <data name="Language_RestartNow" xml:space="preserve">
+    <value>Restart now</value>
+  </data>
+  <data name="Language_RestartTitle" xml:space="preserve">
+    <value>Restart NEXT-Toggle?</value>
+  </data>
+  <data name="Language_Russian" xml:space="preserve">
+    <value>Russian</value>
+  </data>
+  <data name="Language_Section" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="MessageBox_RemoteDisconnect_Body" xml:space="preserve">
+    <value>You're connected to this PC remotely. Turning the network off will end this remote session, and you won't be able to reconnect until someone turns the network back on at the PC.&amp;#10;&amp;#10;Turn the network off anyway?</value>
+  </data>
+  <data name="MessageBox_Title_App" xml:space="preserve">
+    <value>NEXT-Toggle</value>
+  </data>
+  <data name="MessageBox_Title_Network" xml:space="preserve">
+    <value>NEXT-Toggle — network</value>
+  </data>
+  <data name="NetworkUsage_NeedsHelper" xml:space="preserve">
+    <value>Per-app network use needs the NEXT-Toggle helper service, which the installer sets up.</value>
+  </data>
+  <data name="NetworkUsage_NeedsUpdate" xml:space="preserve">
+    <value>The helper service needs updating to count network use. Run the latest NEXT-Toggle installer.</value>
+  </data>
+  <data name="NotifyBadge_CamOff" xml:space="preserve">
+    <value>CAM OFF</value>
+  </data>
+  <data name="NotifyBadge_CamOn" xml:space="preserve">
+    <value>CAM ON</value>
+  </data>
+  <data name="NotifyBadge_MicOff" xml:space="preserve">
+    <value>MIC OFF</value>
+  </data>
+  <data name="NotifyBadge_MicOn" xml:space="preserve">
+    <value>MIC ON</value>
+  </data>
+  <data name="NotifyBadge_NetOff" xml:space="preserve">
+    <value>NET OFF</value>
+  </data>
+  <data name="NotifyBadge_NetOn" xml:space="preserve">
+    <value>NET ON</value>
+  </data>
+  <data name="NotifyBadge_NoCamera" xml:space="preserve">
+    <value>NO CAMERA</value>
+  </data>
+  <data name="NotifyBadge_NoMic" xml:space="preserve">
+    <value>NO MIC</value>
+  </data>
+  <data name="NotifyBadge_NoNetwork" xml:space="preserve">
+    <value>NO NETWORK</value>
+  </data>
+  <data name="Notify_Cam_NeedsRestart" xml:space="preserve">
+    <value>Windows needs a restart to finish switching the camera.</value>
+  </data>
+  <data name="Notify_Cam_NoDevice" xml:space="preserve">
+    <value>No camera found</value>
+  </data>
+  <data name="Notify_Cam_NotInstalled_Body" xml:space="preserve">
+    <value>Camera on/off needs the NEXT-Toggle helper, which the installer sets up.</value>
+  </data>
+  <data name="Notify_Cam_NotInstalled_Title" xml:space="preserve">
+    <value>Camera control not installed</value>
+  </data>
+  <data name="Notify_Cam_Off" xml:space="preserve">
+    <value>Camera turned off</value>
+  </data>
+  <data name="Notify_Cam_On" xml:space="preserve">
+    <value>Camera is on</value>
+  </data>
+  <data name="Notify_Cam_SwitchFailed" xml:space="preserve">
+    <value>Couldn't switch the camera: {0}</value>
+  </data>
+  <data name="Notify_Mic_Live" xml:space="preserve">
+    <value>Microphone is live</value>
+  </data>
+  <data name="Notify_Mic_Muted" xml:space="preserve">
+    <value>Microphone muted</value>
+  </data>
+  <data name="Notify_Mic_NoDevice" xml:space="preserve">
+    <value>No microphone found</value>
+  </data>
+  <data name="Notify_Net_NeedsRestart" xml:space="preserve">
+    <value>Windows needs a restart to finish switching the network adapter.</value>
+  </data>
+  <data name="Notify_Net_NoDevice" xml:space="preserve">
+    <value>No network adapter found</value>
+  </data>
+  <data name="Notify_Net_NotAvailable_Install" xml:space="preserve">
+    <value>Network on/off needs the NEXT-Toggle helper, which the installer sets up.</value>
+  </data>
+  <data name="Notify_Net_NotAvailable_Title" xml:space="preserve">
+    <value>Network control not available</value>
+  </data>
+  <data name="Notify_Net_NotAvailable_Update" xml:space="preserve">
+    <value>Run the latest NEXT-Toggle installer to update the helper service; it adds network control.</value>
+  </data>
+  <data name="Notify_Net_Off" xml:space="preserve">
+    <value>Network disconnected</value>
+  </data>
+  <data name="Notify_Net_On" xml:space="preserve">
+    <value>Network reconnected</value>
+  </data>
+  <data name="Notify_Net_SwitchFailed" xml:space="preserve">
+    <value>Couldn't switch the network: {0}</value>
+  </data>
+  <data name="Notify_Title_Brand" xml:space="preserve">
+    <value>NEXT-Toggle</value>
+  </data>
+  <data name="Notify_Title_Camera" xml:space="preserve">
+    <value>Camera</value>
+  </data>
+  <data name="Notify_Title_HotkeyUnavailable" xml:space="preserve">
+    <value>Hotkey unavailable</value>
+  </data>
+  <data name="Notify_Title_Network" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="Overlay_CamOff" xml:space="preserve">
+    <value>CAM OFF</value>
+  </data>
+  <data name="Overlay_MicOff" xml:space="preserve">
+    <value>MIC OFF</value>
+  </data>
+  <data name="Overlay_NetOff" xml:space="preserve">
+    <value>NET OFF</value>
+  </data>
+  <data name="Overlay_WindowTitle" xml:space="preserve">
+    <value>NEXT-Toggle overlay</value>
+  </data>
+  <data name="SettingsDyn_AdapterLine" xml:space="preserve">
+    <value>{0}: {1} — {2}</value>
+  </data>
+  <data name="SettingsDyn_Adapter_Connected" xml:space="preserve">
+    <value>connected</value>
+  </data>
+  <data name="SettingsDyn_Adapter_Mobile" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="SettingsDyn_Adapter_NotConnected" xml:space="preserve">
+    <value>not connected</value>
+  </data>
+  <data name="SettingsDyn_Adapter_Off" xml:space="preserve">
+    <value>off</value>
+  </data>
+  <data name="SettingsDyn_Adapter_WiFi" xml:space="preserve">
+    <value>Wi-Fi</value>
+  </data>
+  <data name="SettingsDyn_Adapter_Wired" xml:space="preserve">
+    <value>Wired</value>
+  </data>
+  <data name="SettingsDyn_CamCard_HelperNotInstalled" xml:space="preserve">
+    <value>Helper not installed</value>
+  </data>
+  <data name="SettingsDyn_CamCard_LastError" xml:space="preserve">
+    <value>Last switch failed: {0}</value>
+  </data>
+  <data name="SettingsDyn_CamCard_NCameras" xml:space="preserve">
+    <value>{0} cameras</value>
+  </data>
+  <data name="SettingsDyn_CamCard_NeedsHelper" xml:space="preserve">
+    <value>Needs the helper service — see the Camera page.</value>
+  </data>
+  <data name="SettingsDyn_CamCard_NeedsRestart" xml:space="preserve">
+    <value>Windows needs a restart to finish the switch.</value>
+  </data>
+  <data name="SettingsDyn_CamCard_Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="SettingsDyn_CamCard_On" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="SettingsDyn_CamCard_OneCamera" xml:space="preserve">
+    <value>1 camera</value>
+  </data>
+  <data name="SettingsDyn_CamCard_PlugIn" xml:space="preserve">
+    <value>Plug in a camera.</value>
+  </data>
+  <data name="SettingsDyn_CamCard_TurnOff" xml:space="preserve">
+    <value>Turn off</value>
+  </data>
+  <data name="SettingsDyn_CamCard_TurnOn" xml:space="preserve">
+    <value>Turn on</value>
+  </data>
+  <data name="SettingsDyn_CamCard_TurningOff" xml:space="preserve">
+    <value>Turning off…</value>
+  </data>
+  <data name="SettingsDyn_CamCard_TurningOn" xml:space="preserve">
+    <value>Turning on…</value>
+  </data>
+  <data name="SettingsDyn_CamCard_Unavailable" xml:space="preserve">
+    <value>Unavailable</value>
+  </data>
+  <data name="SettingsDyn_CamHotkeyHint" xml:space="preserve">
+    <value>Press {0} to turn the camera off, and again to turn it back on.</value>
+  </data>
+  <data name="SettingsDyn_Helper_NotInstalled" xml:space="preserve">
+    <value>Helper service: not installed</value>
+  </data>
+  <data name="SettingsDyn_Helper_OldVersion" xml:space="preserve">
+    <value>Helper service: running (an older version, without network control)</value>
+  </data>
+  <data name="SettingsDyn_Helper_Running" xml:space="preserve">
+    <value>Helper service: running</value>
+  </data>
+  <data name="SettingsDyn_HotkeyWarning_Keep" xml:space="preserve">
+    <value>{0} Keeping {1}.</value>
+  </data>
+  <data name="SettingsDyn_MicCard_HoldToTalk" xml:space="preserve">
+    <value>Hold {0} to talk</value>
+  </data>
+  <data name="SettingsDyn_MicCard_Live" xml:space="preserve">
+    <value>Live</value>
+  </data>
+  <data name="SettingsDyn_MicCard_Mute" xml:space="preserve">
+    <value>Mute</value>
+  </data>
+  <data name="SettingsDyn_MicCard_Muted" xml:space="preserve">
+    <value>Muted</value>
+  </data>
+  <data name="SettingsDyn_MicCard_NMics" xml:space="preserve">
+    <value>{0} microphones</value>
+  </data>
+  <data name="SettingsDyn_MicCard_NotFound" xml:space="preserve">
+    <value>Not found</value>
+  </data>
+  <data name="SettingsDyn_MicCard_OneMic" xml:space="preserve">
+    <value>1 microphone</value>
+  </data>
+  <data name="SettingsDyn_MicCard_PlugIn" xml:space="preserve">
+    <value>Plug in a microphone.</value>
+  </data>
+  <data name="SettingsDyn_MicCard_Switch" xml:space="preserve">
+    <value>{0} to switch</value>
+  </data>
+  <data name="SettingsDyn_MicCard_Unmute" xml:space="preserve">
+    <value>Unmute</value>
+  </data>
+  <data name="SettingsDyn_MicHotkeyHint_Ptt" xml:space="preserve">
+    <value>Microphones stay muted and are live only while you hold {0}. The key press is not passed on to other apps.</value>
+  </data>
+  <data name="SettingsDyn_MicHotkeyHint_Toggle" xml:space="preserve">
+    <value>Press {0} once to mute and again to unmute.</value>
+  </data>
+  <data name="SettingsDyn_NetBanner_NotInstalledBody" xml:space="preserve">
+    <value>Turning the network off needs the NEXT-Toggle helper service, which the installer sets up (it asks for admin rights once). Run NEXT-Toggle-Setup to enable it.</value>
+  </data>
+  <data name="SettingsDyn_NetBanner_NotInstalledTitle" xml:space="preserve">
+    <value>Network control isn't installed</value>
+  </data>
+  <data name="SettingsDyn_NetBanner_UpdateBody" xml:space="preserve">
+    <value>The NEXT-Toggle helper service on this PC is from an older version that can't switch the network. Run the latest NEXT-Toggle-Setup to update it.</value>
+  </data>
+  <data name="SettingsDyn_NetBanner_UpdateTitle" xml:space="preserve">
+    <value>The helper service needs updating</value>
+  </data>
+  <data name="SettingsDyn_NetCard_Disconnect" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="SettingsDyn_NetCard_Disconnecting" xml:space="preserve">
+    <value>Disconnecting…</value>
+  </data>
+  <data name="SettingsDyn_NetCard_HelperNeedsUpdate" xml:space="preserve">
+    <value>Helper needs updating</value>
+  </data>
+  <data name="SettingsDyn_NetCard_NAdapters" xml:space="preserve">
+    <value>{0} adapters</value>
+  </data>
+  <data name="SettingsDyn_NetCard_NConnected" xml:space="preserve">
+    <value> · {0} connected</value>
+  </data>
+  <data name="SettingsDyn_NetCard_NeedsHelper" xml:space="preserve">
+    <value>Needs the helper service — see the Network page.</value>
+  </data>
+  <data name="SettingsDyn_NetCard_NeedsInstaller" xml:space="preserve">
+    <value>Needs the latest installer — see the Network page.</value>
+  </data>
+  <data name="SettingsDyn_NetCard_NoAdapter" xml:space="preserve">
+    <value>No Wi-Fi or wired adapter found.</value>
+  </data>
+  <data name="SettingsDyn_NetCard_OneAdapter" xml:space="preserve">
+    <value>1 adapter</value>
+  </data>
+  <data name="SettingsDyn_NetCard_OneAdapterConnected" xml:space="preserve">
+    <value>1 adapter · connected</value>
+  </data>
+  <data name="SettingsDyn_NetCard_Reconnect" xml:space="preserve">
+    <value>Reconnect</value>
+  </data>
+  <data name="SettingsDyn_NetCard_Reconnecting" xml:space="preserve">
+    <value>Reconnecting…</value>
+  </data>
+  <data name="SettingsDyn_NetHotkeyHint" xml:space="preserve">
+    <value>Press {0} to disconnect, and again to reconnect.</value>
+  </data>
+  <data name="SettingsDyn_SidebarVersion" xml:space="preserve">
+    <value>NEXT-Toggle {0}</value>
+  </data>
+  <data name="SettingsDyn_Status_CamNotInstalled" xml:space="preserve">
+    <value>Camera control not installed</value>
+  </data>
+  <data name="SettingsDyn_Status_CameraOff" xml:space="preserve">
+    <value>Camera off</value>
+  </data>
+  <data name="SettingsDyn_Status_CameraOn" xml:space="preserve">
+    <value>Camera on</value>
+  </data>
+  <data name="SettingsDyn_Status_MicOff" xml:space="preserve">
+    <value>Mic off</value>
+  </data>
+  <data name="SettingsDyn_Status_MicOn" xml:space="preserve">
+    <value>Mic on</value>
+  </data>
+  <data name="SettingsDyn_Status_NetworkOff" xml:space="preserve">
+    <value>Network off</value>
+  </data>
+  <data name="SettingsDyn_Status_NetworkOn" xml:space="preserve">
+    <value>Network on</value>
+  </data>
+  <data name="SettingsDyn_Status_NetworkUnavailable" xml:space="preserve">
+    <value>Network control unavailable</value>
+  </data>
+  <data name="SettingsDyn_Status_NoCamera" xml:space="preserve">
+    <value>No camera</value>
+  </data>
+  <data name="SettingsDyn_Status_NoMicrophone" xml:space="preserve">
+    <value>No microphone</value>
+  </data>
+  <data name="SettingsDyn_Status_NoNetworkAdapter" xml:space="preserve">
+    <value>No network adapter</value>
+  </data>
+  <data name="SettingsDyn_Update_Available" xml:space="preserve">
+    <value>Version {0} is available</value>
+  </data>
+  <data name="SettingsDyn_Update_AvailableDetail" xml:space="preserve">
+    <value>You have {0}. Update downloads the installer from GitHub ({1} MB), checks it, and installs it; NEXT-Toggle restarts afterwards.</value>
+  </data>
+  <data name="SettingsDyn_Update_Button" xml:space="preserve">
+    <value>Update to {0}</value>
+  </data>
+  <data name="SettingsDyn_Update_Cancelled" xml:space="preserve">
+    <value>Update cancelled</value>
+  </data>
+  <data name="SettingsDyn_Update_CancelledHint" xml:space="preserve">
+    <value>The installer needs permission to run. Click Update to try again.</value>
+  </data>
+  <data name="SettingsDyn_Update_CheckFailed" xml:space="preserve">
+    <value>Couldn't check for updates</value>
+  </data>
+  <data name="SettingsDyn_Update_CheckFailedHint" xml:space="preserve">
+    <value>Check your internet connection and try again.</value>
+  </data>
+  <data name="SettingsDyn_Update_Checking" xml:space="preserve">
+    <value>Checking for updates…</value>
+  </data>
+  <data name="SettingsDyn_Update_DownloadFailed" xml:space="preserve">
+    <value>The download failed. Check your internet connection and try again.</value>
+  </data>
+  <data name="SettingsDyn_Update_DownloadProgress" xml:space="preserve">
+    <value>{0}% of {1} MB</value>
+  </data>
+  <data name="SettingsDyn_Update_Downloading" xml:space="preserve">
+    <value>Downloading {0}…</value>
+  </data>
+  <data name="SettingsDyn_Update_Failed" xml:space="preserve">
+    <value>Update failed</value>
+  </data>
+  <data name="SettingsDyn_Update_InstallerHint" xml:space="preserve">
+    <value>Windows will ask for permission. NEXT-Toggle closes now and restarts when the update is done.</value>
+  </data>
+  <data name="SettingsDyn_Update_NoInstallerDetail" xml:space="preserve">
+    <value>You have {0}. This release has no installer attached; download it from the link below.</value>
+  </data>
+  <data name="SettingsDyn_Update_ReleaseNotes" xml:space="preserve">
+    <value>Release notes for {0}</value>
+  </data>
+  <data name="SettingsDyn_Update_StartingInstaller" xml:space="preserve">
+    <value>Starting the installer…</value>
+  </data>
+  <data name="SettingsDyn_Update_UpToDate" xml:space="preserve">
+    <value>You're up to date</value>
+  </data>
+  <data name="SettingsDyn_Update_UpToDateDetail" xml:space="preserve">
+    <value>NEXT-Toggle {0} is the latest version (checked {1:t}).</value>
+  </data>
+  <data name="SettingsDyn_Update_WhatsNewIn" xml:space="preserve">
+    <value>What's new in {0}</value>
+  </data>
+  <data name="SettingsDyn_Version" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="Settings_About_GitHub" xml:space="preserve">
+    <value>GitHub repository</value>
+  </data>
+  <data name="Settings_About_OpenSettingsFolder" xml:space="preserve">
+    <value>Open settings folder</value>
+  </data>
+  <data name="Settings_About_Tagline" xml:space="preserve">
+    <value>Quick privacy toggles for your microphone and camera, from the tray or a global shortcut.</value>
+  </data>
+  <data name="Settings_About_WhatsNew" xml:space="preserve">
+    <value>What's new</value>
+  </data>
+  <data name="Settings_Cam_DevAll" xml:space="preserve">
+    <value>All cameras</value>
+  </data>
+  <data name="Settings_Cam_Devices_Title" xml:space="preserve">
+    <value>Which cameras to turn off</value>
+  </data>
+  <data name="Settings_Cam_EnforceOff_Hint" xml:space="preserve">
+    <value>If a camera is turned back on elsewhere (for example in Device Manager) while NEXT-Toggle has it off, turn it off again. When off, NEXT-Toggle follows the change.</value>
+  </data>
+  <data name="Settings_Cam_EnforceOff_Title" xml:space="preserve">
+    <value>Keep cameras off</value>
+  </data>
+  <data name="Settings_Cam_FooterHint" xml:space="preserve">
+    <value>Turning the camera off disables it in Windows, the same as Device Manager does. Apps using it lose the picture immediately, and no app can open it until you turn it back on. If a program holds the camera and won't let go, NEXT-Toggle asks before closing it; a background service closed this way is started again when you turn the camera back on.</value>
+  </data>
+  <data name="Settings_Cam_HelperNotInstalled_Body" xml:space="preserve">
+    <value>Turning cameras off needs the NEXT-Toggle helper service, which the installer sets up (it asks for admin rights once). Run NEXT-Toggle-Setup to enable it.</value>
+  </data>
+  <data name="Settings_Cam_HelperNotInstalled_Title" xml:space="preserve">
+    <value>Camera control isn't installed</value>
+  </data>
+  <data name="Settings_Cam_NoCameras" xml:space="preserve">
+    <value>No cameras found.</value>
+  </data>
+  <data name="Settings_Cam_NoSelectionWarning" xml:space="preserve">
+    <value>No camera selected: turning off will have no effect.</value>
+  </data>
+  <data name="Settings_Cam_Notify_Hint" xml:space="preserve">
+    <value>Each time you switch it, as a Windows notification or a badge that disappears after 2 seconds.</value>
+  </data>
+  <data name="Settings_Cam_Notify_Title" xml:space="preserve">
+    <value>Notify me when the camera turns off or on</value>
+  </data>
+  <data name="Settings_Cam_OnStart_Off" xml:space="preserve">
+    <value>Always off</value>
+  </data>
+  <data name="Settings_Cam_OnStart_On" xml:space="preserve">
+    <value>Always on</value>
+  </data>
+  <data name="Settings_Cam_Overlay_Hint" xml:space="preserve">
+    <value>A small badge that stays on top of every app and lets clicks pass through. If it shares a corner with the MIC OFF badge, they sit side by side.</value>
+  </data>
+  <data name="Settings_Cam_Overlay_Title" xml:space="preserve">
+    <value>Show a CAM OFF badge while off</value>
+  </data>
+  <data name="Settings_Cam_Tray_Hint" xml:space="preserve">
+    <value>Click it to turn the camera off or on. Right-click for both controls and Settings.</value>
+  </data>
+  <data name="Settings_Cam_Tray_Show" xml:space="preserve">
+    <value>Show the camera icon in the tray</value>
+  </data>
+  <data name="Settings_Caption_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Settings_Caption_Maximize" xml:space="preserve">
+    <value>Maximize</value>
+  </data>
+  <data name="Settings_Caption_Minimize" xml:space="preserve">
+    <value>Minimize</value>
+  </data>
+  <data name="Settings_Caption_Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="Settings_General_PlaySound_Hint" xml:space="preserve">
+    <value>A short tone when the microphone or camera turns on or off (the camera has its own, lower tone). Turn off for silent switching.</value>
+  </data>
+  <data name="Settings_General_PlaySound_Title" xml:space="preserve">
+    <value>Play a sound when switching</value>
+  </data>
+  <data name="Settings_General_StartMinimized_Hint" xml:space="preserve">
+    <value>When off, this window opens every time NEXT-Toggle starts manually.</value>
+  </data>
+  <data name="Settings_General_StartMinimized_Title" xml:space="preserve">
+    <value>Start minimized to tray</value>
+  </data>
+  <data name="Settings_General_StartWithWindows_Hint" xml:space="preserve">
+    <value>Launch NEXT-Toggle in the tray when you sign in.</value>
+  </data>
+  <data name="Settings_General_StartWithWindows_Title" xml:space="preserve">
+    <value>Start with Windows</value>
+  </data>
+  <data name="Settings_General_ThemeLight_Hint" xml:space="preserve">
+    <value>Light is the classic look: cream paper, black ink and bold colours.</value>
+  </data>
+  <data name="Settings_HotkeyRecorder_Hint" xml:space="preserve">
+    <value>Click the box and press a combination with at least one of Ctrl, Alt, Shift or Win. Works even when another app is focused.</value>
+  </data>
+  <data name="Settings_Mic_Devices_Title" xml:space="preserve">
+    <value>Which microphones to mute</value>
+  </data>
+  <data name="Settings_Mic_DoubleClick_Hint" xml:space="preserve">
+    <value>Single clicks stay instant; a double-click undoes that click.</value>
+  </data>
+  <data name="Settings_Mic_DoubleClick_Title" xml:space="preserve">
+    <value>Double-click the icon to open Settings</value>
+  </data>
+  <data name="Settings_Mic_EnforceMute_Hint" xml:space="preserve">
+    <value>If another app or a headset button unmutes a microphone while NEXT-Toggle has it muted, mute it again right away. When off, NEXT-Toggle follows the change.</value>
+  </data>
+  <data name="Settings_Mic_EnforceMute_Title" xml:space="preserve">
+    <value>Enforce mute</value>
+  </data>
+  <data name="Settings_Mic_NoDevices" xml:space="preserve">
+    <value>No active microphones found.</value>
+  </data>
+  <data name="Settings_Mic_NoSelectionWarning" xml:space="preserve">
+    <value>No microphone selected: muting will have no effect.</value>
+  </data>
+  <data name="Settings_Mic_NoTrayWarning" xml:space="preserve">
+    <value>With both tray icons hidden, use the shortcuts, or start NEXT-Toggle again to open this window.</value>
+  </data>
+  <data name="Settings_Mic_Notify_Hint" xml:space="preserve">
+    <value>Each time you switch it, as a Windows notification or a badge that disappears after 2 seconds. Not shown for push-to-talk presses.</value>
+  </data>
+  <data name="Settings_Mic_Notify_Title" xml:space="preserve">
+    <value>Notify me when the microphone mutes or unmutes</value>
+  </data>
+  <data name="Settings_Mic_OnStart_Muted" xml:space="preserve">
+    <value>Always muted</value>
+  </data>
+  <data name="Settings_Mic_OnStart_Unmuted" xml:space="preserve">
+    <value>Always unmuted</value>
+  </data>
+  <data name="Settings_Mic_Overlay_Hint" xml:space="preserve">
+    <value>A small badge that stays on top of every app and lets clicks pass through.</value>
+  </data>
+  <data name="Settings_Mic_Overlay_Title" xml:space="preserve">
+    <value>Show a MIC OFF badge while muted</value>
+  </data>
+  <data name="Settings_Mic_Tray_Hint" xml:space="preserve">
+    <value>Click it to mute or unmute. Right-click for both controls and Settings.</value>
+  </data>
+  <data name="Settings_Mic_Tray_Show" xml:space="preserve">
+    <value>Show the microphone icon in the tray</value>
+  </data>
+  <data name="Settings_Nav_About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Settings_Nav_Activity" xml:space="preserve">
+    <value>Activity</value>
+  </data>
+  <data name="Settings_Nav_Camera" xml:space="preserve">
+    <value>Camera</value>
+  </data>
+  <data name="Settings_Nav_General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="Settings_Nav_Microphone" xml:space="preserve">
+    <value>Microphone</value>
+  </data>
+  <data name="Settings_Nav_Network" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="Settings_Nav_Overview" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="Settings_Net_DevAll" xml:space="preserve">
+    <value>All (Wi-Fi and wired)</value>
+  </data>
+  <data name="Settings_Net_Devices_Title" xml:space="preserve">
+    <value>Which connections to turn off</value>
+  </data>
+  <data name="Settings_Net_EnforceOff_Hint" xml:space="preserve">
+    <value>If a connection is turned back on elsewhere (for example in Network Connections) while NEXT-Toggle has it off, turn it off again. When off, NEXT-Toggle follows the change.</value>
+  </data>
+  <data name="Settings_Net_EnforceOff_Title" xml:space="preserve">
+    <value>Keep the network off</value>
+  </data>
+  <data name="Settings_Net_FooterHint" xml:space="preserve">
+    <value>Turning the network off disables the selected network adapters in Windows, the same as the Network Connections window does. Nothing on this PC can reach the internet or your local network through them until you turn them back on. Virtual adapters (VPNs, virtual machines, WSL) aren't touched. Uninstalling NEXT-Toggle turns every adapter it switched off back on.</value>
+  </data>
+  <data name="Settings_Net_NoAdapters" xml:space="preserve">
+    <value>No network adapters found.</value>
+  </data>
+  <data name="Settings_Net_NoSelectionWarning" xml:space="preserve">
+    <value>No connection selected: turning the network off will have no effect.</value>
+  </data>
+  <data name="Settings_Net_Notify_Hint" xml:space="preserve">
+    <value>Each time you switch it, as a Windows notification or a badge that disappears after 2 seconds.</value>
+  </data>
+  <data name="Settings_Net_Notify_Title" xml:space="preserve">
+    <value>Notify me when the network turns off or on</value>
+  </data>
+  <data name="Settings_Net_OnStart_Connected" xml:space="preserve">
+    <value>Always connected</value>
+  </data>
+  <data name="Settings_Net_OnStart_Disconnected" xml:space="preserve">
+    <value>Always disconnected</value>
+  </data>
+  <data name="Settings_Net_Overlay_Hint" xml:space="preserve">
+    <value>A small badge that stays on top of every app and lets clicks pass through. If it shares a corner with another OFF badge, they sit side by side.</value>
+  </data>
+  <data name="Settings_Net_Overlay_Title" xml:space="preserve">
+    <value>Show a NET OFF badge while off</value>
+  </data>
+  <data name="Settings_Net_TaskbarSpeed_Both" xml:space="preserve">
+    <value>Download and upload</value>
+  </data>
+  <data name="Settings_Net_TaskbarSpeed_Down" xml:space="preserve">
+    <value>Download only</value>
+  </data>
+  <data name="Settings_Net_TaskbarSpeed_Hint" xml:space="preserve">
+    <value>The current download and upload speed of this PC, next to the tray icons. Updates every second, and steps aside for fullscreen apps.</value>
+  </data>
+  <data name="Settings_Net_TaskbarSpeed_ShowLabel" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="Settings_Net_TaskbarSpeed_Title" xml:space="preserve">
+    <value>Show network speed on the taskbar</value>
+  </data>
+  <data name="Settings_Net_TaskbarSpeed_Up" xml:space="preserve">
+    <value>Upload only</value>
+  </data>
+  <data name="Settings_Net_Tray_Hint" xml:space="preserve">
+    <value>Click it to disconnect or reconnect. Right-click for all controls and Settings.</value>
+  </data>
+  <data name="Settings_Net_Tray_Show" xml:space="preserve">
+    <value>Show the network icon in the tray</value>
+  </data>
+  <data name="Settings_Option_AllMicrophones" xml:space="preserve">
+    <value>All microphones</value>
+  </data>
+  <data name="Settings_Option_BadgePosition" xml:space="preserve">
+    <value>Badge position</value>
+  </data>
+  <data name="Settings_Option_BottomLeft" xml:space="preserve">
+    <value>Bottom left</value>
+  </data>
+  <data name="Settings_Option_BottomRight" xml:space="preserve">
+    <value>Bottom right</value>
+  </data>
+  <data name="Settings_Option_CornerBadge" xml:space="preserve">
+    <value>Corner badge</value>
+  </data>
+  <data name="Settings_Option_Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="Settings_Option_KeepLastState" xml:space="preserve">
+    <value>Keep last state</value>
+  </data>
+  <data name="Settings_Option_Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Settings_Option_MatchWindows" xml:space="preserve">
+    <value>Match Windows</value>
+  </data>
+  <data name="Settings_Option_NotificationStyle" xml:space="preserve">
+    <value>Notification style</value>
+  </data>
+  <data name="Settings_Option_OnlySelected" xml:space="preserve">
+    <value>Only selected</value>
+  </data>
+  <data name="Settings_Option_PushToTalk" xml:space="preserve">
+    <value>Push-to-talk</value>
+  </data>
+  <data name="Settings_Option_Toggle" xml:space="preserve">
+    <value>Toggle</value>
+  </data>
+  <data name="Settings_Option_TopLeft" xml:space="preserve">
+    <value>Top left</value>
+  </data>
+  <data name="Settings_Option_TopRight" xml:space="preserve">
+    <value>Top right</value>
+  </data>
+  <data name="Settings_Option_WindowsNotification" xml:space="preserve">
+    <value>Windows notification</value>
+  </data>
+  <data name="Settings_Overview_Hint" xml:space="preserve">
+    <value>Click a tray icon or press its shortcut to switch. Right-click a tray icon for more options.</value>
+  </data>
+  <data name="Settings_Overview_OpenCamPage" xml:space="preserve">
+    <value>Open the Camera page</value>
+  </data>
+  <data name="Settings_Overview_OpenMicPage" xml:space="preserve">
+    <value>Open the Microphone page</value>
+  </data>
+  <data name="Settings_Overview_OpenNetPage" xml:space="preserve">
+    <value>Open the Network page</value>
+  </data>
+  <data name="Settings_Section_Alerts" xml:space="preserve">
+    <value>Alerts</value>
+  </data>
+  <data name="Settings_Section_Appearance" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="Settings_Section_OnStart" xml:space="preserve">
+    <value>When NEXT-Toggle starts</value>
+  </data>
+  <data name="Settings_Section_Shortcut" xml:space="preserve">
+    <value>Shortcut</value>
+  </data>
+  <data name="Settings_Section_Sound" xml:space="preserve">
+    <value>Sound</value>
+  </data>
+  <data name="Settings_Section_Startup" xml:space="preserve">
+    <value>Startup</value>
+  </data>
+  <data name="Settings_Section_TaskbarSpeed" xml:space="preserve">
+    <value>Taskbar speed</value>
+  </data>
+  <data name="Settings_Section_TrayIcon" xml:space="preserve">
+    <value>Tray icon</value>
+  </data>
+  <data name="Settings_Section_Updates" xml:space="preserve">
+    <value>Updates</value>
+  </data>
+  <data name="Settings_Title" xml:space="preserve">
+    <value>NEXT-Toggle Settings</value>
+  </data>
+  <data name="TaskbarSpeed_Tooltip" xml:space="preserve">
+    <value>Network speed — click to open NEXT-Toggle's Network page</value>
+  </data>
+  <data name="TaskbarSpeed_WindowTitle" xml:space="preserve">
+    <value>NEXT-Toggle network speed</value>
+  </data>
+  <data name="TrayTip_Cam_Hint_Click" xml:space="preserve">
+    <value>click to {0}</value>
+  </data>
+  <data name="TrayTip_Cam_Hint_TurnOff" xml:space="preserve">
+    <value>turn off</value>
+  </data>
+  <data name="TrayTip_Cam_Hint_TurnOn" xml:space="preserve">
+    <value>turn on</value>
+  </data>
+  <data name="TrayTip_Cam_NoDevice" xml:space="preserve">
+    <value>NEXT-Toggle — no camera found</value>
+  </data>
+  <data name="TrayTip_Cam_NotInstalled" xml:space="preserve">
+    <value>Camera control not installed — open Settings</value>
+  </data>
+  <data name="TrayTip_Cam_Off" xml:space="preserve">
+    <value>Camera OFF — {0}</value>
+  </data>
+  <data name="TrayTip_Cam_On" xml:space="preserve">
+    <value>Camera ON — {0}</value>
+  </data>
+  <data name="TrayTip_Cam_TurningOff" xml:space="preserve">
+    <value>Camera — turning off…</value>
+  </data>
+  <data name="TrayTip_Cam_TurningOn" xml:space="preserve">
+    <value>Camera — turning on…</value>
+  </data>
+  <data name="TrayTip_Mic_Hint_ClickUnavailable" xml:space="preserve">
+    <value>click to {0} (hotkey unavailable)</value>
+  </data>
+  <data name="TrayTip_Mic_Hint_HoldTalk" xml:space="preserve">
+    <value>hold {0} to talk</value>
+  </data>
+  <data name="TrayTip_Mic_Hint_Hotkey" xml:space="preserve">
+    <value>{0} to {1}</value>
+  </data>
+  <data name="TrayTip_Mic_Hint_Mute" xml:space="preserve">
+    <value>mute</value>
+  </data>
+  <data name="TrayTip_Mic_Hint_Unmute" xml:space="preserve">
+    <value>unmute</value>
+  </data>
+  <data name="TrayTip_Mic_NoDevice" xml:space="preserve">
+    <value>NEXT-Toggle — no microphone found</value>
+  </data>
+  <data name="TrayTip_Mic_Off" xml:space="preserve">
+    <value>Mic OFF — {0}</value>
+  </data>
+  <data name="TrayTip_Mic_On" xml:space="preserve">
+    <value>Mic ON — {0}</value>
+  </data>
+  <data name="TrayTip_Mic_On_Ptt" xml:space="preserve">
+    <value>Mic ON — push-to-talk</value>
+  </data>
+  <data name="TrayTip_Net_Disconnecting" xml:space="preserve">
+    <value>Network — disconnecting…</value>
+  </data>
+  <data name="TrayTip_Net_Hint_Disconnect" xml:space="preserve">
+    <value>disconnect</value>
+  </data>
+  <data name="TrayTip_Net_Hint_Reconnect" xml:space="preserve">
+    <value>reconnect</value>
+  </data>
+  <data name="TrayTip_Net_NeedsInstaller" xml:space="preserve">
+    <value>Network control needs the latest installer — open Settings</value>
+  </data>
+  <data name="TrayTip_Net_NoDevice" xml:space="preserve">
+    <value>NEXT-Toggle — no network adapter found</value>
+  </data>
+  <data name="TrayTip_Net_NotInstalled" xml:space="preserve">
+    <value>Network control not installed — open Settings</value>
+  </data>
+  <data name="TrayTip_Net_Off" xml:space="preserve">
+    <value>Network OFF — {0}</value>
+  </data>
+  <data name="TrayTip_Net_On" xml:space="preserve">
+    <value>Network ON — {0}</value>
+  </data>
+  <data name="TrayTip_Net_Reconnecting" xml:space="preserve">
+    <value>Network — reconnecting…</value>
+  </data>
+  <data name="Tray_CameraNotInstalled" xml:space="preserve">
+    <value>Camera control not installed</value>
+  </data>
+  <data name="Tray_CameraSwitching" xml:space="preserve">
+    <value>Camera: switching…</value>
+  </data>
+  <data name="Tray_DefaultCamTooltip" xml:space="preserve">
+    <value>NEXT-Toggle camera</value>
+  </data>
+  <data name="Tray_DefaultMicTooltip" xml:space="preserve">
+    <value>NEXT-Toggle microphone</value>
+  </data>
+  <data name="Tray_DefaultNetTooltip" xml:space="preserve">
+    <value>NEXT-Toggle network</value>
+  </data>
+  <data name="Tray_DisconnectNetwork" xml:space="preserve">
+    <value>Disconnect network</value>
+  </data>
+  <data name="Tray_Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="Tray_MuteMicrophone" xml:space="preserve">
+    <value>Mute microphone</value>
+  </data>
+  <data name="Tray_NetworkNotAvailable" xml:space="preserve">
+    <value>Network control not available</value>
+  </data>
+  <data name="Tray_NetworkSwitching" xml:space="preserve">
+    <value>Network: switching…</value>
+  </data>
+  <data name="Tray_NoCameraFound" xml:space="preserve">
+    <value>No camera found</value>
+  </data>
+  <data name="Tray_NoNetworkAdapter" xml:space="preserve">
+    <value>No network adapter found</value>
+  </data>
+  <data name="Tray_ReconnectNetwork" xml:space="preserve">
+    <value>Reconnect network</value>
+  </data>
+  <data name="Tray_Settings" xml:space="preserve">
+    <value>Settings…</value>
+  </data>
+  <data name="Tray_StartWithWindows" xml:space="preserve">
+    <value>Start with Windows</value>
+  </data>
+  <data name="Tray_TurnCameraOff" xml:space="preserve">
+    <value>Turn camera off</value>
+  </data>
+  <data name="Tray_TurnCameraOn" xml:space="preserve">
+    <value>Turn camera on</value>
+  </data>
+  <data name="Tray_UnmuteMicrophone" xml:space="preserve">
+    <value>Unmute microphone</value>
+  </data>
+  <data name="UpdateService_BadUrl" xml:space="preserve">
+    <value>The installer link doesn't point to NEXT-Toggle's GitHub releases.</value>
+  </data>
+  <data name="UpdateService_ChecksumFailed" xml:space="preserve">
+    <value>The download didn't match GitHub's checksum, so it was deleted. Please try again.</value>
+  </data>
+  <data name="UpdateService_NoInstaller" xml:space="preserve">
+    <value>This release has no installer attached.</value>
+  </data>
+  <data name="UpdateService_UnexpectedTag" xml:space="preserve">
+    <value>Unexpected release tag "{0}".</value>
+  </data>
+</root>

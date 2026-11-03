@@ -1,10 +1,10 @@
-# Generates the PrivacyToggle icons as multi-size .ico files (16, 20, 24, 32, 48, 256).
+# Generates the NEXT-Toggle icons as multi-size .ico files (16, 20, 24, 32, 48, 256).
 # Small sizes are stored as 32-bit DIBs, 256 as PNG (the standard Windows layout).
 # Usage:  powershell -ExecutionPolicy Bypass -File tools\make-icons.ps1
 
 Add-Type -AssemblyName System.Drawing
 
-$outDir = Join-Path $PSScriptRoot '..\src\PrivacyToggle\Assets'
+$outDir = Join-Path $PSScriptRoot '..\src\NextToggle\Assets'
 New-Item -ItemType Directory -Force $outDir | Out-Null
 $sizes = 16, 20, 24, 32, 48, 256
 
