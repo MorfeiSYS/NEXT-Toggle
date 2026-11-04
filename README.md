@@ -117,7 +117,7 @@ dotnet run --project src/NextToggle               # запуск для разр
 
 ## Лицензия
 
-[MIT](LICENSE) © azahinhasan
+[MIT](LICENSE) © MorfeiSYS
 
 ---
 
