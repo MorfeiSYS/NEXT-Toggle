@@ -4,22 +4,136 @@
 
 # NEXT-Toggle
 
-**Kill your microphone, camera and internet with one click or one shortcut, from the Windows tray.**
+**Выключите микрофон, камеру и интернет одним кликом или глобальным сочетанием клавиш из трея Windows.**
+
+*Kill your microphone, camera and internet with one click or one shortcut, from the Windows tray.*
 
 ![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D6?logo=windows)
 ![.NET](https://img.shields.io/badge/.NET-8-512BD4?logo=dotnet)
 [![Latest release](https://img.shields.io/github/v/release/MorfeiSYS/NEXT-Toggle?label=version&color=blue)](https://github.com/MorfeiSYS/NEXT-Toggle/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-| | Live | Off | None found | Shortcut(Default) |
+| | Вкл. | Выкл. | Не найдено | Сочетание (по умол.) |
+|---|:---:|:---:|:---:|:---:|
+| 🎙️ **Микрофон** | <img src="docs/icon-on.png?v=1.3.0" alt="on" width="42"> | <img src="docs/icon-off.png?v=1.3.0" alt="off" width="42"> | <img src="docs/icon-none.png?v=1.3.0" alt="none" width="42"> | `Ctrl+Alt+M` |
+| 📷 **Камера** | <img src="docs/icon-cam-on.png?v=1.3.0" alt="on" width="42"> | <img src="docs/icon-cam-off.png?v=1.3.0" alt="off" width="42"> | <img src="docs/icon-cam-none.png?v=1.3.0" alt="none" width="42"> | `Ctrl+Alt+V` |
+| 🌐 **Сеть** | <img src="docs/icon-net-on.png?v=1.6.0" alt="on" width="42"> | <img src="docs/icon-net-off.png?v=1.6.0" alt="off" width="42"> | <img src="docs/icon-net-none.png?v=1.6.0" alt="none" width="42"> | `Ctrl+Alt+N` |
+
+</div>
+
+---
+
+## Возможности
+
+### 🎙️ Микрофон
+- **Отключение на всю систему.** Пока микрофон выключен, ни одно приложение (Zoom, Discord, Teams, браузеры, OBS…) не получает звук.
+- **Переключение или push-to-talk** — глобальное сочетание работает даже в полноэкранных приложениях.
+
+### 📷 Камера
+- **Настоящее выключение камеры.** Отключает веб-камеру в Windows, как диспетчер устройств. Приложения сразу теряют изображение и не могут снова открыть камеру, пока вы её не включите. Если программа не отпускает камеру, NEXT-Toggle покажет, какая это программа, и спросит перед закрытием.
+
+### 🌐 Сеть
+- **«Рубильник» интернета.** Включает и отключает сетевые адаптеры (Wi‑Fi, Ethernet, мобильный интернет), как в Windows. Интернет пропадает у всех приложений сразу, не только в браузере. При подключении через удалённый рабочий стол сначала спросит, чтобы вы не отрезали себе доступ.
+- **Сеть по приложениям.** Какие программы сейчас используют интернет, с какой скоростью и сколько данных передали за последние 7 дней. Считается по трассировке событий Windows (тот же источник, что у монитора ресурсов) — цифры точные, не оценки.
+- **Скорость на панели задач.** Текущая скорость загрузки и отправки рядом со значками в трее. Клик открывает настройки сети. Подстраивается под автоматически скрывающуюся панель задач, уступает место полноэкранным играм и видео, работает с панелью с любой стороны экрана. Можно показывать обе скорости или одну.
+
+### 🛡️ Для каждого устройства
+- **Удерживать выключенным.** Снова выключает микрофон, камеру или сеть, если их включили из другого места (кнопка на гарнитуре, новое устройство и т.д.).
+- **Выбор устройств.** Все микрофоны, камеры или адаптеры — или только выбранные.
+- **Состояние при запуске.** Каждое устройство может стартовать включённым, выключенным или «как в прошлый раз».
+- **Уведомления.** Уведомление Windows или короткий значок в углу при каждом переключении; опционально постоянные бейджи `MIC OFF` / `CAM OFF` / `NET OFF`, пока устройство выключено (клики проходят сквозь них). Настраивается отдельно для каждого устройства и угла экрана.
+
+### 📊 Активность (Beta)
+- **Сейчас:** карточки микрофона, камеры и сети — какие приложения используют устройство, итог за сегодня и быстрые действия: *выкл./вкл. микрофон*, *выкл./вкл. камеру*, *отключить/подключить сеть*.
+- **История:** шкала времени по микрофону, камере и сети (от 1 часа до 7 дней) или список. Фильтр, сортировка, суммы за период. Время, пока устройство выключено, не учитывается.
+- Всё хранится только на вашем ПК (см. [Конфиденциальность](#конфиденциальность)).
+
+### ⚙️ Прочее
+- **Светлая и тёмная тема** или как в Windows. Звуки переключения можно отключить.
+- **Обновления из приложения.** *Настройки → О программе* проверяет GitHub, скачивает, проверяет и устанавливает новую версию.
+
+<img width="850" height="530" alt="Screenshot 2026-10-28 153407" src="https://github.com/user-attachments/assets/8b95a63f-67ef-439f-bedc-fb0bb0e9c038" />
+<img width="850" height="700" alt="Screenshot 2026-10-28 153505" src="https://github.com/user-attachments/assets/f436de7a-11a9-4d7c-9867-0b9e644c6339" />
+<img width="850" height="530" alt="Screenshot 2026-10-28 154153" src="https://github.com/user-attachments/assets/49cd0698-d36c-44c2-b5a3-d51b69cdd837" />
+
+## Установка
+
+Скачайте `NEXT-Toggle-Setup-<версия>.exe` из [последнего релиза](https://github.com/MorfeiSYS/NEXT-Toggle/releases/latest) и запустите. После установки откроются настройки.
+
+> [!NOTE]
+> Управление камерой, отключение сети и учёт трафика по приложениям требуют службы **NEXT-Toggle Helper** — установщик настраивает её (один запрос прав администратора). Само приложение в трее не работает от имени администратора. Микрофон и индикатор скорости на панели задач работают без службы.
+
+**Требования:** Windows 10 или 11, 64-bit. .NET ставить не нужно — он встроен в сборку.
+
+## Использование
+
+- **Левый клик** по значку в трее — переключить. **Правый клик** — все действия, настройки, *Запуск с Windows* и выход.
+- Страницы **Настроек**:
+  - **Обзор:** все устройства; клик по карточке открывает её страницу.
+  - **Активность:** текущее использование и история.
+  - **Микрофон / Камера / Сеть:** сочетание клавиш, устройства, поведение при запуске, значок в трее и уведомления. На странице «Сеть» — скорость на панели задач.
+  - **Общие:** автозапуск, оформление, звук, язык.
+  - **О программе:** версия и обновления.
+- Настройки сразу сохраняются в `%AppData%\NEXT-Toggle\settings.json`.
+- Повторный запуск exe открывает настройки уже работающей копии. `NEXT-Toggle.exe --exit` завершает приложение.
+
+## Конфиденциальность
+
+Нет аккаунтов, аналитики, рекламы и телеметрии. Приложение не записывает аудио и видео и не читает содержимое трафика — только объём данных по приложениям. Всё остаётся на вашем ПК:
+
+| Файл | Содержимое |
+|---|---|
+| `%AppData%\NEXT-Toggle\settings.json` | Ваши настройки |
+| `%AppData%\NEXT-Toggle\usage.json` | Какие приложения использовали микрофон и камеру и когда (7 дней) |
+| `%AppData%\NEXT-Toggle\network-history.json` | Сколько данных каждое приложение отправило и получило (7 дней) |
+| `%ProgramData%\NEXT-Toggle\` | Устройства, которые NEXT-Toggle выключил, чтобы включить их снова |
+
+Единственное сетевое подключение — к GitHub для проверки и загрузки обновлений. Подробнее: [PRIVACY.md](PRIVACY.md).
+
+## Вопросы и известные проблемы
+
+Почему камера «занята», NVIDIA Broadcast и другое: [Q&A.md](Q&A.md).
+
+## 🛠️ Сборка
+
+Нужен .NET 8 SDK.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File build.ps1   # release + установщик
+dotnet run --project src/NextToggle               # запуск для разработки
+```
+
+- `publish\NEXT-Toggle.exe` — один самодостаточный файл.
+- `installer\Output\NEXT-Toggle-Setup-<version>.exe` — если установлен [Inno Setup 6](https://jrsoftware.org/isinfo.php). Ставит службу-помощник, предлагает автозапуск; при удалении включает камеры и сеть обратно.
+- Версия задаётся в `<Version>` в `src\NextToggle\NEXT-Toggle.csproj`; `build.ps1` передаёт её установщику.
+- Значки в `docs\` и в трее: `tools\make-icons.ps1`.
+
+### Диагностика
+
+Ключи командной строки (лучше из **cmd/PowerShell от администратора**; в cmd можно добавить `| more`):
+
+| Ключ | Действие |
+|---|---|
+| `--list-cameras` | Список камер, которыми управляет NEXT-Toggle |
+| `--list-adapters` | Список сетевых адаптеров |
+| `--camera-in-use` | Используется ли камера сейчас |
+| `--network-usage` | 20 секунд — скорости самых активных приложений, затем итоги |
+
+## Лицензия
+
+[MIT](LICENSE) © azahinhasan
+
+---
+
+<div align="center">
+
+| | Live | Off | None found | Shortcut (default) |
 |---|:---:|:---:|:---:|:---:|
 | 🎙️ **Microphone** | <img src="docs/icon-on.png?v=1.3.0" alt="on" width="42"> | <img src="docs/icon-off.png?v=1.3.0" alt="off" width="42"> | <img src="docs/icon-none.png?v=1.3.0" alt="none" width="42"> | `Ctrl+Alt+M` |
 | 📷 **Camera** | <img src="docs/icon-cam-on.png?v=1.3.0" alt="on" width="42"> | <img src="docs/icon-cam-off.png?v=1.3.0" alt="off" width="42"> | <img src="docs/icon-cam-none.png?v=1.3.0" alt="none" width="42"> | `Ctrl+Alt+V` |
 | 🌐 **Network** | <img src="docs/icon-net-on.png?v=1.6.0" alt="on" width="42"> | <img src="docs/icon-net-off.png?v=1.6.0" alt="off" width="42"> | <img src="docs/icon-net-none.png?v=1.6.0" alt="none" width="42"> | `Ctrl+Alt+N` |
 
 </div>
-
-
 
 ## Features
 
@@ -50,14 +164,6 @@
 - **Light and dark themes**, or follow Windows. Click sounds can be turned off.
 - **In-app updates.** *Settings → About* checks GitHub for a new release, then downloads, verifies and installs it.
 
-##
-
-
-<img width="850" height="530" alt="Screenshot 2026-10-28 153407" src="https://github.com/user-attachments/assets/8b95a63f-67ef-439f-bedc-fb0bb0e9c038" />
-<img width="850" height="700" alt="Screenshot 2026-10-28 153505" src="https://github.com/user-attachments/assets/f436de7a-11a9-4d7c-9867-0b9e644c6339" />
-<img width="850" height="530" alt="Screenshot 2026-10-28 154153" src="https://github.com/user-attachments/assets/49cd0698-d36c-44c2-b5a3-d51b69cdd837" />
-
-
 ## Install
 
 Download `NEXT-Toggle-Setup-<version>.exe` from the [latest release](https://github.com/MorfeiSYS/NEXT-Toggle/releases/latest) and run it. Settings opens when setup finishes.
@@ -74,7 +180,7 @@ Download `NEXT-Toggle-Setup-<version>.exe` from the [latest release](https://git
   - **Overview:** every device at a glance; click a card to open its page.
   - **Activity:** live use and history.
   - **Microphone / Camera / Network:** global shortcut, devices, start state, tray icon and alerts for each. The Network page also has the taskbar speed meter.
-  - **General:** startup, appearance and sound.
+  - **General:** startup, appearance, language, and sound.
   - **About:** version and updates.
 - Changes save instantly to `%AppData%\NEXT-Toggle\settings.json`.
 - Launching the app again opens Settings of the running copy. `NEXT-Toggle.exe --exit` closes it.
